@@ -14,3 +14,4 @@ def checkIfSet(c1,c2,c3)
     colorAllDif = (c1.color != c2.color) && (c2.color != c3.color) && (c1.color != c3.color)
 
     isSet = (countAllSame || countAllDiff) && (shapeAllSame || shapeAllDiff) && (shadingAllSame || shadingAllDiff) && (colorAllSame || colorAllDif)
+end
