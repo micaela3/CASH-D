@@ -21,5 +21,11 @@ class Player
   def score
     return @score
   end
+
+  #Update the player score
+  def score=(value)
+    @score=value
+  end
+
 end
 
