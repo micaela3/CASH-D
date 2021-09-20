@@ -1,7 +1,7 @@
 # Require other files & their functions
 require './checkIfSet'
 require './dealCards'
-require './filldeck'
+require './fillDeck'
 require './modifyChosenCards'
 require './player'
 require './setPresent'
@@ -13,7 +13,7 @@ require './getCardsFromUser'
 def main
 
     # welcome message for the user
-    puts "Welcome to the game of set"
+    puts "Welcome to the game of set!"
 
 
     # maybe display rules here
@@ -25,15 +25,15 @@ def main
 
         if ready != "y"
 
-                puts "Incorrect response, ending the game"
+          puts "Invalid input or you've chosen not to play :("
 
                 exit
 
         end
 
-    puts "Player 1: Enter your name"
+    puts "Player 1: Enter your name."
     player1Name = gets.chomp!
-    puts "Player 2: Enter your name"
+    puts "Player 2: Enter your name."
     player2Name = gets.chomp!
 
     player1 = Player.new(player1Name, 1, 0)
@@ -41,9 +41,9 @@ def main
 
     # Assign each player a letter to determine who chooses a set first
 
-    puts "#{player1.name} you will press 'a' to make a selection"
-    puts "#{player2.name} you will press 'o' to make a selection"
-    puts "First player who sees a set will select their letter to make a selection"
+    puts "#{player1.name} you will press 'a' to make a selection."
+    puts "#{player2.name} you will press 'o' to make a selection."
+    puts "First player who sees a set will select their letter to make a selection."
 
     # initial deck to contain the 81 cards
 
@@ -84,7 +84,7 @@ def main
         end
 
         # ask for user input
-        puts "Input your response by inputting 1,2,3... seprated by a new line"
+        puts "Input your response by inputting 1,2,3... each separated by a new line."
 
         # store user input in an array (possibly use integers as identifiers)
         input = getCardsFromUser(displayCards)
@@ -95,21 +95,21 @@ def main
         # check if the selection is a set 
         while !isSet do
 
-          puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Any player can select their letter and make a selection"
+          puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
           puts "Enter your letter:"
           alphabet = gets.chomp!
 
 
-          while alphabet != "a" || alphabet != "o" do
+          while alphabet != "a" && alphabet != "o" do
 
-              puts "Invalid input!, Please enter a valid input to continue:"
+              puts "Invalid input, please enter a valid input to continue:"
               alphabet = gets.chomp!
 
           end
-          puts "Input your response by inputting 1,2,3... seprated by a new line"
+          puts "Input your response by inputting 1,2,3... each separated by a new line."
           
           input = getCardsFromUser(displayCards)
-          isSet = checkifSet(input[0], input[1], input[2])
+          isSet = checkIfSet(input[0], input[1], input[2])
 
         end
 
