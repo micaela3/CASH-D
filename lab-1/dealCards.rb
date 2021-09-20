@@ -17,9 +17,10 @@ def dealCards(chosenCards)
     while chosenCards[pos] != nil && pos < 21
         
         # line constructs the output to be like this: 1. One Red Striped Squiggle
-        outputString = outputString + pos.to_s + " " + chosenCards[pos].count_string + 
-        chosenCards[pos].color_string + chosenCards[pos].shading_string + chosenCards[pos].shape_string
-         + "\t";
+        outputString << sprintf("%-33s", "#{pos.to_s} #{chosenCards[pos].to_s} ")
+        # outputString = outputString + pos.to_s + " " + chosenCards[pos].count_string + " " +
+        # chosenCards[pos].color_string + " " + chosenCards[pos].shading_string + " " + chosenCards[pos].shape_string
+        # + "\t";
          
         pos = pos + 1;
         

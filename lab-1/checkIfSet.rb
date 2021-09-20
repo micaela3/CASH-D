@@ -4,7 +4,7 @@ def checkIfSet(c1,c2,c3)
     countAllSame = (c1.count == c2.count) && (c2.count == c3.count)
     countAllDiff = (c1.count != c2.count) && (c2.count != c3.count) && (c1.count != c3.count)
 
-    shapeAllSame = (c1.shape == c2.shape && (c2.shape == c3.shape)
+    shapeAllSame = (c1.shape == c2.shape) && (c2.shape == c3.shape)
     shapeAllDiff = (c1.shape != c2.shape) && (c2.shape != c3.shape) && (c1.shape != c3.shape)
 
     shadingAllSame = (c1.shading == c2.shading) && (c2.shading == c3.shading)
@@ -14,4 +14,5 @@ def checkIfSet(c1,c2,c3)
     colorAllDif = (c1.color != c2.color) && (c2.color != c3.color) && (c1.color != c3.color)
 
     isSet = (countAllSame || countAllDiff) && (shapeAllSame || shapeAllDiff) && (shadingAllSame || shadingAllDiff) && (colorAllSame || colorAllDif)
+    return isSet
 end

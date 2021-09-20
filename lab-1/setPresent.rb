@@ -3,19 +3,14 @@
 # is displayed to the user.
 
 def setPresent(displayCards)
-
-    pos = 0
-    while pos < displayCards.length - 2 do
-        while pos + 1 < displayCards.length - 1 do
-            while pos + 2 < displayCards.length do
-                isSet = checkifSet(displayCards[pos], displayCards[pos + 1], displayCards[pos + 2])
-                pos = pos + 1
-                
+    # Loop over each possible combination of cards
+    for pos1 in 0..(displayCards.length-1) do
+        for pos2 in (pos1+1)..(displayCards.length-1) do
+            for pos3 in (pos2+1)..(displayCards.length-1) do
+                isSet = checkIfSet(displayCards[pos1], displayCards[pos2], displayCards[pos3])
                 # once a set is found no need to check for more
-                if isSet == true
-
+                if isSet
                     return isSet
-   
                 end
             end
         end

@@ -1,9 +1,9 @@
+require './card'
 #The number of possible types for each card attribute.
 NUM_TYPES = 3
 
 #Fills Set Deck with all cards needed to play one game.
-def fillDeck
-    deck = []
+def fillDeck(deck)
 
     #Create each card so that each card is unique and there is a combination of every possible type of card.
     for a in 1..NUM_TYPES do

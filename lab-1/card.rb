@@ -83,7 +83,7 @@ class Card
         when 2
             "Striped"
         when 3
-            "Oval"
+            "Open"
         end
     end
 
@@ -102,5 +102,10 @@ class Card
         when 3
             "Purple"
         end
+    end
+
+    # Return a human-readable version of the card
+    def to_s
+        return "#{count_string} #{color_string} #{shading_string} #{shape_string}"
     end
 end
