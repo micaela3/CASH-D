@@ -66,7 +66,7 @@ def main
     displayCards = chooseCards(deck)  
 
     # continue the game until no cards are left
-    while (displayCards.length > 0) do
+    while (deck.length > 0) || (setPresent(displayCards)) do
 
         # display the cards
         dealCards(displayCards)
