@@ -13,7 +13,7 @@ def chooseCards(deck)
     # Iterate at least 12 times for 12 cards,
     # but also add cards as long as a set is not possible
     # (ensuring the number of cards is a multiple of 3)
-    while (i < MIN_CARDS || !setPresent(deck) || i % 3 != 0) && deck.length() > 0 do
+    while (i < MIN_CARDS || !setPresent(chosenCards) || i % 3 != 0) && deck.length() > 0 do
         # Pop cards from the end of the deck, 
         # so that the same cards will not be drawn again
         chosenCards << deck.pop()
@@ -29,7 +29,7 @@ def refreshCards(chosenCards, deck)
     # Iterate at least 3 times to replace the used cards,
     # but also add cards as long as a set is not possible
     # (ensuring the number of cards is a multiple of 3)
-    while (i < REFRESH_AMOUNT || !setPresent(deck) || i % 3 != 0) && deck.length() > 0 do
+    while (i < REFRESH_AMOUNT || !setPresent(chosenCards) || i % 3 != 0) && deck.length() > 0 do
         # Pop cards from the end of the deck, 
         # so that the same cards will not be drawn again
         chosenCards << deck.pop()

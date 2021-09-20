@@ -32,14 +32,17 @@ def main
         end
 
     puts "Player 1: Enter your name"
-    player1 = gets.chomp!
+    player1Name = gets.chomp!
     puts "Player 2: Enter your name"
-    player2 = gets.chomp!
+    player2Name = gets.chomp!
+
+    player1 = Player.new(player1Name, 1, 0)
+    player2 = Player.new(player2Name, 1, 0)
 
     # Assign each player a letter to determine who chooses a set first
 
-    puts "#{player1} you will press 'a' to make a selection"
-    puts "#{player2} you will press 'o' to make a selection"
+    puts "#{player1.name} you will press 'a' to make a selection"
+    puts "#{player2.name} you will press 'o' to make a selection"
     puts "First player who sees a set will select their letter to make a selection"
 
     # initial deck to contain the 81 cards
@@ -110,6 +113,14 @@ def main
 
         end
 
+        if alphabet == "a"
+            player1.score += 1
+            puts "#{player1.name}'s score is now #{player1.score}"
+        else
+            player2.score += 1
+            puts "#{player2.name}'s score is now #{player2.score}"
+        end
+
         # remove the cards that a user selects that form a set
         removeCards(displayCards, input[0], input[1], input[2])
 
@@ -118,6 +129,16 @@ def main
 
     end
 
+    puts "Game over, final scores:"
+    puts "#{player1.name} (player 1): #{player1.score}"
+    puts "#{player2.name} (player 2): #{player2.score}"
+    if player1.score > player2.score
+        puts "Result: #{player1.name} (player 1) wins!"
+    elsif player1.score < player2.score
+        puts "Result: #{player2.name} (player 2) wins!"
+    else 
+        puts "Result: Tie!"
+    end
 
 end
 
