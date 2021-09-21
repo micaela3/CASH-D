@@ -66,7 +66,7 @@ def main
     displayCards = chooseCards(deck)  
 
     # continue the game until no cards are left
-    while (deck.length > 0) || (setPresent(displayCards)) do
+    while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < 5) && (player2.score < 5))) do
 
         # display the cards
         dealCards(displayCards)
