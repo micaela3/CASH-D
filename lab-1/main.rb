@@ -65,81 +65,93 @@ def main
 
     displayCards = chooseCards(deck)  
 
-    # continue the game until no cards are left
-    while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < 5) && (player2.score < 5))) do
 
-        # display the cards
-        dealCards(displayCards)
+    # Put main portion of game into a thread, timed to only last 15 minutes by the timer thread (game will automatically end after 15 minutes.)
+    # Algorithm for threading taken from https://stackoverflow.com/questions/14250517/making-a-timer-in-ruby, answer from user Catnapper.
+    gameThread = Thread.new do
 
-        # check which player goes first 
-        puts "Enter your letter:"
-        alphabet = gets.chomp!
+        # continue the game until no cards are left
+        while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < 5) && (player2.score < 5))) do
 
-        # check for valid input of selection alphabet
-        while alphabet != "a" && alphabet != "o" do
+            # display the cards
+            dealCards(displayCards)
 
-            puts "Invalid input! Please enter a valid input to continue:"
+            # check which player goes first 
+            puts "Enter your letter:"
             alphabet = gets.chomp!
 
+            # check for valid input of selection alphabet
+            while alphabet != "a" && alphabet != "o" do
+
+                puts "Invalid input! Please enter a valid input to continue:"
+                alphabet = gets.chomp!
+
+            end
+
+            # ask for user input
+            puts "Input your response by inputting 1,2,3... each separated by a new line."
+
+            # store user input in an array (possibly use integers as identifiers)
+            input = getCardsFromUser(displayCards)
+
+            # checkifset method checks if the user selected cards make a set
+            isSet = checkIfSet(input[0], input[1], input[2])
+
+            # check if the selection is a set 
+            while (!isSet) do
+
+
+            puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
+            puts "Enter your letter:"
+            alphabet = gets.chomp!
+
+
+            while alphabet != "a" && alphabet != "o" do
+
+                puts "Invalid input, please enter a valid input to continue:"
+                alphabet = gets.chomp!
+
+            end
+            puts "Input your response by inputting 1,2,3... each separated by a new line."
+            
+            input = getCardsFromUser(displayCards)
+            isSet = checkIfSet(input[0], input[1], input[2])
+
+            end
+
+            if alphabet == "a"
+                player1.score += 1
+                puts "#{player1.name}'s score is now #{player1.score}"
+            else
+                player2.score += 1
+                puts "#{player2.name}'s score is now #{player2.score}"
+            end
+
+            # remove the cards that a user selects that form a set
+            removeCards(displayCards, input[0], input[1], input[2])
+
+            # replace the cards that were taken out as a set
+            refreshCards(displayCards, deck)
+
         end
 
-        # ask for user input
-        puts "Input your response by inputting 1,2,3... each separated by a new line."
-
-        # store user input in an array (possibly use integers as identifiers)
-        input = getCardsFromUser(displayCards)
-
-        # checkifset method checks if the user selected cards make a set
-        isSet = checkIfSet(input[0], input[1], input[2])
-
-        # check if the selection is a set 
-        while !isSet do
-
-          puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
-          puts "Enter your letter:"
-          alphabet = gets.chomp!
-
-
-          while alphabet != "a" && alphabet != "o" do
-
-              puts "Invalid input, please enter a valid input to continue:"
-              alphabet = gets.chomp!
-
-          end
-          puts "Input your response by inputting 1,2,3... each separated by a new line."
-          
-          input = getCardsFromUser(displayCards)
-          isSet = checkIfSet(input[0], input[1], input[2])
-
+        puts "Game over, final scores:"
+        puts "#{player1.name} (player 1): #{player1.score}"
+        puts "#{player2.name} (player 2): #{player2.score}"
+        if player1.score > player2.score
+            puts "Result: #{player1.name} (player 1) wins!"
+        elsif player1.score < player2.score
+            puts "Result: #{player2.name} (player 2) wins!"
+        else 
+            puts "Result: Tie!"
         end
-
-        if alphabet == "a"
-            player1.score += 1
-            puts "#{player1.name}'s score is now #{player1.score}"
-        else
-            player2.score += 1
-            puts "#{player2.name}'s score is now #{player2.score}"
-        end
-
-        # remove the cards that a user selects that form a set
-        removeCards(displayCards, input[0], input[1], input[2])
-
-        # replace the cards that were taken out as a set
-        refreshCards(displayCards, deck)
 
     end
 
-    puts "Game over, final scores:"
-    puts "#{player1.name} (player 1): #{player1.score}"
-    puts "#{player2.name} (player 2): #{player2.score}"
-    if player1.score > player2.score
-        puts "Result: #{player1.name} (player 1) wins!"
-    elsif player1.score < player2.score
-        puts "Result: #{player2.name} (player 2) wins!"
-    else 
-        puts "Result: Tie!"
-    end
-
+    # gameTimer will kill game thread after 15 minutes has elapsed.
+    gameTimer = Thread.new {sleep 900; gameThread.kill; puts "\nGame has ended, time expired."}
+    # Wait for gameThread to finish or be killed.
+    gameThread.join
 end
 
 
