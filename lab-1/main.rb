@@ -200,11 +200,6 @@ def main
     gameThread.join
 end
 
-
-# call main method
-
-# main
-
 # Game states
 module Game_State
     ENTER_NAME1 = 0
@@ -225,7 +220,7 @@ class SetGame < Gosu::Window
     # 30 frame cursor blink rate
     CURSOR_BLINK_RATE = 30 
     # 15 minute timer (60 fps)
-    TIMER_LENGTH = 1 * 60 * 60
+    TIMER_LENGTH = 15 * 60 * 60
 
     # Initialize game
     def initialize
@@ -254,7 +249,7 @@ class SetGame < Gosu::Window
             # Create instructions
             @instructions = [
             Gosu::Image.from_text("To play, each player will look at the cards and try to be the first to find a set.", 20),
-            Gosu::Image.from_text("A set is three cards with all the same or different of each of property:", 20),
+            Gosu::Image.from_text("A set is three cards with all the same or different of each of the properties:", 20),
             Gosu::Image.from_text("Number, color, shading, and shape.", 20)
             ]
             @controls = Gosu::Image.from_text("Player 1 will press 'A' to select a set, and Player 2 will press 'L'. Press 'H' to receive a hint.", 20)
@@ -453,9 +448,18 @@ class SetGame < Gosu::Window
     def close
         # Redirect stderr because it would seem that gosu has a bug on some platforms where exiting causes a segfault
         $stderr.reopen(IO::NULL, "w")
+        puts "Thank you for playing Wing Commander"
         @state = Game_State::EXITED
         self.close!
     end
 end
 
-SetGame.new.show
+if ARGV[0] && ARGV[0].downcase == "--no-gui"
+    # Run main if --no-gui is supplied
+    ARGV.clear
+    main
+else
+    # Otherwise, run GUI version
+    puts "Run with --no-gui for text-based version!"
+    SetGame.new.show
+end
