@@ -14,7 +14,7 @@ require './shuffleDeck'
 require './timer'
 
 # main method for the set game
-def main
+def main(timerLength, maxScore)
 
     # welcome message for the user
     puts "Welcome to the game of set!"
@@ -75,7 +75,7 @@ def main
     gameThread = Thread.new do
 
         # continue the game until no cards are left
-        while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < 5) && (player2.score < 5))) do
+        while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < maxScore || maxScore < 1) && (player2.score < maxScore || maxScore < 1))) do
 
             # display the cards
             dealCards(displayCards)
@@ -194,8 +194,8 @@ def main
 
     end
 
-    # gameTimer will kill game thread after 15 minutes has elapsed.
-    gameTimer = Thread.new {sleep 900; gameThread.kill; puts "\nGame has ended, time expired."}
+    # gameTimer will kill game thread after timerLength seconds (defaults to 15 minutes) has elapsed.
+    gameTimer = Thread.new {sleep timerLength/60; gameThread.kill; puts "\nGame has ended, time expired."} if timerLength > 0
     # Wait for gameThread to finish or be killed.
     gameThread.join
 end
@@ -219,12 +219,12 @@ class SetGame < Gosu::Window
     SCREEN_HEIGHT = 720
     # 30 frame cursor blink rate
     CURSOR_BLINK_RATE = 30 
-    # 15 minute timer (60 fps)
-    TIMER_LENGTH = 15 * 60 * 60
 
     # Initialize game object
-    def initialize
+    def initialize(timerLength, maxScore)
         super SCREEN_WIDTH, SCREEN_HEIGHT
+        @timerLength = timerLength
+        @maxScore = maxScore
         self.caption = "Set Game"
         self.init_game
     end
@@ -301,7 +301,7 @@ class SetGame < Gosu::Window
             @state = Game_State::VIEW_CARDS
         elsif @state == Game_State::VIEW_CARDS || @state == Game_State::CHOOSE_CARDS 
             @timer += 1
-            if @timer >= TIMER_LENGTH
+            if @timer >= @timerLength && @timerLength > 0
                 # Timer has went past max game length, end the game
                 @state = Game_State::TALLY_RESULTS
             end
@@ -323,7 +323,7 @@ class SetGame < Gosu::Window
                 #Reset mistake tracker
                 @mistake = false
 
-                if !setPresent(@displayCards) || @player1.score >= 5 || @player2.score >= 5
+                if !setPresent(@displayCards) || ((@player1.score >= @maxScore || @player2.score >= @maxScore) && @maxScore > 0)
                     # No more possible sets, or a player has enough points, end the game now
                     @state = Game_State::TALLY_RESULTS
                 end
@@ -334,7 +334,7 @@ class SetGame < Gosu::Window
             @currentHint = nil
         end
         if @state == Game_State::TALLY_RESULTS
-            @timesUpText = Gosu::Image.from_text("Times up!", 60) if @timer >= TIMER_LENGTH
+            @timesUpText = Gosu::Image.from_text("Times up!", 60) if @timer >= @timerLength
             @winnerText = Gosu::Image.from_text("Player 1 wins!", 60) if @player1.score > @player2.score
             @winnerText = Gosu::Image.from_text("Player 2 wins!", 60) if @player1.score < @player2.score
             @winnerText = Gosu::Image.from_text("It's a tie!", 60) if @player1.score == @player2.score
@@ -384,7 +384,7 @@ class SetGame < Gosu::Window
             @player1Score.draw_text("Player 1: #{@player1.score}", SCREEN_WIDTH - 400, 60, 1, 1, 1, 0xff_000000)
             @player2Score.draw_text("Player 2: #{@player2.score}", SCREEN_WIDTH - 400, 110, 1, 1, 1, 0xff_000000)
             @hintsLeft.draw_text("Hints: #{@hintsAvailable}", SCREEN_WIDTH - 150, 85, 1, 1, 1, 0xff_000000)
-            @timerDisplay.draw_text("Time remaining: #{getTimerString(TIMER_LENGTH - @timer)}", SCREEN_WIDTH - 400, 10, 1, 1, 1, 0xff_000000)
+            @timerDisplay.draw_text("Time remaining: #{getTimerString(@timerLength - @timer)}", SCREEN_WIDTH - 400, 10, 1, 1, 1, 0xff_000000) if @timerLength > 0
             if @state == Game_State::VIEW_CARDS
                 @controls.draw(50, 20+(@instructions.length*25), 1, 1, 1, 0xff_000000)
                 if @mistake
@@ -398,9 +398,9 @@ class SetGame < Gosu::Window
                 @choosePrompt.draw_text("Player #{@playerChoosing}, select #{3 - @chosenCards.length} more #{cardText}", 50, 20+(@instructions.length*25), 1, 1, 1, 0xff_000000)
             end
         elsif @state == Game_State::SHOW_RESULTS
-            @timesUpText.draw(490, 220, 1, 1, 1, 0xff_000000) if @timer >= TIMER_LENGTH
-            @winnerText.draw(500, 300, 1, 1, 1, 0xff_000000)
-            @playAgainText.draw(400, 380, 1, 1, 1, 0xff_000000)
+            @timesUpText.draw(515, 220, 1, 1, 1, 0xff_000000) if @timer >= @timerLength && @timerLength > 0
+            @winnerText.draw(460, 300, 1, 1, 1, 0xff_000000)
+            @playAgainText.draw(420, 380, 1, 1, 1, 0xff_000000)
         end
     end
 
@@ -466,12 +466,58 @@ class SetGame < Gosu::Window
     end
 end
 
-if ARGV[0] && ARGV[0].downcase == "--no-gui"
+# Default game parameters
+# 15 minute timer (60 fps)
+maxTime = 15 * 60 * 60
+maxScore = 5
+
+# Get indexes, if they exist, of where each command line argument is specified
+helpIndex = ARGV.index { |x| x.downcase == "--help"}
+noGuiIndex = ARGV.index { |x| x.downcase == "--no-gui"}
+maxTimeIndex = ARGV.index { |x| x.downcase.start_with? "--max-time="}
+maxScoreIndex = ARGV.index { |x| x.downcase.start_with? "--max-score="}
+
+if maxTimeIndex
+    # If a max time is specified, get the string version of the value
+    maxTimeString = ARGV[maxTimeIndex].downcase.delete_prefix("--max-time=")
+    begin
+        # Convert the string value to an integer, and multiply it by the fps, 60
+        # If it's any negative integer, set it to 0 for no max time
+        maxTime = Integer(maxTimeString) * 60
+        maxTime = 0 if maxTime < 0
+    rescue ArgumentError
+        # Not given an integer, it raised an error during conversion to integer
+        puts "Max time must be an integer, defaulting to #{maxTime / 60}!"
+    end
+end
+
+if maxScoreIndex
+    # If a max score is specified, get the string version of the value
+    maxScoreString = ARGV[maxScoreIndex].downcase.delete_prefix("--max-score=")
+    begin
+        # Convert the string value to an integer
+        # If it's any negative integer, set it to 0 for no max score
+        maxScore = Integer(maxScoreString)
+        maxScore = 0 if maxScore < 0
+    rescue ArgumentError
+        # Not given an integer, it raised an error during conversion to integer
+        puts "Max score must be an integer, defaulting to #{maxScore}!"
+    end
+end
+
+ARGV.clear
+if helpIndex
+    # Display help messsage
+    puts "Usage: ruby main.rb [--help] [--no-gui] [--max-time=<seconds>] [--max-score=<score>]"
+    puts "--help: Displays this help message"
+    puts "--no-gui: Runs the game in text mode"
+    puts "--max-time: Set the timer length, in seconds, or 0 for no timer"
+    puts "--max-score: Set the max score, or 0 for no max score"
+elsif noGuiIndex
     # Run main if --no-gui is supplied
-    ARGV.clear
-    main
+    main maxTime, maxScore
 else
     # Otherwise, run GUI version
-    puts "Run with --no-gui for text-based version!"
-    SetGame.new.show
+    puts "Run with --no-gui for text-based version, or --help for all options!"
+    SetGame.new(maxTime, maxScore).show
 end
