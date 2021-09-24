@@ -305,6 +305,7 @@ class SetGame < Gosu::Window
             # checkifset method checks if the user selected cards make a set
             isSet = checkIfSet(@chosenCards[0], @chosenCards[1], @chosenCards[2])
 
+            @state = Game_State::VIEW_CARDS
             if isSet
                 @player1.score += 1 if @playerChoosing == 1
                 @player2.score += 1 if @playerChoosing == 2
@@ -326,7 +327,6 @@ class SetGame < Gosu::Window
                 @mistake = true
             end
             @currentHint = nil
-            @state = Game_State::VIEW_CARDS
         end
         if @state == Game_State::TALLY_RESULTS
             @winnerText = Gosu::Image.from_text("Player 1 wins!", 60) if @player1.score > @player2.score
