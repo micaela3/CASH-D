@@ -1,3 +1,4 @@
+require 'gosu'
 # Constants for the card's count attribute
 module Count
     ONE = 1
@@ -34,6 +35,7 @@ class Card
         @shape = shape
         @shading = shading
         @color = color
+        @image = Gosu::Image.new("cards/#{count_string}_#{color_string}_#{shading_string}_#{shape_string}.png", :tileable => false)
     end
 
     # Return the card count
@@ -102,6 +104,12 @@ class Card
         when 3
             "Purple"
         end
+    end
+
+    # Return the image object for the card
+
+    def image
+        return @image
     end
 
     # Return a human-readable version of the card
