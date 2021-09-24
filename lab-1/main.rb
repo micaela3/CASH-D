@@ -222,24 +222,29 @@ class SetGame < Gosu::Window
     # 15 minute timer (60 fps)
     TIMER_LENGTH = 15 * 60 * 60
 
-    # Initialize game
+    # Initialize game object
     def initialize
-      super SCREEN_WIDTH, SCREEN_HEIGHT
-      self.caption = "Set Game"
-      # Set state to enter names
-      @state = Game_State::ENTER_NAME1
-      @gameName = Gosu::Image.from_text("CASH'D SET GAME", 80)
-      @cursor = Gosu::Image.new("Cursor.png", :tileable => false)
-      # Player 1 name prompt
-      @player1NamePrompt = Gosu::Image.from_text("Enter player 1's name: ", 40)
-      @player1Input = Gosu::TextInput.new()
-      self.text_input = @player1Input
-      @player1Font = Gosu::Font.new(25)
-      # Text cursor for names
-      @cursorTime = 0
-      @cursorBlink = false
+        super SCREEN_WIDTH, SCREEN_HEIGHT
+        self.caption = "Set Game"
+        self.init_game
     end
     
+    # Initialize game state
+    def init_game
+        # Set state to enter names
+        @state = Game_State::ENTER_NAME1
+        @gameName = Gosu::Image.from_text("CASH'D SET GAME", 80)
+        @cursor = Gosu::Image.new("Cursor.png", :tileable => false)
+        # Player 1 name prompt
+        @player1NamePrompt = Gosu::Image.from_text("Enter player 1's name: ", 40)
+        @player1Input = Gosu::TextInput.new()
+        self.text_input = @player1Input
+        @player1Font = Gosu::Font.new(25)
+        # Text cursor for names
+        @cursorTime = 0
+        @cursorBlink = false
+    end
+
     # Handle game updates (mostly state changes)
     def update
         if @state == Game_State::START
@@ -329,9 +334,11 @@ class SetGame < Gosu::Window
             @currentHint = nil
         end
         if @state == Game_State::TALLY_RESULTS
+            @timesUpText = Gosu::Image.from_text("Times up!", 60) if @timer >= TIMER_LENGTH
             @winnerText = Gosu::Image.from_text("Player 1 wins!", 60) if @player1.score > @player2.score
             @winnerText = Gosu::Image.from_text("Player 2 wins!", 60) if @player1.score < @player2.score
             @winnerText = Gosu::Image.from_text("It's a tie!", 60) if @player1.score == @player2.score
+            @playAgainText = Gosu::Image.from_text("To play again, press enter", 40)
             @state = Game_State::SHOW_RESULTS
         end
     end
@@ -391,7 +398,9 @@ class SetGame < Gosu::Window
                 @choosePrompt.draw_text("Player #{@playerChoosing}, select #{3 - @chosenCards.length} more #{cardText}", 50, 20+(@instructions.length*25), 1, 1, 1, 0xff_000000)
             end
         elsif @state == Game_State::SHOW_RESULTS
+            @timesUpText.draw(490, 220, 1, 1, 1, 0xff_000000) if @timer >= TIMER_LENGTH
             @winnerText.draw(500, 300, 1, 1, 1, 0xff_000000)
+            @playAgainText.draw(400, 380, 1, 1, 1, 0xff_000000)
         end
     end
 
@@ -416,6 +425,9 @@ class SetGame < Gosu::Window
                 @player2Name = @player2Input.text
                 # Start the game
                 @state = Game_State::START
+            elsif @state == Game_State::SHOW_RESULTS
+                # Start a new game
+                self.init_game
             end
         elsif (id == Gosu::KB_A || id == Gosu::KB_L) && @state == Game_State::VIEW_CARDS
             # Player wants to select cards
