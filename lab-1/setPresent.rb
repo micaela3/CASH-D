@@ -1,14 +1,14 @@
 # The plan for the method is to check if a set is present
 # in the array of cards passed to the method before it
 # is displayed to the user. The method returns an array
-# containing a boolean indicating presence of set and
-# an integer indicating number of sets possible in current
-# array of cards to be displayed as hint
+# containing a boolean indicating presence of set,
+# and a string indicating one card in the deck that is
+# part of set that is present
 
 def setPresent(displayCards)
 
     # array to hold boolean and integer
-    numOfSets = [false, 0]
+    numOfSets = [false,""]
 
     # Loop over each possible combination of cards
     for pos1 in 0..(displayCards.length-1) do
@@ -18,7 +18,7 @@ def setPresent(displayCards)
                 # once a set is found no need to check for more
                 if isSet
                     numOfSets[0] = true
-                    numOfSets[1] = numOfSets[1] + 1 
+                    numOfSets[1] = displayCards[pos1].to_s
                 end
             end
         end

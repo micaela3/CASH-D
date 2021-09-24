@@ -41,9 +41,9 @@ def main
 
     # Assign each player a letter to determine who chooses a set first
 
-    puts "#{player1.name} you will press 'a' to make a selection."
-    puts "#{player2.name} you will press 'o' to make a selection."
-    puts "First player who sees a set will select their letter to make a selection."
+    puts "\n#{player1.name} you will press 'a' to make a selection."
+    puts "\n#{player2.name} you will press 'o' to make a selection."
+    puts "\nFirst player who sees a set will select their letter to make a selection."
 
     # initial deck to contain the 81 cards
 
@@ -75,11 +75,35 @@ def main
 
             # display the cards
             dealCards(displayCards)
+                    
+            # players are given a total of 5 hints that they can use during the game
+            numOfHints = 5
+            puts "Would you like hint? Enter y or n:"
+            hint = gets.chomp!
+
+            # check if user requests a hint
+            if hint == "y" && numOfHints == 0
+
+              puts "Sorry no more hints available :("
+
+            elsif hint == "y" && numOfHints > 0
+
+              hintString = setPresent(displayCards)[1]
+              puts "One of the cards in the set is #{hintString}"
+              numOfHints = numOfHints - 1
+
+            else
+
+              puts "No hint, Good Luck!"
+            
+            end
 
             # check which player goes first 
-            puts "Enter your letter:"
-            alphabet = gets.chomp!
+            puts "\n\nEnter your letter:"
 
+            alphabet = gets.chomp!
+          
+          
             # check for valid input of selection alphabet
             while alphabet != "a" && alphabet != "o" do
 
@@ -101,21 +125,40 @@ def main
             while (!isSet) do
 
 
-            puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
-            puts "Enter your letter:"
-            alphabet = gets.chomp!
+              puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
 
+              puts "Would you like hint? Enter y or n:"
+              hint = gets.chomp!
 
-            while alphabet != "a" && alphabet != "o" do
+              if hint == "y" && numOfHints == 0
+
+                puts "Sorry no more hints available :("
+
+              elsif hint == "y" && numOfHints > 0
+
+                hintString = setPresent(displayCards)[1]
+                puts "One of the cards in the set is #{hintString}"
+                numOfHints = numOfHints - 1
+
+              else
+
+                puts "No hint, Good Luck!"
+            
+              end
+
+              puts "Enter your letter:"
+              alphabet = gets.chomp!
+
+              while alphabet != "a" && alphabet != "o" do
 
                 puts "Invalid input, please enter a valid input to continue:"
                 alphabet = gets.chomp!
 
-            end
-            puts "Input your response by inputting 1,2,3... each separated by a new line."
+              end
+              puts "Input your response by inputting 1,2,3... each separated by a new line."
             
-            input = getCardsFromUser(displayCards)
-            isSet = checkIfSet(input[0], input[1], input[2])
+              input = getCardsFromUser(displayCards)
+              isSet = checkIfSet(input[0], input[1], input[2])
 
             end
 
@@ -160,4 +203,4 @@ end
 
 main
 
-                
+
