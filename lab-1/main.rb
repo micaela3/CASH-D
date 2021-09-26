@@ -116,73 +116,28 @@ def main
       # checkifset method checks if the user selected cards make a set
       isSet = checkIfSet(input[0], input[1], input[2])
 
+			# clear the screen of cluttered text and before scores and more cards are shown
+			system("clear")
+
       # check if the selection is a set 
-      while (!isSet) do
-
-        # tell the player that their selection was not a set
-        puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
-
-        puts "Would you like hint? Enter y or n:"
-        hint = gets.chomp!
-
-        # clear the screen of cluttered text and redisplay the cards
-        system("clear")
-        dealCards(displayCards)
-
-        # check if the user wants a hint and can get one
-        if hint == "y" && numOfHints == 0
-
-          puts "Sorry no more hints available :("
-
-          # print out the hint if available
-        elsif hint == "y" && numOfHints > 0
-
-          hintString = setPresent(displayCards)[1]
-          puts "One of the cards in the set is #{hintString}"
-          numOfHints = numOfHints - 1
-
-          # if user does not want a hint
-        else
-
-          puts "No hint, Good Luck!"
-
-        end
-
-        # ask for player identifier input
-        puts "Enter your letter:"
-        alphabet = gets.chomp!
-
-        # make sure that the user input a correct identifier
-        while alphabet != "a" && alphabet != "o" do
-
-          puts "Invalid input, please enter a valid input to continue:"
-          alphabet = gets.chomp!
-
-        end
-
-        # collect user selection
-        puts "Input your response by inputting 1,2,3... each separated by a new line."
-
-        input = getCardsFromUser(displayCards)
-        isSet = checkIfSet(input[0], input[1], input[2])
-
-      end
-
-      # at this point, the user selection was a set, so increment the appropriate score
-      if alphabet == "a"
-        player1.score += 1
-        puts "#{player1.name}'s score is now #{player1.score}"
-      else
-        player2.score += 1
-        puts "#{player2.name}'s score is now #{player2.score}"
-      end
-
-      # remove the cards that a user selects that form a set
-      removeCards(displayCards, input[0], input[1], input[2])
-
-      # replace the cards that were taken out as a set
-      refreshCards(displayCards, deck)
-
+			if isSet
+				# at this point, the user selection was a set, so increment the appropriate score
+				if alphabet == "a"
+					player1.score += 1
+					puts "#{player1.name}'s score is now #{player1.score}"
+				else
+					player2.score += 1
+					puts "#{player2.name}'s score is now #{player2.score}"
+				end
+	
+				# remove the cards that a user selects that form a set
+				removeCards(displayCards, input[0], input[1], input[2])
+	
+				# replace the cards that were taken out as a set
+				refreshCards(displayCards, deck)
+			else
+				puts "The cards #{input[0]}, #{input[1]}, #{input[2]} are not a set. Resuming play. Any player can select their letter and make a selection."
+			end
     end
 
     # at this point, the game has ended. Print out scores and say who won.
@@ -203,7 +158,6 @@ def main
   # Wait for gameThread to finish or be killed.
   gameThread.join
 end
-
 
 
 # call main method
