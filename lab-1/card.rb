@@ -1,4 +1,11 @@
-require 'gosu'
+# Default to no Gosu
+$gosuInstalled = false
+begin
+    require 'gosu'
+    $gosuInstalled = true
+rescue LoadError
+    # Gosu not installed
+end
 # Constants for the card's count attribute
 module Count
     ONE = 1
@@ -35,7 +42,9 @@ class Card
         @shape = shape
         @shading = shading
         @color = color
-        @image = Gosu::Image.new("cards/#{count_string}_#{color_string}_#{shading_string}_#{shape_string}.png", :tileable => false)
+        if $gosuInstalled
+            @image = Gosu::Image.new("cards/#{count_string}_#{color_string}_#{shading_string}_#{shape_string}.png", :tileable => false)
+        end
     end
 
     # Return the card count

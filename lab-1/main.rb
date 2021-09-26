@@ -1,11 +1,9 @@
 # Require other files & their functions
 require './checkIfSet'
 require './dealCards'
-require './drawCards'
 require './fillDeck'
 require './generateHint.rb'
 require './getCardsFromUser'
-require './graphicalSetGame'
 require './modifyChosenCards'
 require './player'
 require './setPresent'
@@ -213,7 +211,15 @@ elsif noGuiIndex
     # Run main if --no-gui is supplied
     main maxTime, maxScore
 else
-    # Otherwise, run GUI version
-    puts "Run with --no-gui for text-based version, or --help for all options!"
-    SetGame.new(maxTime, maxScore).show
+    # Otherwise, attempt to run GUI version
+    begin
+        require './graphicalSetGame'
+        puts "Run with --no-gui for text-based version, or --help for all options!"
+        SetGame.new(maxTime, maxScore).show
+    rescue LoadError
+        # Gosu not installed, default to text version
+        puts "Gosu not installed, defaulting to text game"
+        puts "Check the README for installation instructions!"
+        main maxTime, maxScore
+    end
 end
