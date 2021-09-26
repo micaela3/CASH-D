@@ -66,7 +66,7 @@ def main(timerLength, maxScore)
     gameThread = Thread.new do
 
         # continue the game until no cards are left, one player hasn't reached the score threshold, and they players don't want to play again
-        while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < 5) && (player2.score < 5))) do
+        while (((deck.length > 0) || (setPresent(displayCards))) && ((player1.score < maxScore) && (player2.score < maxScore))) do
 
             # display the cards
             dealCards(displayCards)
