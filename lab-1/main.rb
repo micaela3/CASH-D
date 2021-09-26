@@ -342,8 +342,8 @@ class SetGame < Gosu::Window
         end
         if @state == Game_State::TALLY_RESULTS
             @timesUpText = Gosu::Image.from_text("Times up!", 60) if @timer >= @timerLength
-            @winnerText = Gosu::Image.from_text("Player 1 wins!", 60) if @player1.score > @player2.score
-            @winnerText = Gosu::Image.from_text("Player 2 wins!", 60) if @player1.score < @player2.score
+            @winnerText = Gosu::Image.from_text("#{@player1.name} (player 1) wins!", 60) if @player1.score > @player2.score
+            @winnerText = Gosu::Image.from_text("#{@player2.name} (player 2) wins!", 60) if @player1.score < @player2.score
             @winnerText = Gosu::Image.from_text("It's a tie!", 60) if @player1.score == @player2.score
             @playAgainText = Gosu::Image.from_text("To play again, press enter", 40)
             @state = Game_State::SHOW_RESULTS
@@ -384,29 +384,38 @@ class SetGame < Gosu::Window
             # Draw current entered name
             @player2Font.draw_text("> #{@player2Input.text[0, @player2Input.caret_pos]}#{blinker}#{@player2Input.text[@player2Input.caret_pos..]}", 445, 360, 1, 1, 1, 0xff_000000)
         elsif @state == Game_State::VIEW_CARDS || @state == Game_State::CHOOSE_CARDS
+            # Show displayed cards and instructions
+            # Show instructions
             for i in 0..(@instructions.length-1) do
                 @instructions[i].draw(50, 20+(i*25), 1, 1, 1, 0xff_000000)
             end
+            # Draw cards
             drawCards(@displayCards, 20+((@instructions.length+2) * 25), SCREEN_WIDTH, SCREEN_HEIGHT)
-            @player1Score.draw_text("Player 1: #{@player1.score}", SCREEN_WIDTH - 400, 60, 1, 1, 1, 0xff_000000)
-            @player2Score.draw_text("Player 2: #{@player2.score}", SCREEN_WIDTH - 400, 110, 1, 1, 1, 0xff_000000)
+            # Draw game info / stats
+            @player1Score.draw_text("#{@player1.name}: #{@player1.score}", SCREEN_WIDTH - 400, 60, 1, 1, 1, 0xff_000000)
+            @player2Score.draw_text("#{@player2.name}: #{@player2.score}", SCREEN_WIDTH - 400, 110, 1, 1, 1, 0xff_000000)
             @hintsLeft.draw_text("Hints: #{@hintsAvailable}", SCREEN_WIDTH - 150, 85, 1, 1, 1, 0xff_000000)
             @timerDisplay.draw_text("Time remaining: #{getTimerString(@timerLength - @timer)}", SCREEN_WIDTH - 400, 10, 1, 1, 1, 0xff_000000) if @timerLength > 0
             if @state == Game_State::VIEW_CARDS
+                # Give control instructions
                 @controls.draw(50, 20+(@instructions.length*25), 1, 1, 1, 0xff_000000)
+                # Tell user whether they made a mistake, or what the hint is, if they've asked for one
                 if @mistake
                     @mistakeText.draw(50, 20+((@instructions.length+1)*25), 1, 1, 1, 0xff_000000)
                 elsif @currentHint
                     @currentHint.draw(50, 20+((@instructions.length+1)*25), 1, 1, 1, 0xff_000000)
                 end
             else
+                # Tell the user to select cards
                 cardText = "cards" if (3 - @chosenCards.length) != 1
                 cardText = "card" if (3 - @chosenCards.length) == 1
                 @choosePrompt.draw_text("Player #{@playerChoosing}, select #{3 - @chosenCards.length} more #{cardText}", 50, 20+(@instructions.length*25), 1, 1, 1, 0xff_000000)
             end
         elsif @state == Game_State::SHOW_RESULTS
+            # Draw win screen
             @timesUpText.draw(515, 220, 1, 1, 1, 0xff_000000) if @timer >= @timerLength && @timerLength > 0
-            @winnerText.draw(460, 300, 1, 1, 1, 0xff_000000)
+            # Draw winner text centered
+            @winnerText.draw((SCREEN_WIDTH - @winnerText.width)/2, 300, 1, 1, 1, 0xff_000000)
             @playAgainText.draw(420, 380, 1, 1, 1, 0xff_000000)
         end
     end
