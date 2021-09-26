@@ -1,16 +1,19 @@
 # Require other files & their functions
 require './checkIfSet'
 require './dealCards'
+require './drawCards'
 require './fillDeck'
+require './generateHint.rb'
+require './getCardsFromUser'
+require './graphicalSetGame'
 require './modifyChosenCards'
 require './player'
 require './setPresent'
 require './shuffleDeck'
-require './getCardsFromUser'
+require './timer'
 
 # main method for the set game
-
-def main
+def main(timerLength, maxScore)
 
     # welcome message for the user
     puts "Welcome to the game of Set!"
@@ -153,15 +156,64 @@ def main
         end
     end # end main while loop of game
 
-    # gameTimer will kill game thread after 15 minutes has elapsed.
-    gameTimer = Thread.new {sleep 900; gameThread.kill; puts "\nGame has ended, time expired."}
+    # gameTimer will kill game thread after timerLength seconds (defaults to 15 minutes) has elapsed.
+    gameTimer = Thread.new {sleep timerLength/60; gameThread.kill; puts "\nGame has ended, time expired."} if timerLength > 0
     # Wait for gameThread to finish or be killed.
     gameThread.join
 end
 
+# Default game parameters
+# 15 minute timer (60 fps)
+maxTime = 15 * 60 * 60
+maxScore = 5
 
-# call main method
+# Get indexes, if they exist, of where each command line argument is specified
+helpIndex = ARGV.index { |x| x.downcase == "--help"}
+noGuiIndex = ARGV.index { |x| x.downcase == "--no-gui"}
+maxTimeIndex = ARGV.index { |x| x.downcase.start_with? "--max-time="}
+maxScoreIndex = ARGV.index { |x| x.downcase.start_with? "--max-score="}
 
-main
+if maxTimeIndex
+    # If a max time is specified, get the string version of the value
+    maxTimeString = ARGV[maxTimeIndex].downcase.delete_prefix("--max-time=")
+    begin
+        # Convert the string value to an integer, and multiply it by the fps, 60
+        # If it's any negative integer, set it to 0 for no max time
+        maxTime = Integer(maxTimeString) * 60
+        maxTime = 0 if maxTime < 0
+    rescue ArgumentError
+        # Not given an integer, it raised an error during conversion to integer
+        puts "Max time must be an integer, defaulting to #{maxTime / 60}!"
+    end
+end
 
+if maxScoreIndex
+    # If a max score is specified, get the string version of the value
+    maxScoreString = ARGV[maxScoreIndex].downcase.delete_prefix("--max-score=")
+    begin
+        # Convert the string value to an integer
+        # If it's any negative integer, set it to 0 for no max score
+        maxScore = Integer(maxScoreString)
+        maxScore = 0 if maxScore < 0
+    rescue ArgumentError
+        # Not given an integer, it raised an error during conversion to integer
+        puts "Max score must be an integer, defaulting to #{maxScore}!"
+    end
+end
 
+ARGV.clear
+if helpIndex
+    # Display help messsage
+    puts "Usage: ruby main.rb [--help] [--no-gui] [--max-time=<seconds>] [--max-score=<score>]"
+    puts "--help: Displays this help message"
+    puts "--no-gui: Runs the game in text mode"
+    puts "--max-time: Set the timer length, in seconds, or 0 for no timer"
+    puts "--max-score: Set the max score, or 0 for no max score"
+elsif noGuiIndex
+    # Run main if --no-gui is supplied
+    main maxTime, maxScore
+else
+    # Otherwise, run GUI version
+    puts "Run with --no-gui for text-based version, or --help for all options!"
+    SetGame.new(maxTime, maxScore).show
+end
