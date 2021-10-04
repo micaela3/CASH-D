@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Title of the webpage -->
+		<title>Game of Set</title>
+
+		<!-- Linking the main css stylesheet for styling the page -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+	</head>
+
+	<body>	
+		<!-- Div that holds the welcome message and the button that starts the game -->
+		<div id="gameStart" class="gameStart">
+			<!-- Welcome Message -->
+			<h2>Welcome to the Game of Set</h2>
+
+			<!-- button that starts the game -->
+			<a id="gameStartButton" class="gameStartButton" >Play</a>
+		</div>
+
+		<!-- Container div that holds the form for the player names -->
+		<div id="input" class="input">
+			<!-- The form element that gets the player name input -->
+			<form id="nameForm" class="nameForm" action="#">
+				<!-- First player Input -->
+				<h2>First Player</h2>
+				<input type="text" placeholder="Enter the name of the first player" required />
+				
+				<!-- Second Player Input -->
+				<h2>Second Player</h2>
+				<input type="text" placeholder="Enter the name of the second player" required />
+				<!-- spacing -->
+				<br />
+
+				<!-- button for submitting the form -->
+				<a id="formSubmit" class="formSubmit">Next</a>
+			</form>
+		</div>
+
+		<!-- Container div that contains all the cards displayed on the screen -->
+		<div id="cardsContainer" class="cardsContainer">
+		</div>
+		
+		<!-- JavaScript files needed for the game to run -->
+		<script src="js/player.js"></script>
+		<script src="js/shuffleDeck.js"></script>
+		<script type="module" src="js/main.js"></script>
+	</body>
+</html>
