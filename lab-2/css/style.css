@@ -176,3 +176,9 @@ body{
 	/* Sets the width of the image to the width of the container */
 	width: 100%;
 }
+
+/* CSS for the exit button */
+.gameEnd{
+      	display: none;
+}
+

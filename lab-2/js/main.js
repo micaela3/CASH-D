@@ -16,6 +16,9 @@ const form = document.getElementById('nameForm');
 //Gets the container element that will hold the cards
 const cardsContainer = document.getElementById('cardsContainer');
 
+//The variable that gets the container element that holds the exit button 
+const gameEndContainer = document.getElementById('gameEnd');
+
 //Adds the eventlistener for click on the game start button
 gameStartButton.addEventListener('click', event => {
 	//Makes the container with the game start button invisible so that the next page of the game can be shown
