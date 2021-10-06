@@ -26,6 +26,8 @@ gameStartButton.addEventListener('click', event => {
 
 	//Displays the form for the player name input on screen
 	inputContainer.style.display = "block";
+
+	gameEndContainer.style.display = "block";
 });
 
 
