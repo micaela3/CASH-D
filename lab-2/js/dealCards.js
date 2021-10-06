@@ -11,12 +11,7 @@ function dealCards(chosenCards) {
         //the loop will run will there are still cards left and no more than 21 cards have been displayed
         while ((chosenCards[pos] != undefined) && pos < 21)  {
 
-		/* NEED THE CARD CLASS TO FULLY FINISH THIS PART */
-
-
-                //Adds the card html to the cards container div element html
-                //cardsContainer.innerHTML += "<div class='card'><img src='img/One_Green_Open_Diamond.png' /> </div>";
-		
+		//add a new div element to the cardsContainer using the image of the right card	
 		cardsContainer.innerHTML += "<div class='card'><img src='img/" + chosenCards[pos].toString + ".png' /> </div>";
 		pos++;
         }
