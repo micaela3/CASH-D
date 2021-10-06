@@ -86,6 +86,6 @@ class Card {
 
     // Return the card object as a string
     toString() {
-        return this.countString + ' ' + this.colorString + ' ' + this.shadingString + ' ' + this.shapeString;
+        return this.countString + "_" + this.colorString + "_" + this.shadingString + "_" + this.shapeString;
     }
 };
