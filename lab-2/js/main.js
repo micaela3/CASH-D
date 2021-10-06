@@ -25,16 +25,28 @@ gameStartButton.addEventListener('click', event => {
 	inputContainer.style.display = "block";
 });
 
+
+
 //Adds the eventlistenere for click on the form submit button
 formSubmitButton.addEventListener('click', event => {
-	//WHOVER DOES THE FORM INPUT HANDLING. PLEASE EDIT THIS AND VALIDATE THE INPUT RECEIVED. THIS IS JUST FOR TESTING PURPOSES ON MY END (SHREY) 
+	 
 
-	//Makes the input container invisible so that the next page of the game can be shown
-	inputContainer.style.display = "none";
+	var p1Name = form.playerOne.value;
+	var p2Name = form.playerTwo.value;
 
-	//Displays the card container on screen
-	cardsContainer.display = "block";
 
-	//Displays the cards on screen
-	displayCards();
+	if (p1Name.length <= 15 && p2Name.length <= 15 && p1Name.length > 0 && p2Name.length > 0) {
+		//Makes the input container invisible so that the next page of the game can be shown
+		inputContainer.style.display = "none";
+
+		//Displays the card container on screen
+		cardsContainer.display = "block";
+
+		//Displays the cards on screen
+		displayCards();
+	} else {
+		alert("Names cannot exceed 15 characters and cannot be blank.")
+	}
+
+	
 });
