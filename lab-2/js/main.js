@@ -43,7 +43,7 @@ formSubmitButton.addEventListener('click', event => {
 		cardsContainer.display = "block";
 
 		//Displays the cards on screen
-		displayCards();
+		//dealCards();
 	} else {
 		alert("Names cannot exceed 15 characters and cannot be blank.")
 	}
