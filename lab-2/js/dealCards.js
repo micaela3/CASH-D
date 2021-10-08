@@ -11,7 +11,7 @@ function dealCards(chosenCards) {
         while ((chosenCards[pos] != undefined) && pos < 21)  {
 
 		//add a new div element to the cardsContainer using the image of the right card	
-		cardsContainer.innerHTML += "<div class='card'><img src='img/" + chosenCards[pos].toString + ".png' /> </div>";
+		cardsContainer.innerHTML += "<div class='card'><img src='img/" + chosenCards[pos].toString() + ".png' /> </div>";
 		pos++;
         }
 
