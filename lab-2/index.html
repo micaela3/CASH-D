@@ -23,6 +23,23 @@
 			<!-- button that ends the game -->
 			<a id="gameEndButton" class="gameEndButton" href="./">Exit</a>
 		</div>
+
+		<!-- Div that tells the player to press a for player 1 to select a card, and l for player 2 -->
+        <div id="playerControlInstructions" class="playerControlInstructions">
+            Player 1: Press 'a' to select cards that make a set.
+            <br>
+            Player 2: Press 'l' to select cards that make a set.
+        </div>
+        
+        <!-- Div that holds the player pick cards message -->
+        <div id="playerPickCards" class="playerPickCards">
+            <!-- "Player 1 please select 3 more cards" but we can easily change (1), (3), and (s) -->
+            Player
+            <span id="playerPickNumber">1</span>
+            please select
+            <span id="playerPickCardsLeft">3</span>
+            more card<span id="playerPickPlural">s</span>.
+        </div>
 	  		
 		<!-- Container div that holds the form for the player names -->
 		<div id="input" class="input">
@@ -45,12 +62,19 @@
 
 		<!-- Container div that contains all the cards displayed on the screen -->
 		<div id="cardsContainer" class="cardsContainer">
+
+			
 		</div>
 		
 		<!-- JavaScript files needed for the game to run -->
 		<script src="js/card.js"></script>
 		<script src="js/player.js"></script>
 		<script src="js/shuffleDeck.js"></script>
+		<script src="js/checkIfSet.js"></script>
+		<script src="js/dealCards.js"></script>
+		<script src="js/fillDeck.js"></script>
+		<script src="js/modifyChosenCards.js"></script>
+		<script src="js/setPresent.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>

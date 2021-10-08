@@ -3,6 +3,8 @@ var NUM_TYPES = 3;
 // Fills Set deck with all cards needed to play one game.
 function fillDeck(deck) {
 
+    var deck = [];
+    
     //Create each card so that each card is unique and there is a combination of every possible type of card.
     for (var a = 1; a <= NUM_TYPES; a++) {
         for (var b = 1; b <= NUM_TYPES; b++) {

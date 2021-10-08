@@ -284,3 +284,13 @@ input{
 	/* Changes the background color of the button to red */
 	background-color: #bb0000;
 }
+
+/* CSS for the control instructions */
+.playerControlInstructions{
+    display: none;
+}
+
+/* CSS for the player pick cards message */
+.playerPickCards {
+    display: none;
+}

@@ -1,3 +1,22 @@
+/* 
+Global variable that defines current state of game:
+0 - Starting Game
+1 - Game in Progress
+2 - Game Ending 
+3 - Cards Being Selected
+*/
+
+var gameState = 0;
+
+/* 
+Global variable to show which player is currently picking cards:
+1 - Player 1 Picking
+2 - Player 2 Picking
+Will be set to 1 as default.
+*/
+
+var playerPicking = 1;
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 
@@ -18,6 +37,12 @@ const cardsContainer = document.getElementById('cardsContainer');
 
 //The variable that gets the container element that holds the exit button 
 const gameEndContainer = document.getElementById('gameEnd');
+
+//Gets the container element for the control instructinos
+const controlInstructionsContainer = document.getElementById('playerControlInstructions');
+
+//Gets the container element for the select cards message
+const pickCardsReminderContainer = document.getElementById('playerPickCards');
 
 //Adds the eventlistener for click on the game start button
 gameStartButton.addEventListener('click', event => {
@@ -45,13 +70,40 @@ formSubmitButton.addEventListener('click', event => {
 		inputContainer.style.display = "none";
 
 		//Displays the card container on screen
-		cardsContainer.display = "block";
+		cardsContainer.style.display = "block";
+
+		//Display player controls
+		controlInstructionsContainer.style.display = "block";
+
+		//Fill Set card deck.
+		var deck = fillDeck();
+
+		//Shuffle the deck.
+		shuffleDeck(deck);
 
 		//Displays the cards on screen
-		//dealCards();
+		dealCards(deck);
+
+		//Set game state
+		gameState = 1;
 	} else {
 		alert("Names cannot exceed 15 characters and cannot be blank.")
 	}
 
 	
+});
+
+document.addEventListener("keypress", function(event) {
+    if (gameState == 1 && (event.key === "a" || event.key === "l")) {
+        if (event.key === "a") {
+            playerChoosing = 1;
+        } else if (event.key === "l") {
+            playerChoosing = 2;
+        }
+        controlInstructionsContainer.style.display = "none";
+        pickCardsReminderContainer.style.display = "block";
+
+		//Update game state
+		gameState = 3;
+    }
 });

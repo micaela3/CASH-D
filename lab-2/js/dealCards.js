@@ -5,14 +5,13 @@
  */
 
 function dealCards(chosenCards) {
-
 	var pos = 0;
 
         //the loop will run will there are still cards left and no more than 21 cards have been displayed
         while ((chosenCards[pos] != undefined) && pos < 21)  {
 
 		//add a new div element to the cardsContainer using the image of the right card	
-		cardsContainer.innerHTML += "<div class='card'><img src='img/" + chosenCards[pos].toString + ".png' /> </div>";
+		cardsContainer.innerHTML += "<div class='card'><img src='img/" + chosenCards[pos].toString() + ".png' /> </div>";
 		pos++;
         }
 
