@@ -47,8 +47,11 @@ formSubmitButton.addEventListener('click', event => {
 		//Displays the card container on screen
 		cardsContainer.display = "block";
 
+		//Fill Set card deck.
+		var deck = fillDeck();
+
 		//Displays the cards on screen
-		//dealCards();
+		dealCards(deck);
 	} else {
 		alert("Names cannot exceed 15 characters and cannot be blank.")
 	}

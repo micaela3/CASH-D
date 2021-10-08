@@ -5,7 +5,6 @@
  */
 
 function dealCards(chosenCards) {
-
 	var pos = 0;
 
         //the loop will run will there are still cards left and no more than 21 cards have been displayed
