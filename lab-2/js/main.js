@@ -50,6 +50,9 @@ formSubmitButton.addEventListener('click', event => {
 		//Fill Set card deck.
 		var deck = fillDeck();
 
+		//Shuffle the deck.
+		shuffleDeck(deck);
+
 		//Displays the cards on screen
 		dealCards(deck);
 	} else {
