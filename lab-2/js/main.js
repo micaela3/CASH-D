@@ -1,3 +1,22 @@
+/* 
+Global variable that defines current state of game:
+0 - Starting Game
+1 - Game in Progress
+2 - Game Ending 
+3 - Cards Being Selected
+*/
+
+var gameState = 0;
+
+/* 
+Global variable to show which player is currently picking cards:
+1 - Player 1 Picking
+2 - Player 2 Picking
+Will be set to 1 as default.
+*/
+
+var playerPicking = 1;
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 
