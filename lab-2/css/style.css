@@ -82,15 +82,52 @@ body{
 	background-color: #bb0000;
 }
 
-/* CSS for styling the input container */
+/* CSS for the input container for the form */
 .input{
+	/* Sets display to none to hide the form from view */
 	display: none;
+
+	/* Sets the margin to auto so it can center on the page vertically and horizontally */
+	margin: auto;
+
+	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	position: absolute;
+
+	/* Aligns the text to center */
+	text-align: center;
+
+	/* Centers the div vertically from the top*/
+	top: 50%;
+
+	/* Centers the div horizontally from the left */
+	left: 50%;
+
+	/* Translates the div horizontally and vertically -50% to center the container */
+	transform: translate(-50%, -50%);
+
+	/* Makes the width of the container 30% of the whole page */
+	width: 30%;
+}
+
+/* CSS for styling the input field */
+input{
+	/* Sets a 10px top and bottom padding, and 20px left and right padding */
+	padding: 10px 20px;
+
+	/* Sets the width of the input field to 80% of the container */
+	width: 80%;
+
+	/* Removes the border from the input field */
+	border: none;
+
+	/* Aligns the text to center */
+	text-align: center;
 }
 
 /* CSS for the form submit button */
 .formSubmit{
-	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
-	margin: 0px auto 20px auto;
+	/* Sets a 30px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
+	margin: 30px auto 20px auto;
 
 	/* Sets the color of the text to white */
 	color: white;
@@ -177,8 +214,73 @@ body{
 	width: 100%;
 }
 
-/* CSS for the exit button */
+/* CSS for the exit button container */
 .gameEnd{
-      	display: none;
+      	/* Sets the diplay to none to make the button invisible on the screen */
+	display: none;
+	
+	/* Sets the margin to auto so it can center on the page vertically and horizontally */
+	margin: auto;
+
+	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	position: relative;
+	
+	/* Aligns the text to center */
+	text-align: center;
+
+	/* Moves the div to the right of the screen */
+	left: 40%;
+	
+	/* Makes the width of the container 30% of the whole page */
+	width: 20%;
 }
 
+/* CSS for the exit button */
+.gameEndButton{
+	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
+	margin: 0px auto 20px auto;
+
+	/* Sets the color of the text to white */
+	color: white;
+
+	/* Sets the background color of the button to a dark gray color */
+	background-color: #333;
+
+	/* Sets the top and bottom padding to 10 px and the left and right padding to 20px for the button to look better */
+	padding: 10px 20px;
+
+	/* Sets the cursor to a pointer to make it seem like clicking on a link */
+	cursor: pointer;
+
+	/* Sets the display of the div to be like a block rather than text */
+	display: block;
+
+	/* Center Aligns the text */
+	text-align: center;
+
+	/* Removes the underline from under the text */
+	text-decoration: none;
+
+	/* Clears the spacing on top and bottom */
+	clear: both;
+	
+	/* Sets the width to 50% of the parent container */
+	width: 50%;
+
+	/* Sets the font to have a bolder weight */
+	font-weight: 600;
+
+	/* Creates the extending width and background change transition */
+	transition: width .5s;
+
+	/* Makes it so the text in the button cannot be selected */
+	user-select: none;
+}
+
+.gameEndButton:hover{
+	/* Changes the width of the button to 90% of the container */
+	width: 85%;
+	
+	/* Changes the background color of the button to red */
+	background-color: #bb0000;
+}
