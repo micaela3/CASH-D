@@ -182,3 +182,12 @@ body{
       	display: none;
 }
 
+/* CSS for the control instructions */
+.playerControlInstructions{
+    display: none;
+}
+
+/* CSS for the player pick cards message */
+.playerPickCards {
+    display: none;
+}
