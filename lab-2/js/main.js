@@ -32,6 +32,9 @@ var deck = [];
 //Global variable for the chosen cards (cards shown on screen)
 var chosenCards = [];
 
+//Globabl variable for the score limit until the game ends
+const GAME_SCORE_LIMIT = 5;
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 
@@ -67,6 +70,12 @@ const controlPlayer2Name = document.getElementById('controlPlayer2Name');
 
 //Gets the span element containing the player name for picking cards
 const playerPickName = document.getElementById('playerPickName');
+
+//Gets the container element for the check set button
+const checkSetContainer = document.getElementById('checkSetContainer');
+
+//Gets the check set button 
+const checkSetButton = document.getElementById('checkSetButton');
 
 //Adds the eventlistener for click on the game start button
 gameStartButton.addEventListener('click', event => {
@@ -129,17 +138,85 @@ formSubmitButton.addEventListener('click', event => {
 document.addEventListener("keypress", function(event) {
     if (gameState == 1 && (event.key === "a" || event.key === "l")) {
         if (event.key === "a") {
-            playerChoosing = 1;
-			playerPickName.innerHTML = playerOne.name;
+		playerChoosing = 1;
+		playerPickName.innerHTML = playerOne.name;
         } else if (event.key === "l") {
-            playerChoosing = 2;
-			playerPickName.innerHTML = playerTwo.name;
+		playerChoosing = 2;
+		playerPickName.innerHTML = playerTwo.name;
         }
-        controlInstructionsContainer.style.display = "none";
-        pickCardsReminderContainer.style.display = "block";
+	controlInstructionsContainer.style.display = "none";
+	pickCardsReminderContainer.style.display = "block";
+	
+	//Displays the check set container on the page
+	checkSetContainer.style.display = "block";
 
 
-		//Update game state
-		gameState = 3;
+	//Update game state
+	gameState = 3;
     }
+});
+
+checkSetButton.addEventListener('click', event => {
+	let pickedCards = document.querySelectorAll('.card.select');
+	let indexes = [];
+	if(pickedCards.length == 3){
+		pickedCards.forEach(element => {
+			indexes.push(Array.prototype.indexOf.call(cardsContainer.children, element));
+		});
+		if(checkIfSet(chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]])){
+			if(playerChoosing == 1){
+				playerOne.score++;
+			}else{
+				playerTwo.score++;
+			}
+
+			if(playerOne.score < GAME_SCORE_LIMIT && playerTwo.score < GAME_SCORE_LIMIT){
+				let cardsOnScreen = document.querySelectorAll('.card');
+				cardsOnScreen.forEach(element => {
+					let parentNode = element.parentNode;
+					parentNode.removeChild(element);
+				});
+
+				removeCards(chosenCards, chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]]);
+				removeCards(deck, chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]]);
+
+				chosenCards = refreshCards(chosenCards, deck);
+
+				dealCards(chosenCards);
+
+				checkSetContainer.style.display = "none";
+				controlInstructionsContainer.style.display = "block";
+				pickCardsReminderContainer.style.display = "none";
+
+				gameState = 1;
+
+				numCardsSelected = 0;
+
+			}else{
+				cardsContainer.style.display = "none";
+				gameEndContainer.style.display = "none";
+				checkSetContainer.style.display = "none";
+				pickCardsReminderContainer.style.display = "none";
+
+				gameState = 2;
+			}
+		}else{
+			alert("The cards selected are not in a set");
+			
+			checkSetContainer.style.display = "none";
+			controlInstructionsContainer.style.display = "block";
+			pickCardsReminderContainer.style.display = "none";
+
+			gameState = 1;
+
+			pickedCards.forEach(element => {
+				element.classList.remove('select');
+			});
+
+			numCardsSelected = 0;
+		}
+	}else{
+		alert("Please select three cards");
+	}
+
 });

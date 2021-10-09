@@ -175,10 +175,16 @@ input{
 	background-color: #bb0000;
 }
 
+/* CSS styling for the cards container div */
+.cardsContainer{
+	/* Sets the width of the cards container div to 80% of the body width */
+	width: 80%;
+}
+
 /* CSS styling for the cards */
 .cardsContainer .card{
-	/* Sets the width of each card to 10% of the viewport width */
-	width: 10vw;
+	/* Sets the width of each card to 10% of the container width */
+	width: 10%;
 
 	/* Sets the height of the card to auto */
 	height: auto;
@@ -293,4 +299,75 @@ input{
 /* CSS for the player pick cards message */
 .playerPickCards {
     display: none;
+}
+
+/* CSS for the checkSet button container */
+.checkSetContainer{
+	/* Sets the diplay to none to make the button invisible on the screen */
+	display: none;
+
+	/* Sets the margin to auto so it can center on the page vertically and horizontally */
+	margin: auto;
+
+	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	position: relative;
+
+	/* Aligns the text to center */
+	text-align: center;
+
+	/* Moves the div to the right of the screen */
+	left: 40%;
+
+	/* Makes the width of the container 30% of the whole page */
+	width: 20%;
+}
+
+/* CSS for the check set button */
+.checkSetButton{
+	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
+	margin: 0px auto 20px auto;
+
+	/* Sets the color of the text to white */
+	color: white;
+
+	/* Sets the background color of the button to a dark gray color */
+	background-color: #333;
+
+	/* Sets the top and bottom padding to 10 px and the left and right padding to 20px for the button to look better */
+	padding: 10px 20px;
+
+	/* Sets the cursor to a pointer to make it seem like clicking on a link */
+	cursor: pointer;
+
+	/* Sets the display of the div to be like a block rather than text */
+	display: block;
+
+	/* Center Aligns the text */
+	text-align: center;
+
+	/* Removes the underline from under the text */
+	text-decoration: none;
+
+	/* Clears the spacing on top and bottom */
+	clear: both;
+
+	/* Sets the width to 50% of the parent container */
+	width: 50%;
+
+	/* Sets the font to have a bolder weight */
+	font-weight: 600;
+
+	/* Creates the extending width and background change transition */
+	transition: width .5s;
+
+	/* Makes it so the text in the button cannot be selected */
+	user-select: none;
+}
+
+.checkSetButton:hover{
+	/* Changes the width of the button to 90% of the container */
+	width: 85%;
+
+	/* Changes the background color of the button to red */
+	background-color: #bb0000;
 }
