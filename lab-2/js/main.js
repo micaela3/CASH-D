@@ -26,6 +26,12 @@ var playerTwo;
 //Global variable for number of cards selected
 var numCardsSelected = 0;
 
+//Global variable for the deck (to refill chosen cards)
+var deck = [];
+
+//Global variable for the chosen cards (cards shown on screen)
+var chosenCards = [];
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 
@@ -52,6 +58,15 @@ const controlInstructionsContainer = document.getElementById('playerControlInstr
 
 //Gets the container element for the select cards message
 const pickCardsReminderContainer = document.getElementById('playerPickCards');
+
+//Gets the span element containing the player 1 name in the controls
+const controlPlayer1Name = document.getElementById('controlPlayer1Name');
+
+//Gets the span element containing the player 2 name in the controls
+const controlPlayer2Name = document.getElementById('controlPlayer2Name');
+
+//Gets the span element containing the player name for picking cards
+const playerPickName = document.getElementById('playerPickName');
 
 //Adds the eventlistener for click on the game start button
 gameStartButton.addEventListener('click', event => {
@@ -87,16 +102,20 @@ formSubmitButton.addEventListener('click', event => {
 		cardsContainer.style.display = "block";
 
 		//Display player controls
+		controlPlayer1Name.innerHTML = playerOne.name;
+		controlPlayer2Name.innerHTML = playerTwo.name;
 		controlInstructionsContainer.style.display = "block";
 
 		//Fill Set card deck.
-		var deck = fillDeck();
+		deck = fillDeck();
 
 		//Shuffle the deck.
 		shuffleDeck(deck);
 
+		chosenCards = chooseCards(deck);
+
 		//Displays the cards on screen
-		dealCards(deck);
+		dealCards(chosenCards);
 
 		//Set game state
 		gameState = 1;
@@ -111,11 +130,14 @@ document.addEventListener("keypress", function(event) {
     if (gameState == 1 && (event.key === "a" || event.key === "l")) {
         if (event.key === "a") {
             playerChoosing = 1;
+			playerPickName.innerHTML = playerOne.name;
         } else if (event.key === "l") {
             playerChoosing = 2;
+			playerPickName.innerHTML = playerTwo.name;
         }
         controlInstructionsContainer.style.display = "none";
         pickCardsReminderContainer.style.display = "block";
+
 
 		//Update game state
 		gameState = 3;

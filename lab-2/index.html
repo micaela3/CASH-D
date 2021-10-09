@@ -26,16 +26,15 @@
 
 		<!-- Div that tells the player to press a for player 1 to select a card, and l for player 2 -->
         <div id="playerControlInstructions" class="playerControlInstructions">
-            Player 1: Press 'a' to select cards that make a set.
+            <span id="controlPlayer1Name">Player 1</span>: Press 'a' to select cards that make a set.
             <br>
-            Player 2: Press 'l' to select cards that make a set.
+            <span id="controlPlayer2Name">Player 2</span>: Press 'l' to select cards that make a set.
         </div>
         
         <!-- Div that holds the player pick cards message -->
         <div id="playerPickCards" class="playerPickCards">
-            <!-- "Player 1 please select 3 more cards" but we can easily change (1), (3), and (s) -->
-            Player
-            <span id="playerPickNumber">1</span>
+            <!-- "Player 1 please select 3 more cards" but we can easily change (Player 1), (3), and (s) -->
+            <span id="playerPickName">Player 1</span>
             please select
             <span id="playerPickCardsLeft">3</span>
             more card<span id="playerPickPlural">s</span>.
