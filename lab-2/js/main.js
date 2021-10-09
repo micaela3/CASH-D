@@ -23,6 +23,9 @@ var playerOne;
 //Global variable for player two.
 var playerTwo;
 
+//Global variable for number of cards selected
+var numCardsSelected = 0;
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 

@@ -22,13 +22,18 @@ function dealCards(chosenCards) {
         cards.forEach(item => {
                 //Adds a click event listener to the card div
                 item.addEventListener('click', event => {
-                        //Checks if the card has already been clicked and if not then adds the select class which changes the background color of the card to give user feedback
+
+			//Checks if the card has already been clicked and if not then adds the select class which changes the background color of the card to give user feedback
                         if(item.classList.contains('select')) {
                                 //Removes the select class from the classlist if the card was already clicked
-                                item.classList.remove('select');
+					item.classList.remove('select');
+					numCardsSelected--;
                         }else{
-                                //Adds the class to the classlist if the card has not been clicked before
-                                item.classList.add('select');
+                                //Adds the class to the classlist if the card has not been clicked before and three cards have not been selected
+                                if (numCardsSelected < 3) {
+					item.classList.add('select');
+					numCardsSelected++;
+				}
                         };
                 });
         });
