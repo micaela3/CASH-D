@@ -17,6 +17,12 @@ Will be set to 1 as default.
 
 var playerPicking = 1;
 
+// Global variable for player one.
+var playerOne;
+
+//Global variable for player two.
+var playerTwo;
+
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
 
@@ -66,6 +72,11 @@ formSubmitButton.addEventListener('click', event => {
 
 
 	if (p1Name.length <= 15 && p2Name.length <= 15 && p1Name.length > 0 && p2Name.length > 0) {
+
+		// Create your player objects with their names and starting score of 0.
+		playerOne = new Player(p1Name,1,0);
+		playerTwo = new Player(p2Name,2,0);
+
 		//Makes the input container invisible so that the next page of the game can be shown
 		inputContainer.style.display = "none";
 
