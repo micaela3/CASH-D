@@ -35,6 +35,9 @@ function dealCards(chosenCards) {
 					numCardsSelected++;
 				}
                         };
+                        // Update the "X card(s)" message for the player
+                        playerPickCardsLeft.innerHTML = (3 - numCardsSelected);
+		        playerPickPlural.innerHTML = numCardsSelected != 2 ? "s" : "";
                 });
         });
 };

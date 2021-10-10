@@ -71,6 +71,12 @@ const controlPlayer2Name = document.getElementById('controlPlayer2Name');
 //Gets the span element containing the player name for picking cards
 const playerPickName = document.getElementById('playerPickName');
 
+//Gets the span element containing the number of cards left to pick
+const playerPickCardsLeft = document.getElementById('playerPickCardsLeft');
+
+//Gets the span element containing the plural for card(s)
+const playerPickPlural = document.getElementById('playerPickPlural');
+
 //Gets the container element for the check set button
 const checkSetContainer = document.getElementById('checkSetContainer');
 
@@ -160,21 +166,24 @@ formSubmitButton.addEventListener('click', event => {
 document.addEventListener("keypress", function(event) {
     if (gameState == 1 && (event.key === "a" || event.key === "l")) {
         if (event.key === "a") {
-		playerChoosing = 1;
-		playerPickName.innerHTML = playerOne.name;
+			playerChoosing = 1;
+			playerPickName.innerHTML = playerOne.name;
         } else if (event.key === "l") {
-		playerChoosing = 2;
-		playerPickName.innerHTML = playerTwo.name;
+			playerChoosing = 2;
+			playerPickName.innerHTML = playerTwo.name;
         }
-	controlInstructionsContainer.style.display = "none";
-	pickCardsReminderContainer.style.display = "block";
+		controlInstructionsContainer.style.display = "none";
+		pickCardsReminderContainer.style.display = "block";
+		// Update "X card(s) left" to show "3 cards left"
+		playerPickCardsLeft.innerHTML = "3";
+		playerPickPlural.innerHTML = "s";
 	
-	//Displays the check set container on the page
-	checkSetContainer.style.display = "block";
+		//Displays the check set container on the page
+		checkSetContainer.style.display = "block";
 
 
-	//Update game state
-	gameState = 3;
+		//Update game state
+		gameState = 3;
     }
 });
 
