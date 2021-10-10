@@ -20,10 +20,6 @@ function setPresent (displayCards){
 				 * set is present before displaying the cards 
 				 */
 				if (isSet){
-					console.log(displayCards[pos1]);
-					console.log(displayCards[pos2]);
-					console.log(displayCards[pos3]);
-
 					numOfSets = true;
 				}
 			}

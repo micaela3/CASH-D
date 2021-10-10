@@ -33,7 +33,7 @@ var deck = [];
 var chosenCards = [];
 
 //Globabl variable for the score limit until the game ends
-const GAME_SCORE_LIMIT = 1;
+const GAME_SCORE_LIMIT = 5;
 
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
