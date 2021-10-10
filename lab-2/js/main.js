@@ -33,7 +33,7 @@ var deck = [];
 var chosenCards = [];
 
 //Globabl variable for the score limit until the game ends
-const GAME_SCORE_LIMIT = 5;
+const GAME_SCORE_LIMIT = 1;
 
 // The variable that gets the button that starts the game
 const gameStartButton = document.getElementById('gameStartButton');
@@ -77,6 +77,24 @@ const checkSetContainer = document.getElementById('checkSetContainer');
 //Gets the check set button 
 const checkSetButton = document.getElementById('checkSetButton');
 
+//Game End Message
+const gameEndingMessage = document.getElementById('gameEndingMessage');
+
+//Player1 score p tag
+const playerOneScoreContainer = document.getElementById('player1Score');
+
+//Player 2 score p tag
+const playerTwoScoreContainer = document.getElementById('player2Score');
+
+//player score div container
+const scoreContainer = document.getElementById('scoreContainer');
+
+//winner score container
+const winnerScoreContainer = document.getElementById('winnerScoreContainer');
+
+//loser score container
+const loserScoreContainer = document.getElementById('loserScoreContainer');
+
 //Adds the eventlistener for click on the game start button
 gameStartButton.addEventListener('click', event => {
 	//Makes the container with the game start button invisible so that the next page of the game can be shown
@@ -114,6 +132,11 @@ formSubmitButton.addEventListener('click', event => {
 		controlPlayer1Name.innerHTML = playerOne.name;
 		controlPlayer2Name.innerHTML = playerTwo.name;
 		controlInstructionsContainer.style.display = "block";
+
+		//Player 1 and 2 score
+		scoreContainer.style.display = "block";
+		playerOneScoreContainer.innerHTML = playerOne.name + ": " + playerOne.score;
+		playerTwoScoreContainer.innerHTML = playerTwo.name + ": " + playerTwo.score;
 
 		//Fill Set card deck.
 		deck = fillDeck();
@@ -166,8 +189,10 @@ checkSetButton.addEventListener('click', event => {
 		if(checkIfSet(chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]])){
 			if(playerChoosing == 1){
 				playerOne.score++;
+				playerOneScoreContainer.innerHTML = playerOne.name + ": " + playerOne.score;
 			}else{
 				playerTwo.score++;
+				playerTwoScoreContainer.innerHTML = playerTwo.name + ": " + playerTwo.score;
 			}
 
 			if(playerOne.score < GAME_SCORE_LIMIT && playerTwo.score < GAME_SCORE_LIMIT){
@@ -197,8 +222,21 @@ checkSetButton.addEventListener('click', event => {
 				gameEndContainer.style.display = "none";
 				checkSetContainer.style.display = "none";
 				pickCardsReminderContainer.style.display = "none";
+				scoreContainer.style.display = "none";
 
 				gameState = 2;
+
+				gameEndingMessage.style.display = "block";
+
+				if (playerOne.score > playerTwo.score) {
+				
+					winnerScoreContainer.innerHTML = "The winner is " + playerOne.name + " with the score of " + playerOne.score;
+					loserScoreContainer.innerHTML = playerTwo.name + " had the score of " + playerTwo.score; 
+				}else{
+
+					winnerScoreContainer.innerHTML = "The winner is " + playerTwo.name + " with the score of " + playerTwo.score;
+                                        loserScoreContainer.innerHTML = playerOne.name + " had the score of " + playerOne.score; 
+				}
 			}
 		}else{
 			alert("The cards selected are not in a set");

@@ -371,3 +371,11 @@ input{
 	/* Changes the background color of the button to red */
 	background-color: #bb0000;
 }
+
+.gameEndingMessage{
+	display: none;
+}
+
+.scoreContainer{
+	display: none;
+}
