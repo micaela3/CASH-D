@@ -228,7 +228,7 @@ input{
 	/* Sets the margin to auto so it can center on the page vertically and horizontally */
 	margin: auto;
 
-	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	/* Sets the position to relative so that we can position the div relative to the page and other elements around it so it can stack with them */
 	position: relative;
 	
 	/* Aligns the text to center */
@@ -237,7 +237,7 @@ input{
 	/* Moves the div to the right of the screen */
 	left: 40%;
 	
-	/* Makes the width of the container 30% of the whole page */
+	/* Makes the width of the container 20% of the whole page */
 	width: 20%;
 }
 
@@ -283,6 +283,7 @@ input{
 	user-select: none;
 }
 
+/* CSS for when user hovers over the button*/
 .gameEndButton:hover{
 	/* Changes the width of the button to 90% of the container */
 	width: 85%;
@@ -309,7 +310,7 @@ input{
 	/* Sets the margin to auto so it can center on the page vertically and horizontally */
 	margin: auto;
 
-	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	/* Sets the position to relative so that we can position the div relative to the page and other elements around it so it can stack with them */
 	position: relative;
 
 	/* Aligns the text to center */
@@ -318,7 +319,7 @@ input{
 	/* Moves the div to the right of the screen */
 	left: 40%;
 
-	/* Makes the width of the container 30% of the whole page */
+	/* Makes the width of the container 20% of the whole page */
 	width: 20%;
 }
 
@@ -364,6 +365,7 @@ input{
 	user-select: none;
 }
 
+/* CSS for when user hovers over the button */
 .checkSetButton:hover{
 	/* Changes the width of the button to 90% of the container */
 	width: 85%;
@@ -372,10 +374,34 @@ input{
 	background-color: #bb0000;
 }
 
+/* CSS for the game ending message block */
 .gameEndingMessage{
+	/* Sets the diplay to none to make the button invisible on the screen */
 	display: none;
+
+	/* Sets the margin to auto so it can center on the page vertically and horizontally */
+	margin: auto;
+	
+	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	position: absolute;
+
+	/* Aligns the text to center */
+	text-align: center;
+
+	/* Centers the div vertically from the top*/
+	top: 50%;
+
+	/* Centers the div horizontally from the left */
+	left: 50%;
+
+	/* Translates the div horizontally and vertically -50% to center the container */
+	transform: translate(-50%, -50%);
+
+	/* Makes the width of the container 30% of the whole page */
+	width: 30%;
 }
 
+/* CSS for the score container */
 .scoreContainer{
 	display: none;
 }

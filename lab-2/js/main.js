@@ -102,7 +102,8 @@ gameStartButton.addEventListener('click', event => {
 
 	//Displays the form for the player name input on screen
 	inputContainer.style.display = "block";
-
+	
+	//Displays the game end container tat displays the exit game button
 	gameEndContainer.style.display = "block";
 });
 
@@ -178,13 +179,25 @@ document.addEventListener("keypress", function(event) {
 });
 
 checkSetButton.addEventListener('click', event => {
+	//Get all of the selected cards in an array
 	let pickedCards = document.querySelectorAll('.card.select');
+
+	//Indexes array to store the position of the cards on screen
 	let indexes = [];
+
+	//Checks if the amount of cards are equal to three and runs the code corresponding to it, else sends an alert to the player to let them know to pick three cards
 	if(pickedCards.length == 3){
+
+		//Iterates over all of the cards that are selected
 		pickedCards.forEach(element => {
+			//Pushes the index of each of the card on the screen to the indexes array
 			indexes.push(Array.prototype.indexOf.call(cardsContainer.children, element));
 		});
+
+		//Checks if the selected cards are a set and runs the corresponding code, else lets the player know that the selected cards are not a set and resets the screen to let any player pick the cards
 		if(checkIfSet(chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]])){
+			
+			//If player 1 is the one who chose the cards
 			if(playerChoosing == 1){
 
 				/* increment player 1 score */
@@ -192,6 +205,8 @@ checkSetButton.addEventListener('click', event => {
 
 				/* display the name and score of player 1 */
 				playerOneScoreContainer.innerHTML = playerOne.name + ": " + playerOne.score;
+			
+			//If player 2 is the one who chose the cards
 			}else{
 
 				/* increment player 2 score */
@@ -201,33 +216,62 @@ checkSetButton.addEventListener('click', event => {
 				playerTwoScoreContainer.innerHTML = playerTwo.name + ": " + playerTwo.score;
 			}
 
+			//Alert to let the player know that the cards selected are indeed a set
+			alert("Congratulations, the cards you selected are indeed a set");
+
+			//Checks if the score for any of the player has reached the threshold for the game to end
 			if(playerOne.score < GAME_SCORE_LIMIT && playerTwo.score < GAME_SCORE_LIMIT){
+
+				//Gets all of the cards currently being shown on the screen
 				let cardsOnScreen = document.querySelectorAll('.card');
+
+				//Iterates over each of the card elements on screen and removes them from the screen
 				cardsOnScreen.forEach(element => {
 					let parentNode = element.parentNode;
 					parentNode.removeChild(element);
 				});
-
+				
+				//Remove the selected cards from the chosenCards array
 				removeCards(chosenCards, chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]]);
+				
+				//Remove the selected cards from the deck array
 				removeCards(deck, chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]]);
-
+				
+				//Adds new cards to the chosenCards array
 				chosenCards = refreshCards(chosenCards, deck);
 
+				//Displays those cards on the screen
 				dealCards(chosenCards);
 
+				//Hides the check set button from the screen
 				checkSetContainer.style.display = "none";
+
+				//Displays the buttons for player input on screen
 				controlInstructionsContainer.style.display = "block";
+
+				//Hides the reminder for player to select three cards
 				pickCardsReminderContainer.style.display = "none";
 
+				//Changes the game state to in progress
 				gameState = 1;
 
+				//Resets the number of cards selected to 0
 				numCardsSelected = 0;
 
 			}else{
+				//Hides the cards from the screen
 				cardsContainer.style.display = "none";
+
+				//Hides the exit button from the screen
 				gameEndContainer.style.display = "none";
+
+				//Hides the check set button from the screen
 				checkSetContainer.style.display = "none";
+
+				//Hides the reminder for players to select three cards from the screen
 				pickCardsReminderContainer.style.display = "none";
+
+				//Hides the player score container from the screen
 				scoreContainer.style.display = "none";
 
 				/* game ends */
@@ -249,22 +293,54 @@ checkSetButton.addEventListener('click', event => {
 				}
 			}
 		}else{
+			//Sends an alert to the player that mentions that the selected cards were not in a set
 			alert("The cards selected are not in a set");
 			
+			//Hides the check set button from the screen
 			checkSetContainer.style.display = "none";
-			controlInstructionsContainer.style.display = "block";
-			pickCardsReminderContainer.style.display = "none";
 
+			//Displays the player input container on the screen
+			controlInstructionsContainer.style.display = "block";
+
+			//Hides the player reminder for selecting three cards from the screen
+			pickCardsReminderContainer.style.display = "none";
+			
+			//Sets the game state to in progress
 			gameState = 1;
 
+			//Iterates over each of the selected cards
 			pickedCards.forEach(element => {
+				//Removes the class 'select' from the cards to get rid of the highlighted background
 				element.classList.remove('select');
 			});
-
+			
+			//Resets the number of cards selected to 0
 			numCardsSelected = 0;
 		}
 	}else{
+		//Sends an alert to the player to select three cards
 		alert("Please select three cards");
-	}
+	
+		//Hides the check set button from the screen
+		checkSetContainer.style.display = "none";
+
+		//Displays the player input container on screen
+		controlInstructionsContainer.style.display = "block";
+
+		//Hides the player reminder for selecting three cards from the screen
+		pickCardsReminderContainer.style.display = "none";
+
+		//Sets the game state to in progress
+		gameState = 1;
+
+		//Iterates over each of the selected cards
+		pickedCards.forEach(element => {
+			//Removes the class 'select' from the cards to get rid of the highlighted background
+			element.classList.remove('select');
+		});
+
+		//Resets the number of cards selected to 0
+		numCardsSelected = 0;
+	}	
 
 });
