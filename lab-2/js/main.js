@@ -80,19 +80,19 @@ const checkSetButton = document.getElementById('checkSetButton');
 //Game End Message
 const gameEndingMessage = document.getElementById('gameEndingMessage');
 
-//Player1 score p tag
+//Gets the container element for Player1 score p tag
 const playerOneScoreContainer = document.getElementById('player1Score');
 
-//Player 2 score p tag
+//Gets the container element for Player 2 score p tag
 const playerTwoScoreContainer = document.getElementById('player2Score');
 
-//player score div container
+//Gets the player score container
 const scoreContainer = document.getElementById('scoreContainer');
 
-//winner score container
+//Gets the winner score container
 const winnerScoreContainer = document.getElementById('winnerScoreContainer');
 
-//loser score container
+//Gets the loser score container
 const loserScoreContainer = document.getElementById('loserScoreContainer');
 
 //Adds the eventlistener for click on the game start button
@@ -105,8 +105,6 @@ gameStartButton.addEventListener('click', event => {
 
 	gameEndContainer.style.display = "block";
 });
-
-
 
 //Adds the eventlistenere for click on the form submit button
 formSubmitButton.addEventListener('click', event => {
@@ -188,10 +186,18 @@ checkSetButton.addEventListener('click', event => {
 		});
 		if(checkIfSet(chosenCards[indexes[0]], chosenCards[indexes[1]], chosenCards[indexes[2]])){
 			if(playerChoosing == 1){
+
+				/* increment player 1 score */
 				playerOne.score++;
+
+				/* display the name and score of player 1 */
 				playerOneScoreContainer.innerHTML = playerOne.name + ": " + playerOne.score;
 			}else{
+
+				/* increment player 2 score */
 				playerTwo.score++;
+
+				/* display the name and score of player 2 */
 				playerTwoScoreContainer.innerHTML = playerTwo.name + ": " + playerTwo.score;
 			}
 
@@ -224,16 +230,20 @@ checkSetButton.addEventListener('click', event => {
 				pickCardsReminderContainer.style.display = "none";
 				scoreContainer.style.display = "none";
 
+				/* game ends */
 				gameState = 2;
 
+				/* display the game ending message */
 				gameEndingMessage.style.display = "block";
 
+				/* checking which player wins and printing the appropriate message with score */
 				if (playerOne.score > playerTwo.score) {
 				
+					/* display player 1 won and the score of player 1. Also, display player 2 lost and score of player 2 */
 					winnerScoreContainer.innerHTML = "The winner is " + playerOne.name + " with the score of " + playerOne.score;
 					loserScoreContainer.innerHTML = playerTwo.name + " had the score of " + playerTwo.score; 
 				}else{
-
+					/* display player 2 won and the score for player 2. Also display player 1 lost and score of player 1 */
 					winnerScoreContainer.innerHTML = "The winner is " + playerTwo.name + " with the score of " + playerTwo.score;
                                         loserScoreContainer.innerHTML = playerOne.name + " had the score of " + playerOne.score; 
 				}
