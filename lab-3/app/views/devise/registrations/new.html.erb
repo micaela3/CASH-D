@@ -23,17 +23,10 @@
 
   
   <div class="field">
-    <form>
-      <label>Choose Status:</label>
-      <select>
-        <option>TA</option>
-        <option>Staff</option>
-        <option>Admin</option>
-      </select>
-      </form>
+    <%= f.label :select_role %><br />
+    <%= f.select :user_type, ['TA', 'Staff','Admin'] %>
   </div>
-
-
+  <br/>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
