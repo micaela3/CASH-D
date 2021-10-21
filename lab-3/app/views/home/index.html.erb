@@ -1,8 +1,18 @@
 <% if !user_signed_in? %>
-</br>This will be displayed if user not signed in.
+    </br>This will be displayed if user not signed in.
 <%end%>
 
 <% if user_signed_in? %>
-</br>This will be displayed if user signed in.
+    <% if current_user.user_type == 'Staff' %>
+        This is what staff users will see.
+    <%end%>
+    <% if current_user.user_type == 'Admin' %>
+        This is what admin users will see.
+    <%end%>
+    <% if current_user.user_type == 'TA' %>
+        This is what TA users will see.
+    <%end%>
+
+    </br>This will be displayed if user signed in.
 <%end%>
 
