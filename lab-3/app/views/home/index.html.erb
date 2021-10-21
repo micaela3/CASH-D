@@ -1,1 +1,8 @@
-This is our homepage!
+<% if !user_signed_in? %>
+</br>This will be displayed if user not signed in.
+<%end%>
+
+<% if user_signed_in? %>
+</br>This will be displayed if user signed in.
+<%end%>
+
