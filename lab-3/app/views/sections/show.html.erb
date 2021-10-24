@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Section number:</strong>
+  <%= @section.section_number %>
+</p>
+
+<p>
+  <strong>Class number:</strong>
+  <%= @section.class_number %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @section.time %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @section.day %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @section.location %>
+</p>
+
+<p>
+  <strong>Component:</strong>
+  <%= @section.component %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @section.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @section.end_date %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @section.course_id %>
+</p>
+
+<%= link_to 'Edit', edit_section_path(@section) %> |
+<%= link_to 'Back', sections_path %>
