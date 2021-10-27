@@ -80,7 +80,7 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:course_description, :course_title, :course_id)
+      params.require(:course).permit(:course_description, :course_title, :course_number)
     end
 
     # Clear existing courses and sections
@@ -146,7 +146,7 @@ class CoursesController < ApplicationController
             new_course = Course.new(
               course_description: course["description"],
               course_title: course["title"],
-              course_id: course["catalogNumber"]
+              course_number: course["catalogNumber"]
             )
             courses << new_course
           end

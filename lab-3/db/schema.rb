@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_040109) do
+ActiveRecord::Schema.define(version: 2021_10_27_225226) do
 
   create_table "courses", force: :cascade do |t|
     t.string "course_description"
     t.string "course_title"
-    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_courses_on_course_id"
+    t.string "course_number"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -43,8 +42,8 @@ ActiveRecord::Schema.define(version: 2021_10_27_040109) do
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "section_number"
-    t.index ["section_number"], name: "index_meetings_on_section_number"
+    t.integer "sections_id"
+    t.index ["sections_id"], name: "index_meetings_on_sections_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -55,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_10_27_040109) do
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "course_id"
-    t.index ["course_id"], name: "index_sections_on_course_id"
+    t.integer "courses_id"
+    t.index ["courses_id"], name: "index_sections_on_courses_id"
   end
 
   create_table "users", force: :cascade do |t|

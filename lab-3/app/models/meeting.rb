@@ -1,4 +1,4 @@
 class Meeting < ApplicationRecord
-  belongs_to :section, foreign_key: 'section_number'
+  belongs_to :section
   has_many :instructors
 end

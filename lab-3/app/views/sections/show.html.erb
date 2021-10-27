@@ -30,6 +30,11 @@
   <%= @section.course_id %>
 </p>
 
+<p>
+  <strong>Id:</strong>
+  <%= @section.id %>
+</p>
+
 
 <table>
   <thead>
@@ -62,7 +67,7 @@
         <td><%= meeting.saturday %></td>
         <td><%= meeting.sunday %></td>
         <td><%= meeting.location %></td>
-        <td><%= meeting.section_number %></td>
+        <td><%= meeting.sections_id %></td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
