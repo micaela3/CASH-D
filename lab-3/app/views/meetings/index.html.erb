@@ -1,35 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Section number:</strong>
-  <%= @section.section_number %>
-</p>
-
-<p>
-  <strong>Class number:</strong>
-  <%= @section.class_number %>
-</p>
-
-<p>
-  <strong>Component:</strong>
-  <%= @section.component %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @section.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @section.end_date %>
-</p>
-
-<p>
-  <strong>Course:</strong>
-  <%= @section.course_id %>
-</p>
-
+<h1>Meetings</h1>
 
 <table>
   <thead>
@@ -50,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @section.meetings.each do |meeting| %>
+    <% @meetings.each do |meeting| %>
       <tr>
         <td><%= meeting.start_time %></td>
         <td><%= meeting.end_time %></td>
@@ -71,5 +42,6 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_section_path(@section) %> |
-<%= link_to 'Back', sections_path %>
+<br>
+
+<%= link_to 'New Meeting', new_meeting_path %>
