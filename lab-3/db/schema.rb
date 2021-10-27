@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 2021_10_27_040109) do
     t.string "component"
     t.date "start_date"
     t.date "end_date"
-    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
