@@ -141,8 +141,8 @@ class CoursesController < ApplicationController
         data["courses"].each { |course_entry|
           # Create course
           course = course_entry["course"]
-          new_course = Course.find_by course_id: course["catalogNumber"]
-          if new_course == nil && courses.find { |c| c.course_id == course["catalogNumber"].to_i } == nil
+          new_course = Course.find_by course_number: course["catalogNumber"]
+          if new_course == nil && courses.find { |c| c.course_number == course["catalogNumber"] } == nil
             new_course = Course.new(
               course_description: course["description"],
               course_title: course["title"],
@@ -159,7 +159,7 @@ class CoursesController < ApplicationController
 
         sections = []
         data["courses"].each { |course_entry|
-          course = courses.find { |c| c.course_id == course_entry["course"]["catalogNumber"].to_i }
+          course = courses.find { |c| c.course_number == course_entry["course"]["catalogNumber"] }
           course_entry["sections"].each { |section|
             new_section = Section.new(
               course: course,
@@ -173,15 +173,13 @@ class CoursesController < ApplicationController
           }
         }
         # Import every section in one query
-        puts "Importing #{sections.length} sections"
         Section.import sections
         # Get an array of sections & their IDs (we'll need all of them for meetings)
         sections = Section.all.to_a
 
         meetings = []
         data["courses"].each { |course_entry|
-        puts(course_entry["course"]["catalogNumber"])
-          course = courses.find { |c| c.course_id == course_entry["course"]["catalogNumber"].to_i }
+          course = courses.find { |c| c.course_number == course_entry["course"]["catalogNumber"] }
           course_entry["sections"].each { |section_entry|
             section = sections.find { |s| s.course_id == course.id && s.section_number == section_entry["section"].to_i }
             section_entry["meetings"].each { |meeting|
@@ -215,11 +213,11 @@ class CoursesController < ApplicationController
 
         instructors = []
         data["courses"].each { |course_entry|
-          course = courses.find { |c| c.course_id == course_entry["course"]["catalogNumber"].to_i }
+          course = courses.find { |c| c.course_number == course_entry["course"]["catalogNumber"] }
           course_entry["sections"].each { |section_entry|
             section = sections.find { |s| s.course_id == course.id && s.section_number == section_entry["section"].to_i }
             section_entry["meetings"].each { |meeting_entry|
-              meeting = meetings.find { |m| m.section_number == section.id && meeting_matches_entry?(m, meeting_entry) }
+              meeting = meetings.find { |m| m.section_id == section.id && meeting_matches_entry?(m, meeting_entry) }
               meeting_entry["instructors"].each { |instructor|
                 # This will cause duplicates if an instructor teaches multiple sections
                 # However this allows us to do a belongs_to relation and gives us the same output
