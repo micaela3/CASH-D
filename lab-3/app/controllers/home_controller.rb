@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     @courses = Course.where(nil);
-    @courses = @courses.filter_by_starts_with(params[:starts_with]) if params[:starts_with].present?
+    @courses = @courses.filter_by_course_number(params[:course_number]) if params[:course_number].present?
+    @courses = @courses.filter_by_course_title(params[:course_title]) if params[:course_title].present?
   end
 
   def rescrape

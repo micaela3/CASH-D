@@ -1,23 +1,31 @@
+<hr \>
 <% if current_user.user_type == 'Admin' %>
   <%= link_to 'Rescrape', home_rescrape_path, method: :rescrape, data: { confirm: 'Are you sure?' } %>
+  <hr \>
 <% end %>
 <h4>Filter by: </h4>
 <table>
   <tr>
-    <th><a href="/?starts_with=1">1xxx</a></th>
-    <th><a href="/?starts_with=2">2xxx</a></th>
-    <th><a href="/?starts_with=3">3xxx</a></th>
-    <th><a href="/?starts_with=4">4xxx</a></th>
-    <th><a href="/?starts_with=5">5xxx</a></th>
-    <th><a href="/?starts_with=6">6xxx</a></th>
-    <th><a href="/?starts_with=7">7xxx</a></th>
-    <th><a href="/?starts_with=8">8xxx</a></th>
+    <th><a href="/">All courses</a></th>
+    <th><a onclick="addQuery('course_number=1')">1xxx</a></th>
+    <th><a onclick="addQuery('course_number=2')">2xxx</a></th>
+    <th><a onclick="addQuery('course_number=3')">3xxx</a></th>
+    <th><a onclick="addQuery('course_number=4')">4xxx</a></th>
+    <th><a onclick="addQuery('course_number=5')">5xxx</a></th>
+    <th><a onclick="addQuery('course_number=6')">6xxx</a></th>
+    <th><a onclick="addQuery('course_number=7')">7xxx</a></th>
+    <th><a onclick="addQuery('course_number=8')">8xxx</a></th>
+    <th><input type="search" id="searchBar" placeholder="Search for the course by title"></th>
+    <th><button type="submit" onclick="addQuery('course_title=' + document.getElementById('searchBar').value)">Search</button></th>
   </tr>
 </table>
 
+<hr />
 <h1>Courses</h1>
+<hr />
 <% if current_user.user_type == 'Admin' %>
   <%= link_to 'Add a new Course', new_course_path %>
+  <hr />
 <%end%>
 
 <table>
