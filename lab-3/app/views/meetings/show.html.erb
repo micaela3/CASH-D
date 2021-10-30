@@ -50,10 +50,6 @@
   <%= @meeting.location %>
 </p>
 
-<p>
-  <strong>Section:</strong>
-  <%= @meeting.section_number %>
-</p>
 
 <table>
   <thead>
@@ -71,13 +67,17 @@
         <td><%= instructor.instructor_name %></td>
         <td><%= instructor.instructor_email %></td>
         <td><%= instructor.meeting_id %></td>
-        <td><%= link_to 'Show', instructor %></td>
-        <td><%= link_to 'Edit', edit_instructor_path(instructor) %></td>
-        <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if current_user.user_type == 'Admin' %>
+          <td><%= link_to 'Edit', edit_instructor_path(instructor) %></td>
+          <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+<% if current_user.user_type == 'Admin' %>
+  <%= link_to 'Edit', edit_meeting_path(@meeting) %>
+<%end%>
+<%= link_to 'Back', @meeting.section %>

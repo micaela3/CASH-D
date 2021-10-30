@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<a href="/?starts_with=1">1xxx</a>
+<h1>Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <% if user_signed_in? %>
+        <% if current_user.user_type == 'TA' %>
+          <th>Course Number</th>
+          <th>Course title</th>
+          <th>Course Description</th>
+          <th>Grade Requirement</th>
+          <th>Sections</th>
+        <%end%>
+      <%end%>
+
+      <% if user_signed_in? %>
+        <% if current_user.user_type == 'Admin' %>
+          <th colspan="3"></th>
+        <%end%>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @courses.each do |course| %>
+        <% if user_signed_in? %>
+          <% if current_user.user_type == 'TA' %>
+            <tr>
+              <td><%= course.course_number %></td>
+              <td><%= course.course_title %></td>
+              <td><%= course.course_description %></td>
+              <td><%= 'A' %></td>
+              <td><%= link_to 'Show Sections', course %></td>
+            </tr>
+          <%end%>
+        <%end%>
+      <%end%>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+  <% if current_user.user_type == 'Admin' %>
+    <%= link_to 'New Course', new_course_path %>
+  <%end%>
+<%end%>

@@ -8,10 +8,9 @@
     <%end%>
     <% if current_user.user_type == 'Admin' %>
         This is what admin users will see.
-    <%end%>
-    <% if current_user.user_type == 'TA' %>
-        This is what TA users will see.
-    <%end%>
+      <%end%>
+
+      <%= render 'course' %>
 
     </br>This will be displayed if user signed in.
 <%end%>
