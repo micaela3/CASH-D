@@ -30,7 +30,7 @@ This application was developed using Ruby v2.7.4 and Rails v6.1.4. Therefore, a 
 (Google Chrome, Safari, Microsoft Edge, Firefox all will work). 
 
 Installation Instructions
-The code for the application is located at https://github.com/cse-3901-sharkey/CASH-D.git inside the "lab-2" folder. To install it, either clone the repository to your directory using the link above with the appropriate git command (below)
+The code for the application is located at https://github.com/cse-3901-sharkey/CASH-D.git inside the "lab-3" folder. To install it, either clone the repository to your directory using the link above with the appropriate git command (below)
 or download the zip file and unzip it to a desired location.
  - git clone https://github.com/cse-3901-sharkey/CASH-D.git
 
