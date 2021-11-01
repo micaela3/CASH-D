@@ -1,50 +1,45 @@
 <p id="notice"><%= notice %></p>
 
+<%# Display the start time for the meeting in HH:MM format %>
 <p>
   <strong>Start time:</strong>
-  <%= @meeting.start_time %>
+  <%= @meeting.start_time.strftime('%I:%M %p') unless @meeting.start_time.nil? %>
 </p>
 
+<%# Display the end time for the meeting in HH::MM format %>
 <p>
   <strong>End time:</strong>
-  <%= @meeting.end_time %>
+  <%= @meeting.end_time.strftime('%I:%M %p') unless @meeting.start_time.nil? %>
 </p>
 
+<%# check which days of the week the class is scheduled %>
+<% str = "" %>
+<% if @meeting.monday %>
+  <% str = str + "M" %>
+<%end%>
+<% if @meeting.tuesday %>
+  <% str = str + "T" %>
+<%end%>
+<% if @meeting.wednesday %>
+  <% str = str + "W" %>
+<%end%>
+<% if @meeting.thursday %>
+  <% str = str + "TH" %>
+<%end%>
+<% if @meeting.friday %>
+  <% str = str + "F" %>
+<%end%>
+
+<%# dispaly which days class is scheduled %>
 <p>
-  <strong>Monday:</strong>
-  <%= @meeting.monday %>
+  <strong>Class Days:</strong>
+    <% if str.length == 0 %>
+      <% str = "TBA" %>
+    <%end%>
+    <%= str %>
 </p>
 
-<p>
-  <strong>Tuesday:</strong>
-  <%= @meeting.tuesday %>
-</p>
-
-<p>
-  <strong>Wednesday:</strong>
-  <%= @meeting.wednesday %>
-</p>
-
-<p>
-  <strong>Thursday:</strong>
-  <%= @meeting.thursday %>
-</p>
-
-<p>
-  <strong>Friday:</strong>
-  <%= @meeting.friday %>
-</p>
-
-<p>
-  <strong>Saturday:</strong>
-  <%= @meeting.saturday %>
-</p>
-
-<p>
-  <strong>Sunday:</strong>
-  <%= @meeting.sunday %>
-</p>
-
+<%# display the location of the class %>
 <p>
   <strong>Location:</strong>
   <%= @meeting.location %>
@@ -61,6 +56,7 @@
     </tr>
   </thead>
 
+  <%# Display instructor information for the particular meeting %>
   <tbody>
     <% @meeting.instructors.each do |instructor| %>
       <tr>
@@ -68,6 +64,7 @@
         <td><%= instructor.instructor_email %></td>
         <td><%= instructor.meeting_id %></td>
 
+        <%# Allo Admin to make changes to instructor information %>
         <% if current_user.user_type == 'Admin' %>
           <td><%= link_to 'Edit', edit_instructor_path(instructor) %></td>
           <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -80,4 +77,6 @@
 <% if current_user.user_type == 'Admin' %>
   <%= link_to 'Edit', edit_meeting_path(@meeting) %>
 <%end%>
+
+<%# Back button to back to the previous page %>
 <%= link_to 'Back', @meeting.section %>

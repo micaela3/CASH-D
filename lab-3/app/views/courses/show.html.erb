@@ -28,6 +28,7 @@
     </tr>
   </thead>
 
+  <%# Display course information for a particular course like sections, component, etc %>
   <tbody>
     <% @course.sections.each do |section| %>
       <tr>
@@ -38,6 +39,7 @@
         <td><%= section.end_date %></td>
         <td><%= link_to 'Show', section %></td>
 
+        <%# Allow Admin to make changes to course information %>
         <% if current_user.user_type == 'Admin' %>
           <td><%= link_to 'Edit', edit_section_path(section) %></td>
           <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -47,5 +49,7 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
+<% if current_user.user_type == 'Admin' %>
+  <%= link_to 'Edit', edit_course_path(@course) %> |
+<%end%>
 <%= link_to 'Back', home_index_path %>

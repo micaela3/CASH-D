@@ -24,6 +24,7 @@ Finally, the user can also view the following meeting information for specific s
 - End Time
 - Class Meeting Days
 - Location
+- Instructor
 
 Installation Requirements
 This application was developed using Ruby v2.7.4 and Rails v6.1.4. Therefore, a command line interface running those versions (or higher) of Ruby and Rails is required. Additionally, a web-browser capable of reaching localhost websites
@@ -41,5 +42,9 @@ based on what type of account it will be and then navigate the page accordingly.
 
 Acknowledgements:
 
-HERE'S WHERE WE PUT CODE WE SNATCHED FROM SOMEWHERE ELSE
+1. Code for filtering courses below was obtained from: https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/
+
+  scope :filter_by_course_number, -> (course_number) { where("course_number like ?", "#{course_number}%")}
+  scope :filter_by_course_title, -> (course_title) { where("course_title like ?", "%#{course_title}%")}
+
 

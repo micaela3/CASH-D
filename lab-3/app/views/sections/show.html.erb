@@ -87,7 +87,10 @@
   </tbody>
 </table>
 
+<%# Allow Admin to make changes to different senctions %>
 <% if current_user.user_type == 'Admin' %>
   <%= link_to 'Edit', edit_section_path(@section) %> |
-<%end%>  
+<%end%> 
+
+<%# Back button to go the previous page %>
 <%= link_to 'Back', @section.course %>
