@@ -2,7 +2,8 @@
 
 <%# button to rescrape the website for admin %>
 <% if current_user.user_type == 'Admin' %>
-  <%= link_to 'Rescrape', home_rescrape_path, method: :rescrape, data: { confirm: 'Are you sure?' } %>
+<%# , method: :rescrape, data: { confirm: 'Are you sure?' }%>
+  <%= link_to 'Rescrape', home_scrapeoptions_path%>
   <hr \>
 <% end %>
 

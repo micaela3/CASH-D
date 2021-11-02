@@ -1,3 +1,5 @@
+require 'date'
+
 class HomeController < ApplicationController
   def index
 
@@ -8,12 +10,60 @@ class HomeController < ApplicationController
     @courses = @courses.filter_by_course_title(params[:course_title]) if params[:course_title].present?
   end
 
+  def scrapeoptions
+    # Define campuses
+    @campuses = [
+      ["Columbus", "col"],
+      ["Wooster", "wst"],
+      ["Mansfield", "mns"],
+      ["Marion", "mrn"],
+      ["Newark", "nwk"],
+      ["Lima", "lma"]
+    ]
+    # Define careers
+    @careers = [
+      ["Undergraduate", "ugrd"],
+      ["Graduate", "grad"]
+    ]
+    @terms = []
+    # Get date, month, and next year for calculating terms
+    today = Date.today
+    month = today.month
+    next_year = today + 1.year
+    # Get current and next terms (commented out code for 2-our terms)
+    if month < 5
+        @terms = [
+          [today.strftime("Spring %Y"), today.strftime("1%y2")],
+          [today.strftime("Summer %Y"), today.strftime("1%y4")],
+#          [today.strftime("Autumn %Y"), today.strftime("1%y8")]
+        ]
+    elsif month < 8
+      @terms = [
+        [today.strftime("Summer %Y"), today.strftime("1%y4")],
+        [today.strftime("Autumn %Y"), today.strftime("1%y8")],
+#        [next_year.strftime("Spring %Y"), next_year.strftime("1%y2")]
+      ]
+    else
+      @terms = [
+        [today.strftime("Autumn %Y"), today.strftime("1%y8")],
+        [next_year.strftime("Spring %Y"), next_year.strftime("1%y2")],
+#        [next_year.strftime("Summer %Y"), next_year.strftime("1%y4")]
+      ]
+    end
+  end
+
   def rescrape
     clear_courses
-    update_course_data
-    respond_to do |format|
-      format.html { redirect_to home_index_url, notice: "Succesfully rescraped" }
-      format.json { head :no_content }
+    # Make sure user supplied paramaters
+    if params.has_key?(:campus) && params.has_key?(:career) && params.has_key?(:term)
+      # Use them and update course data
+      update_course_data params[:campus], params[:career], params[:term]
+      respond_to do |format|
+        format.html { redirect_to home_index_url, notice: "Succesfully rescraped" }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to home_index_url, notice: "Please select a campus, career, and term"
     end
   end
   
@@ -24,13 +74,13 @@ class HomeController < ApplicationController
     # Search for 'CSE'
     SEARCH_QUERY = 'cse'
     # Set campus to Columbus
-    CAMPUS = 'col'
+    #CAMPUS = 'col'
     # Set subject to CSE
     SUBJECT = 'cse'
     # Set career to Undergraduate
-    CAREER = 'ugrd'
+    #CAREER = 'ugrd'
     # Set term to Spring 2022
-    TERM = '1222'
+    #TERM = '1222'
 
     # Clear existing courses and sections
     def clear_courses
@@ -61,7 +111,7 @@ class HomeController < ApplicationController
     end
 
     # Pull/Update Course and Section data
-    def update_course_data
+    def update_course_data(campus, career, term)
       # Start from page 1
       page = 1
       # There is at least one page
@@ -71,11 +121,11 @@ class HomeController < ApplicationController
         # Make request
         response = RestClient.get(BASE_URL, { params: {
           q: SEARCH_QUERY,
-          campus: CAMPUS,
+          campus: campus,
           p: page,
           subject: SUBJECT,
-          'academic_career': CAREER,
-          term: TERM
+          'academic-career': career,
+          term: term
         }})
 
         # Parse response and get data

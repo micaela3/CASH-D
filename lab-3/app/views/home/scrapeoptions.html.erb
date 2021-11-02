@@ -1,0 +1,19 @@
+<% if !user_signed_in? %>
+    </br>Please sign in or sign up to continue!!!!
+<%end%>
+<% if current_user.user_type == 'Admin'%>
+    <%= form_with url: home_rescrape_path do |form| %>
+        <%= form.label :campus, "Campus:" %>
+        <%# Thanks to rb- on stackoverflow (https://stackoverflow.com/a/21884002) for this%>
+        <%= form.select :campus, @campuses, {}, prompt: 'Select a campus'%>
+        <%= form.label :career, "Academic Career:" %>
+        <%= form.select :career, @careers, {}, prompt: 'Select an academic career'%>
+        <%= form.label :term, "Term:" %>
+        <%= form.select :term, @terms, {}, prompt: 'Select a term'%>
+        </br>
+        <%= form.submit "Scrape", data: {confirm: 'Are you sure you want to re-scrape all data?'} %>
+    <%end%>
+<% else %>
+    </br>You need to be an admin to start a rescrape!
+<%end%>
+
