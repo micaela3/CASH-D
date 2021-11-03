@@ -5,8 +5,11 @@ class HomeController < ApplicationController
 
     # Code for filtering was obtained from:  https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/
     # filtering is done through level of courses and course title
+    # Gets all the courses
     @courses = Course.where(nil);
+    # Gets courses with filter based on the course number
     @courses = @courses.filter_by_course_number(params[:course_number]) if params[:course_number].present?
+    # Gets courses with filter based on the course title
     @courses = @courses.filter_by_course_title(params[:course_title]) if params[:course_title].present?
   end
 

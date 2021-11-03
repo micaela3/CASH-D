@@ -1,10 +1,7 @@
 class InstructorsController < ApplicationController
+  # Calls this function before the webpage loads
+  before_action :authenticate
   before_action :set_instructor, only: %i[ show edit update destroy ]
-
-  # GET /instructors or /instructors.json
-  def index
-    @instructors = Instructor.all
-  end
 
   # GET /instructors/1 or /instructors/1.json
   def show
@@ -49,14 +46,23 @@ class InstructorsController < ApplicationController
 
   # DELETE /instructors/1 or /instructors/1.json
   def destroy
+    @meeting = @instructor.meeting
     @instructor.destroy
     respond_to do |format|
-      format.html { redirect_to instructors_url, notice: "Instructor was successfully destroyed." }
+      format.html { redirect_to @meeting, notice: "Instructor was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
+    #Authenticate if the user is signed in
+    def authenticate
+      #Do unless the user is signed in
+      unless user_signed_in?
+        # Redirect the user to the root page to sign/up or sign in and Flash a alert to the user when they try to access the page without signing in 
+        redirect_to root_path, notice: "Login before trying to access this page"
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor
       @instructor = Instructor.find(params[:id])

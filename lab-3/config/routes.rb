@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :instructors
-  resources :meetings
-  resources :sections
-  resources :courses
+  resources :instructors, only: [:show, :update, :destroy, :new, :create, :edit]
+  resources :meetings, only: [:show, :update, :destroy, :new, :create, :edit]
+  resources :sections, only: [:show, :update, :destroy, :new, :create, :edit]
+  resources :courses, only: [:show, :update, :destroy, :new, :create, :edit]  
   devise_for :users
   get 'home/index'
   get 'home/scrapeoptions'

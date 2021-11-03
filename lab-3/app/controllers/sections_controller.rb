@@ -1,10 +1,7 @@
 class SectionsController < ApplicationController
+  # Calls this method before the webpage loads
+  before_action :authenticate
   before_action :set_section, only: %i[ show edit update destroy ]
-
-  # GET /sections or /sections.json
-  def index
-    @sections = Section.all
-  end
 
   # GET /sections/1 or /sections/1.json
   def show
@@ -49,14 +46,23 @@ class SectionsController < ApplicationController
 
   # DELETE /sections/1 or /sections/1.json
   def destroy
+    @course = @section.course
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: "Section was successfully destroyed." }
+      format.html { redirect_to @course, notice: "Section was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
+    #Authenticate if the user is signed in
+    def authenticate
+      #Do unless the user is signed in
+      unless user_signed_in?
+        # Redirect the user to the root page to sign/up or sign in and Flash a alert to the user when they try to access the page without signing in 
+        redirect_to root_path, notice: "Login before trying to access this page"
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_section
       @section = Section.find(params[:id])
@@ -64,6 +70,6 @@ class SectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def section_params
-      params.require(:section).permit(:section_number, :class_number, :component, :start_date, :end_date, :courses_id)
+      params.require(:section).permit(:section_number, :class_number, :component, :start_date, :end_date, :course_id)
     end
 end
