@@ -36,7 +36,9 @@ or download the zip file and unzip it to a desired location.
  - git clone https://github.com/cse-3901-sharkey/CASH-D.git
 
 How to Run/Navigate
-To run the application, type the command <bin/rails server> onto the command line. Some text will appear on the screen. The server has been completely configured when the last line is "Use Ctrl+C to stop". At that point, just above that line will be another line that looks something like <tcp://[::1]:3000>. The final four digits are the port number for the server. To access the server, go to "http://localhost:<port>". Once the application loads, either create an or log in based on what type of account it will be and then navigate the page accordingly.
+To run the application, type the command <bin/rails server> onto the command line. Some text will appear on the screen. The server has been completely configured when the last line is "Use Ctrl+C to stop". At that point, just above that line will be another line that looks something like <tcp://[::1]:3000>. 
+The final four digits are the port number for the server. To access the server, go to "http://localhost:<port>". 
+Once the application loads, either create an or log in based on what type of account it will be and then navigate the page accordingly.
 
 Additionally, should an output file of the courses and their information be needed, a command called "scrapeData.rb" can be run. This scrape the data and print it out to the command line or to a file that the user specifies.
  - Print to command line: <$ ruby scrapeData.rb>
