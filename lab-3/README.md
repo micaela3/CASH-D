@@ -57,7 +57,8 @@ Additionally, should an output file of the courses and their information be need
 Some example calls are:
  - Undergraduate courses at Columbus in the fall of 2021: <$ ruby scrapeData.rb col ugrd 1218>
  - Graduate courses at Mansfield in the spring of 2022: <$ ruby scrapeData.rb msn grad 1222>
-Acknowledgements:
+
+ Acknowledgements:
 
 1. Code for filtering courses below was obtained from: https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/
 
