@@ -40,10 +40,23 @@ To run the application, type the command <bin/rails server> onto the command lin
 The final four digits are the port number for the server. To access the server, go to "http://localhost:<port>". 
 Once the application loads, either create an or log in based on what type of account it will be and then navigate the page accordingly.
 
-Additionally, should an output file of the courses and their information be needed, a command called "scrapeData.rb" can be run. This scrape the data and print it out to the command line or to a file that the user specifies.
- - Print to command line: <$ ruby scrapeData.rb>
- - Print to file: <$ ruby scrapeData.rb > output.txt>
+Additionally, should an output file of the courses and their information be needed, a command called "scrapeData.rb" can be run. This scrape the data and print it out to the command line or to a file that the user specifies. It requires three command line arguments: the campus, the career, and the term.
+ - Possible Campus Arguments:
+   - Columbus -> "col"
+   - Wooster -> "wst"
+   - Mansfield -> "mns"
+   - Marion -> "mrn"
+   - Newark -> "nwk"
+   - Lima -> "lma"
+ - Possible Career Arguments:
+   - Undergraduate -> "ugrd"
+   - Graduate -> "grad"
+ - Possible Term Arguments
+   - The term argument is a four digit number calculated by a formula. The first digit is always 1. The second two digits are the last two digits of the year. The third digit is the month, and is usually 8, 2, or 4 to signify the fall, spring, or summer semester, respectively.
 
+Some example calls are:
+ - Undergraduate courses at Columbus in the fall of 2021: <$ ruby scrapeData.rb col ugrd 1218>
+ - Graduate courses at Mansfield in the spring of 2022: <$ ruby scrapeData.rb msn grad 1222>
 Acknowledgements:
 
 1. Code for filtering courses below was obtained from: https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/

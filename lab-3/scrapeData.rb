@@ -7,13 +7,13 @@ BASE_URL = "https://content.osu.edu/v2/classes/search"
 # Search for 'CSE'
 SEARCH_QUERY = 'cse'
 # Set campus to Columbus
-CAMPUS = 'col'
+CAMPUS = ARGV[0]
 # Set subject to CSE
 SUBJECT = 'cse'
 # Set career to Undergraduate
-CAREER = 'ugrd'
+CAREER = ARGV[1]
 # Set term to Spring 2022
-TERM = '1222'
+TERM = ARGV[2]
 
 
 # Start from page 1
@@ -28,7 +28,7 @@ while page <= total_pages
   campus: CAMPUS,
   p: page,
   subject: SUBJECT,
-  'academic_career': CAREER,
+  academic_career: CAREER,
   term: TERM
 }})
 
