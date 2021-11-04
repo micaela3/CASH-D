@@ -65,5 +65,7 @@ Some example calls are:
   scope :filter_by_course_number, -> (course_number) { where("course_number like ?", "#{course_number}%")}
   scope :filter_by_course_title, -> (course_title) { where("course_title like ?", "%#{course_title}%")}
 
+2. Code for putting hidden fields below was obtained from https://stackoverflow.com/questions/17916316/is-there-a-way-to-pass-params-when-clicking-submit-button-in-simple-form-view-in
 
+  hidden_field_tag(:prev_course_id, @course)
 

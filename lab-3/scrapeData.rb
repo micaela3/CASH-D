@@ -28,10 +28,9 @@ while page <= total_pages
   campus: CAMPUS,
   p: page,
   subject: SUBJECT,
-  academic_career: CAREER,
+  'academic-career': CAREER,
   term: TERM
 }})
-
   # Parse response and get data
   json_response = JSON.parse(response)
 

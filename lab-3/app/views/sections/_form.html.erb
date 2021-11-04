@@ -42,6 +42,7 @@
   </div>
 
   <div class="actions">
+    <% # got this code from https://stackoverflow.com/questions/17916316/is-there-a-way-to-pass-params-when-clicking-submit-button-in-simple-form-view-in %>
     <%= hidden_field_tag(:prev_course_id, @course) %>
     <%= form.submit %>
   </div>
