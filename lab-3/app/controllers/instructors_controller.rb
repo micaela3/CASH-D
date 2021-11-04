@@ -9,6 +9,7 @@ class InstructorsController < ApplicationController
 
   # GET /instructors/new
   def new
+    @meeting = params[:prev_meeting_id]
     @instructor = Instructor.new
   end
 
@@ -18,6 +19,7 @@ class InstructorsController < ApplicationController
 
   # POST /instructors or /instructors.json
   def create
+    @meeting = params[:prev_meeting_id]
     @instructor = Instructor.new(instructor_params)
 
     respond_to do |format|
@@ -25,7 +27,7 @@ class InstructorsController < ApplicationController
         format.html { redirect_to @instructor, notice: "Instructor was successfully created." }
         format.json { render :show, status: :created, location: @instructor }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, params: {prev_meeting_id: @meeting} }
         format.json { render json: @instructor.errors, status: :unprocessable_entity }
       end
     end

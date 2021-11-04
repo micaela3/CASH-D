@@ -71,7 +71,7 @@
     <% end %>
     <% if current_user.user_type == 'Admin' %>
       <tr>
-        <td><%= link_to 'New Instructor', new_instructor_path %></td>
+        <td><%= link_to 'New Instructor', new_instructor_path(:prev_meeting_id => @meeting) %></td>
       </tr>  
     <% end %>
   </tbody>

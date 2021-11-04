@@ -9,6 +9,7 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
+    @section = params[:prev_section_id]
     @meeting = Meeting.new
   end
 
@@ -18,6 +19,7 @@ class MeetingsController < ApplicationController
 
   # POST /meetings or /meetings.json
   def create
+    @section = params[:prev_section_id]
     @meeting = Meeting.new(meeting_params)
 
     respond_to do |format|
@@ -25,7 +27,7 @@ class MeetingsController < ApplicationController
         format.html { redirect_to @meeting, notice: "Meeting was successfully created." }
         format.json { render :show, status: :created, location: @meeting }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, params: {prev_section_id: @section} }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end

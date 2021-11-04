@@ -84,7 +84,7 @@
     <% end %>
     <% if current_user.user_type == 'Admin' %>
       <tr>
-        <td><%= link_to 'New Meeting', new_meeting_path %></td>
+        <td><%= link_to 'New Meeting', new_meeting_path(:prev_section_id => @section) %></td>
       </tr>  
     <% end %>
   </tbody>

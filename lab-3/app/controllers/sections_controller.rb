@@ -9,6 +9,7 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
+    @course = params[:prev_course_id]
     @section = Section.new
   end
 
@@ -18,6 +19,7 @@ class SectionsController < ApplicationController
 
   # POST /sections or /sections.json
   def create
+    @course = params[:prev_course_id]
     @section = Section.new(section_params)
 
     respond_to do |format|
@@ -25,7 +27,7 @@ class SectionsController < ApplicationController
         format.html { redirect_to @section, notice: "Section was successfully created." }
         format.json { render :show, status: :created, location: @section }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, params: {courses_id: @course} }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
     end
