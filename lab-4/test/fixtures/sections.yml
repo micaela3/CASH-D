@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  section_number: 1
+  class_number: 1
+  time: MyString
+  day: MyString
+  location: MyString
+  component: MyString
+  start_date: 2021-10-24
+  end_date: 2021-10-24
+  course_id: 1
+
+two:
+  section_number: 1
+  class_number: 1
+  time: MyString
+  day: MyString
+  location: MyString
+  component: MyString
+  start_date: 2021-10-24
+  end_date: 2021-10-24
+  course_id: 1

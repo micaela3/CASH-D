@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2021-10-27 03:06:32
+  end_time: 2021-10-27 03:06:32
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false
+  location: MyString
+  section: one
+
+two:
+  start_time: 2021-10-27 03:06:32
+  end_time: 2021-10-27 03:06:32
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false
+  location: MyString
+  section: two

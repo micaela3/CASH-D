@@ -1,0 +1,17 @@
+<p>
+  <strong>Instructor name:</strong>
+  <%= @instructor.instructor_name %>
+</p>
+
+<p>
+  <strong>Instructor email:</strong>
+  <%= @instructor.instructor_email %>
+</p>
+
+<p>
+  <strong>Meetings:</strong>
+  <%= @instructor.meeting_id %>
+</p>
+
+<%= link_to 'Edit', edit_instructor_path(@instructor) %> |
+<%= link_to 'Back', @instructor.meeting %>

@@ -1,0 +1,49 @@
+<%= form_with(model: section, local: true) do |form| %>
+  <% if section.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>
+
+      <ul>
+        <% section.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :section_number %>
+    <%= form.number_field :section_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :class_number %>
+    <%= form.number_field :class_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :component %>
+    <%= form.text_field :component %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_id %>
+    <%= form.number_field :course_id %>
+  </div>
+
+  <div class="actions">
+    <% # got this code from https://stackoverflow.com/questions/17916316/is-there-a-way-to-pass-params-when-clicking-submit-button-in-simple-form-view-in %>
+    <%= hidden_field_tag(:prev_course_id, @course) %>
+    <%= form.submit %>
+  </div>
+<% end %>

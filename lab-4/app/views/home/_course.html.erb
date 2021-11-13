@@ -1,0 +1,84 @@
+<hr \>
+
+<%# button to rescrape the website for admin %>
+<% if current_user.user_type == 'Admin' %>
+<%# , method: :rescrape, data: { confirm: 'Are you sure?' }%>
+  <%= link_to 'Rescrape', home_scrapeoptions_path%>
+  <hr \>
+<% end %>
+
+<%# User can filter the courses by course level or search for course by title %>
+<h4>Filter by: </h4>
+<table>
+  <tr>
+    <th><a href="/">All courses</a></th>
+    <th><a onclick="addQuery('course_number=1')">1xxx</a></th>
+    <th><a onclick="addQuery('course_number=2')">2xxx</a></th>
+    <th><a onclick="addQuery('course_number=3')">3xxx</a></th>
+    <th><a onclick="addQuery('course_number=4')">4xxx</a></th>
+    <th><a onclick="addQuery('course_number=5')">5xxx</a></th>
+    <th><a onclick="addQuery('course_number=6')">6xxx</a></th>
+    <th><a onclick="addQuery('course_number=7')">7xxx</a></th>
+    <th><a onclick="addQuery('course_number=8')">8xxx</a></th>
+    <th><input type="search" id="searchBar" placeholder="Search for the course by title"></th>
+    <th><button type="submit" onclick="addQuery('course_title=' + document.getElementById('searchBar').value)">Search</button></th>
+  </tr>
+</table>
+
+<hr />
+<h1>Courses</h1>
+<hr />
+
+<%# Allow admin to add a new course to course list %>
+<% if current_user.user_type == 'Admin' %>
+  <%= link_to 'Add a new Course', new_course_path %>
+  <hr />
+<%end%>
+
+<%# Show course information for all CSE courses offered in spring 2022 %>
+<table>
+  <thead>
+    <tr>
+      <% if current_user.user_type == 'Admin' %>
+        <th>Course ID</th>
+      <% end %>
+      <th>Course Number</th>
+      <th>Course title</th>
+      <th>Course Description</th>
+      <%# Show the grade requirement to be TA for a class %>
+      <% if current_user.user_type == 'TA' %>
+        <th>Grade Requirement</th>
+      <% end %>
+      <th>Sections</th>
+      <% if current_user.user_type == 'Admin' %>
+        <th colspan="3"></th>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <% if current_user.user_type == 'Admin' %>
+            <td><%= course.id %></td>
+          <% end %>
+          <td><%= course.course_number %></td>
+          <td><%= course.course_title %></td>
+          <td><%= course.course_description %></td>
+          <% if current_user.user_type == 'TA' %>
+            <td><%= 'A' %></td>
+          <% end %>
+          <%# button/link to show more information about the a particular course %>
+          <td><%= link_to 'Show Sections', course %></td>
+          
+          <%# Allow admin to make changes to different courses like editing and deleting %>
+          <% if current_user.user_type == 'Admin' %>
+            <td><%= link_to 'Edit Course', edit_course_path(course) %></td>
+            <td><%= link_to 'Delete Course', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <%end%>
+  </tbody>
+</table>
+
+<br>

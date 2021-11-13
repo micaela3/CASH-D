@@ -1,0 +1,58 @@
+<p>
+  <strong>Course Number:</strong>
+  <%= @course.course_number %>
+</p>  
+
+<p>
+  <strong>Course Title:</strong>
+  <%= @course.course_title %>
+</p>
+
+<p>
+  <strong>Course Description:</strong>
+  <%= @course.course_description %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Section number</th>
+      <th>Class number</th>
+      <th>Component</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>More info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <%# Display course information for a particular course like sections, component, etc %>
+  <tbody>
+    <% @course.sections.each do |section| %>
+      <tr>
+        <td><%= section.section_number %></td>
+        <td><%= section.class_number %></td>
+        <td><%= section.component %></td>
+        <td><%= section.start_date %></td>
+        <td><%= section.end_date %></td>
+        <td><%= link_to 'Show', section %></td>
+
+        <%# Allow Admin to make changes to course information %>
+        <% if current_user.user_type == 'Admin' %>
+          <td><%= link_to 'Edit', edit_section_path(section) %></td>
+          <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+    <% if current_user.user_type == 'Admin' %>
+      <tr>
+        <td><%= link_to 'New Section', new_section_path(:prev_course_id => @course) %></td>
+      </tr>  
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_user.user_type == 'Admin' %>
+  <%= link_to 'Edit', edit_course_path(@course) %>
+<%end%>
+<%= link_to 'Back', home_index_path %>

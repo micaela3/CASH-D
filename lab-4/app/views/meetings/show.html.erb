@@ -1,0 +1,85 @@
+<%# Display the start time for the meeting in HH:MM format %>
+<p>
+  <strong>Start time:</strong>
+  <%= @meeting.start_time.strftime('%I:%M %p') unless @meeting.start_time.nil? %>
+</p>
+
+<%# Display the end time for the meeting in HH::MM format %>
+<p>
+  <strong>End time:</strong>
+  <%= @meeting.end_time.strftime('%I:%M %p') unless @meeting.start_time.nil? %>
+</p>
+
+<%# check which days of the week the class is scheduled %>
+<% str = "" %>
+<% if @meeting.monday %>
+  <% str = str + "M" %>
+<%end%>
+<% if @meeting.tuesday %>
+  <% str = str + "T" %>
+<%end%>
+<% if @meeting.wednesday %>
+  <% str = str + "W" %>
+<%end%>
+<% if @meeting.thursday %>
+  <% str = str + "TH" %>
+<%end%>
+<% if @meeting.friday %>
+  <% str = str + "F" %>
+<%end%>
+
+<%# dispaly which days class is scheduled %>
+<p>
+  <strong>Class Days:</strong>
+    <% if str.length == 0 %>
+      <% str = "TBA" %>
+    <%end%>
+    <%= str %>
+</p>
+
+<%# display the location of the class %>
+<p>
+  <strong>Location:</strong>
+  <%= @meeting.location %>
+</p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Instructor name</th>
+      <th>Instructor email</th>
+      <th>Meetings</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <%# Display instructor information for the particular meeting %>
+  <tbody>
+    <% @meeting.instructors.each do |instructor| %>
+      <tr>
+        <td><%= instructor.instructor_name %></td>
+        <td><%= instructor.instructor_email %></td>
+        <td><%= instructor.meeting_id %></td>
+
+        <%# Allo Admin to make changes to instructor information %>
+        <% if current_user.user_type == 'Admin' %>
+          <td><%= link_to 'Edit', edit_instructor_path(instructor) %></td>
+          <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+    <% if current_user.user_type == 'Admin' %>
+      <tr>
+        <td><%= link_to 'New Instructor', new_instructor_path(:prev_meeting_id => @meeting) %></td>
+      </tr>  
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_user.user_type == 'Admin' %>
+  <%= link_to 'Edit', edit_meeting_path(@meeting) %>
+<%end%>
+
+<%# Back button to back to the previous page %>
+<%= link_to 'Back', @meeting.section %>
