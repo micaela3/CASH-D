@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   has_many :sections
+  has_and_belongs_to_many :graders, class_name: 'possible_graders'
   
   # sort by ascending course_number
   default_scope { order(course_number: :asc) }

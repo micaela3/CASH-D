@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_13_213942) do
+ActiveRecord::Schema.define(version: 2021_11_20_224752) do
+
+  create_table "availabilities", force: :cascade do |t|
+    t.integer "grader_id", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "weekday"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["grader_id"], name: "index_availabilities_on_grader_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "course_description"
@@ -18,6 +28,26 @@ ActiveRecord::Schema.define(version: 2021_11_13_213942) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "course_number"
+  end
+
+  create_table "courses_graders", id: false, force: :cascade do |t|
+    t.integer "grader_id", null: false
+    t.integer "course_id", null: false
+    t.index ["course_id"], name: "index_courses_graders_on_course_id"
+    t.index ["grader_id"], name: "index_courses_graders_on_grader_id"
+  end
+
+  create_table "graders", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "major"
+    t.integer "user_id", null: false
+    t.boolean "assigned"
+    t.integer "section_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_graders_on_section_id"
+    t.index ["user_id"], name: "index_graders_on_user_id"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -80,4 +110,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_213942) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "availabilities", "graders"
+  add_foreign_key "graders", "sections"
+  add_foreign_key "graders", "users"
 end

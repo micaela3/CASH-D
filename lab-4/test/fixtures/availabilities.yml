@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grader: one
+  start_time: 2021-11-20 17:47:52
+  end_time: 2021-11-20 17:47:52
+  weekday: 1
+
+two:
+  grader: two
+  start_time: 2021-11-20 17:47:52
+  end_time: 2021-11-20 17:47:52
+  weekday: 1
