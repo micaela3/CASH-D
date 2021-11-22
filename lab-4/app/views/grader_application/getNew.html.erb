@@ -1,0 +1,8 @@
+<%= javascript_pack_tag 'time' %>
+<h1>Grader Application</h1>
+<form action="?" method="POST">
+
+<%= render 'form', courses: @courses%>
+<input type="submit" value="Submit">
+</form>
+<%= render 'availability'%>
