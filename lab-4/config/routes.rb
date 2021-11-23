@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   get 'home/scrapeoptions'
   post 'home/rescrape'
   root 'home#index'
-  get 'grader/application/new', to:'grader_application#getNew'
-  get 'grader/application/edit', to:'grader_application#edit'
-  post 'grader/application/new', to:'grader_application#postNew'
+  get 'grader/application', to:'grader_application#get'
+  post 'grader/application', to:'grader_application#post'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
