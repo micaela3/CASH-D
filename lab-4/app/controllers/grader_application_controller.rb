@@ -27,7 +27,9 @@ class GraderApplicationController < ApplicationController
 
       @availability.save
     end
-     
+    
+    current_user.has_grader = true
+    current_user.save
 
   end
 
