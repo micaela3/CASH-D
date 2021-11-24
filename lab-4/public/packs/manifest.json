@@ -10,6 +10,14 @@
         "/packs/js/application-c6f96980e88a5cb04d30.js.map"
       ]
     },
+    "graderapp": {
+      "js": [
+        "/packs/js/graderapp-e5286bf3b677b7ca4bb7.js"
+      ],
+      "js.map": [
+        "/packs/js/graderapp-e5286bf3b677b7ca4bb7.js.map"
+      ]
+    },
     "home": {
       "js": [
         "/packs/js/home-155a96ac165d00df9d95.js"
@@ -17,18 +25,10 @@
       "js.map": [
         "/packs/js/home-155a96ac165d00df9d95.js.map"
       ]
-    },
-    "time": {
-      "js": [
-        "/packs/js/time-41011fae09e973f54fe7.js"
-      ],
-      "js.map": [
-        "/packs/js/time-41011fae09e973f54fe7.js.map"
-      ]
     }
   },
+  "graderapp.js": "/packs/js/graderapp-e5286bf3b677b7ca4bb7.js",
+  "graderapp.js.map": "/packs/js/graderapp-e5286bf3b677b7ca4bb7.js.map",
   "home.js": "/packs/js/home-155a96ac165d00df9d95.js",
-  "home.js.map": "/packs/js/home-155a96ac165d00df9d95.js.map",
-  "time.js": "/packs/js/time-41011fae09e973f54fe7.js",
-  "time.js.map": "/packs/js/time-41011fae09e973f54fe7.js.map"
+  "home.js.map": "/packs/js/home-155a96ac165d00df9d95.js.map"
 }

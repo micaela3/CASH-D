@@ -3,6 +3,8 @@ class GraderApplicationController < ApplicationController
     @courses = Course.all
     @graders = Grader.all
     @availabilities = Availability.all
+
+    
   end
 
   def post
