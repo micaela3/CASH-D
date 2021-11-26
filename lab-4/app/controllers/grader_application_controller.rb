@@ -3,7 +3,7 @@ class GraderApplicationController < ApplicationController
     @courses = Course.all
     @graders = Grader.all
     @availabilities = Availability.all
-
+    @courses_graders = CoursesGrader.all
     
   end
 
@@ -26,6 +26,16 @@ class GraderApplicationController < ApplicationController
       @availability.grader = @grader
 
       @availability.save
+    end
+    
+    @course_interests = params[:courses]
+    @course_interests.each do |index, value|
+        @courses_graders = CoursesGrader.new
+        
+        @courses_graders.course_id = @course_interests[index][:course_id]
+        @courses_graders.grader = @grader
+        
+        @courses_graders.save
     end
     
     current_user.has_grader = true

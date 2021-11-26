@@ -1,7 +1,7 @@
 <div id="course_template" style="display:none; flex-direction:row; gap:1em">
 <%= fields_for :course do |c| %>
     <%= c.label :courses, 'Courses of Interest' %>   
-    <%= c.collection_select :course_title, @courses, :course_title, :course_title%>
+    <%= c.collection_select :id, @courses, :id, :course_number_with_title%>
 <% end %>
 </div>
 

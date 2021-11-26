@@ -21,7 +21,7 @@ window.addNewCourse = function() {
     var form = document.getElementById('course_template').cloneNode(true);
     form.id = "";
     form.style.display = 'flex';
-    form.querySelector('#course_course_title').setAttribute('name','courses['+(courseIndex)+'][course_title]');
+    form.querySelector('#course_id').setAttribute('name','courses['+(courseIndex)+'][course_id]');
     courseIndex++;
     var list = document.getElementById('courses');
     list.append(form);

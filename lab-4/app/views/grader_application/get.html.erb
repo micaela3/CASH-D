@@ -15,7 +15,12 @@ For testing purposes, ignore
     <p><%= g.weekday %></p>
 <% end %>
 
-
+<%@courses_graders.each do |item| %>
+    <p><%= item.grader_id %></p>
+    <p><%= item.course_id %></p>
+    <% @course_info = @courses.where(id: item.course_id).pluck(:course_number, :course_title) %>
+    <p><%= "#{@course_info[0][0]}: #{@course_info[0][1]}" %></p>
+<% end %>
 
 <h1>Grader Application</h1>
 <form action="?" method="POST">
