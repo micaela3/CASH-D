@@ -1,0 +1,15 @@
+<%= fields_for :recommendation do |form| %>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <%= form.label :'Instructor Name' %>
+    <%= form.text_field :'Instructor Name' %>
+    <%= form.label :'Grader Name' %>
+    <%= form.text_field :'Grader Name' %>
+    <%= form.label :'Instructor ID' %>
+    <%= form.text_field :'Instructor ID' %>
+    <%= form.label :'Grader ID' %>
+    <%= form.text_field :'Grader ID' %>
+    <%= form.label :'Section Number' %>
+    <%= form.text_field :'Section Number' %>
+    <%= form.label :'Comments' %>
+    <%= form.text_field :'Comments' %>
+  <%end%>
