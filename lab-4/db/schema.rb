@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_013323) do
+ActiveRecord::Schema.define(version: 2021_11_26_183024) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_013323) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "availabilities", "graders"
-  add_foreign_key "graders", "sections"
-  add_foreign_key "graders", "users"
+  add_foreign_key "availabilities", "graders", on_delete: :cascade
+  add_foreign_key "graders", "sections", on_delete: :cascade
+  add_foreign_key "graders", "users", on_delete: :cascade
 end
