@@ -1,15 +1,18 @@
-<%= fields_for :recommendation do |form| %>
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-    <%= form.label :'Instructor Name' %>
-    <%= form.text_field :'Instructor Name' %>
+
+<%= fields_for :recommendation do |form| %>   
+ <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <%= form.label :'Instructor Name (Your Name)' %>
+    <%= form.text_field :instructor_name %>
     <%= form.label :'Grader Name' %>
-    <%= form.text_field :'Grader Name' %>
-    <%= form.label :'Instructor ID' %>
-    <%= form.text_field :'Instructor ID' %>
-    <%= form.label :'Grader ID' %>
-    <%= form.text_field :'Grader ID' %>
-    <%= form.label :'Section Number' %>
-    <%= form.text_field :'Section Number' %>
+    <%= form.text_field :grader_name %>
+    <%= form.label :'Instructor ID (Your Lastname.#)' %>
+    <%= form.text_field :instructor_id %>
+    <%= form.label :'Grader ID (Lastname.#)' %>
+    <%= form.text_field :grader_id %>
+    <%= form.label :'Course title that the grader is being recommended for' %>
+    <%= form.text_field :course %>
+    <%= form.label :'Section Number for the course the grader is being recommended for (Enter only if you are requesting a grader for a specific section. Otherwise leave it blank)' %>
+    <%= form.number_field :section %>
     <%= form.label :'Comments' %>
-    <%= form.text_field :'Comments' %>
+    <%= form.text_field :comments %>
   <%end%>
