@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_223148) do
+ActiveRecord::Schema.define(version: 2021_11_27_232957) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 2021_11_27_223148) do
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.integer "grader_id"
-    t.integer "instructor_id"
+    t.string "grader_id"
+    t.string "instructor_id"
     t.string "course"
     t.integer "section"
     t.string "comments"

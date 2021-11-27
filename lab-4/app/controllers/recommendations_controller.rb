@@ -12,11 +12,19 @@ class RecommendationsController < ApplicationController
     @recommendation.instructor_id = params[:recommendation][:instructor_id]
     @recommendation.grader_id = params[:recommendation][:grader_id] 
     @recommendation.course = params[:recommendation][:course]
-    @recommendation.section = params[:recommendation][:section]
+    if params[:recommendation][:section] == ""
+        @recommendation.section = -1
+        puts "blashs"
+    else
+        puts "badksbhdjksa"
+        @recommendation.section = params[:recommendation][:section]
+    end
     @recommendation.comments = params[:recommendation][:comments]
     
   if @recommendation.save
     redirect_to 'home_index_path'
+  else
+    puts "error"
   end
   end
 
