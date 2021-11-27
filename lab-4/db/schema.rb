@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_183024) do
+ActiveRecord::Schema.define(version: 2021_11_27_223148) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_183024) do
     t.integer "grader_id"
     t.integer "instructor_id"
     t.string "course"
-    t.string "section"
+    t.integer "section"
     t.string "comments"
     t.string "grader_name"
     t.string "instructor_name"
