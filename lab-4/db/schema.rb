@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_232957) do
+ActiveRecord::Schema.define(version: 2021_11_28_215417) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_232957) do
     t.integer "section_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_dot_number"
     t.index ["section_id"], name: "index_graders_on_section_id"
     t.index ["user_id"], name: "index_graders_on_user_id"
   end
@@ -77,13 +78,13 @@ ActiveRecord::Schema.define(version: 2021_11_27_232957) do
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.string "grader_id"
-    t.string "instructor_id"
     t.string "course"
     t.integer "section"
     t.string "comments"
     t.string "grader_name"
     t.string "instructor_name"
+    t.integer "user_id"
+    t.string "grader_name_dot_number"
   end
 
   create_table "sections", force: :cascade do |t|

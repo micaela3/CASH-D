@@ -1,5 +1,4 @@
 class Recommendation < ApplicationRecord
-  belongs_to  :grader
-  has_one :instructor
+  belongs_to  :user
 end
 
