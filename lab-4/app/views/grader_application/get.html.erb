@@ -1,26 +1,5 @@
 <%= javascript_pack_tag 'graderapp' %>
 
-For testing purposes, ignore 
-<p>graders</p>
-<p><%= @graders.length() %></p>
-<% @graders.each do |g| %>
-    <p><%= g.name %></p>
-    <p><%= g.user_id %></p>
-<% end %>
-
-<% @availabilities.each do |g| %>
-    <p><%= g.grader_id %></p>
-    <p><%= g.start_time %></p>
-    <p><%= g.end_time %></p>
-    <p><%= g.weekday %></p>
-<% end %>
-
-<%@courses_graders.each do |item| %>
-    <p><%= item.grader_id %></p>
-    <p><%= item.course_id %></p>
-    <% @course_info = @courses.where(id: item.course_id).pluck(:course_number, :course_title) %>
-    <p><%= "#{@course_info[0][0]}: #{@course_info[0][1]}" %></p>
-<% end %>
 
 <h1>Grader Application</h1>
 <form action="?" method="POST">
@@ -30,3 +9,46 @@ For testing purposes, ignore
 </form>
 <%= render 'availability'%>
 <%= render 'courseselect'%>
+
+
+
+
+<script>
+    window.addEventListener('load', (event) => {
+        console.log('page is fully loaded');
+
+        var availabilities = <%= @currAvails.to_json.html_safe %>;
+        
+
+        console.log(availabilities);
+
+        for (var key in availabilities) {
+            console.log(key);
+            console.log(availabilities[key]);
+            console.log(availabilities[key].weekday)
+            window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
+        }
+
+
+
+        var courseInterests = <%= @courseInts.to_json.html_safe %>;
+        
+
+        console.log(courseInterests);
+
+        for (var key in courseInterests) {
+            console.log(key);
+            console.log(courseInterests[key]);
+            console.log(courseInterests[key].course_id);
+            window.addNewCourse(courseInterests[key].course_id);
+
+        }
+    });
+
+
+</script>
+
+
+
+
+
