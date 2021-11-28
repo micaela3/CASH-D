@@ -27,7 +27,7 @@
 
 <hr />
 <% if current_user.user_type == 'TA' %>
-  <%= link_to 'Grader Application Form', grader_application_path %>
+  <%= link_to 'Grader Application Form', grader_application_path, 'data-turbolinks' => false%>
   <hr />
 <% end %>
 
