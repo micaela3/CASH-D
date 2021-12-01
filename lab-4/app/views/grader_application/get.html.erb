@@ -5,6 +5,7 @@
 <form action="?" method="POST">
 
 <%= render 'form', courses: @courses%>
+<br/><br/><br/>
 <input type="submit" value="Submit">
 </form>
 <%= render 'availability'%>
@@ -24,8 +25,7 @@
             for (var key in availabilities) {
                 window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
             }
-        }
-        
+        }       
         
 
         var courseInterests = <%= @courseInts.to_json.html_safe %>;

@@ -36,3 +36,10 @@ window.addNewCourse = function(courseID=undefined) {
     list.append(form);
 
 }
+
+window.deleteOption = function(button) {
+    var parent = button.closest(".options");
+    if(parent.querySelectorAll(".option").length > 1){
+        button.closest(".option").remove();
+    }
+}
