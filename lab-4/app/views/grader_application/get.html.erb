@@ -17,16 +17,28 @@
    window.addEventListener('load', (event) => {
 
         var availabilities = <%= @currAvails.to_json.html_safe %>;
-        
-        for (var key in availabilities) {
-            window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
+
+        if (availabilities == undefined) {
+            window.addNewTimeSlot();
+        } else {
+            for (var key in availabilities) {
+                window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
+            }
         }
+        
+        
 
         var courseInterests = <%= @courseInts.to_json.html_safe %>;
 
-        for (var key in courseInterests) {
-            window.addNewCourse(courseInterests[key].course_id);
+        if (courseInterests == undefined) {
+            window.addNewCourse();
+        } else {
+            for (var key in courseInterests) {
+                window.addNewCourse(courseInterests[key].course_id);
+            }
         }
+
+
     });
 
 

@@ -28,6 +28,7 @@ window.addNewCourse = function(courseID=undefined) {
     form.id = "";
     form.style.display = 'flex';
     form.querySelector('#course_id').setAttribute('name','courses['+(courseIndex)+'][course_id]');
+    form.querySelector('#course_id').setAttribute('required','true');
     form.querySelector('#course_id').value=courseID;
 
     courseIndex++;
