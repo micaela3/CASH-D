@@ -5,6 +5,7 @@ class SectionsController < ApplicationController
 
   # GET /sections/1 or /sections/1.json
   def show
+    @graders = Grader.get_graders(@section)
   end
 
   # GET /sections/new
@@ -54,6 +55,52 @@ class SectionsController < ApplicationController
       format.html { redirect_to @course, notice: "Section was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def showGraders
+    @section = Section.find(params[:section_id])
+    unless current_user.user_type == 'Admin'
+        redirect_to root_path, notice: "Page only available for admin users"
+    end
+    @meetings = @section.meetings
+    @grader = Grader.all
+    @graders = Grader.get_graders(@section)
+  end
+
+  def assignGrader
+    @section = Section.find(params[:section_id])
+    @grader = Grader.find(params[:grader])
+    @grader.section = @section
+    @grader.assigned = true
+    @grader.save
+    respond_to do |format|
+        format.html { redirect_to @section, notice: "Succesfully assigned grader." }
+    end
+  end
+    
+  def unassignGrader
+   @section = Section.find(params[:section_id])
+   @grader = Grader.find(params[:grader_id])
+   @grader.section_id = nil
+   @grader.assigned = nil
+   @grader.save
+   respond_to do |format|
+       format.html { redirect_to @section, notice: "Successfully unassigned grader." }
+    end
+  end
+
+  def availabilities
+    @prev_page = params[:prev_page]
+    @weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    @grader = Grader.find(params[:grader_id])
+    @section = Section.find(params[:section_id])
+  end
+
+  def recommendations
+    @prev_page = params[:prev_page]
+    @grader = Grader.find(params[:grader_id])
+    @section = Section.find(params[:section_id])
+    @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, @grader.name_dot_number)
   end
 
   private

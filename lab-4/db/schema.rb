@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_044036) do
+ActiveRecord::Schema.define(version: 2021_11_30_044830) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 2021_11_29_044036) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "course_id"
-    t.integer "grader_id"
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 

@@ -1,0 +1,37 @@
+<%= form_tag(section_assignGrader_path, :method => "post") do %>
+    <table>
+        <thead>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Name.#</th>
+            <th>Major</th>
+            <th>Availabilities</th>
+            <th>Recommendations</th>
+        </thead>  
+        <tbody>
+        <% @graders.each do |grader| %>
+            <tr>
+                <td><%= radio_button_tag(:grader, grader.id, true) %></td>
+                <td><%= grader.name %></td>
+                <td><%= grader.email %></td>
+                <td><%= grader.name_dot_number %></td>
+                <td><%= grader.major %></td>
+                <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "showGraders") %></td>
+                <td>
+                    <% @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, grader.name_dot_number) %>
+                    <% if @recommendations.count == 0 %>
+                        No Recommendations
+                    <% else %>
+                        <%= link_to 'View', section_showGraders_recommendations_path(@section, :grader_id => grader.id, :prev_page => "showGraders") %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <br />
+    <%= submit_tag("Submit") %>
+    <br />
+<% end %>
+<br />

@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   resources :graders, only: [:show, :update, :destroy, :new, :create, :edit]
   resources :instructors, only: [:show, :update, :destroy, :new, :create, :edit]
   resources :meetings, only: [:show, :update, :destroy, :new, :create, :edit]
-  resources :sections, only: [:show, :update, :destroy, :new, :create, :edit]
+  resources :sections, only: [:show, :update, :destroy, :new, :create, :edit] do
+    get 'showGraders'
+    get 'showGraders/availabilities', to: 'sections#availabilities'
+    get 'showGraders/recommendations', to: 'sections#recommendations'
+    post 'assignGrader'
+    post 'unassignGrader'
+  end
   resources :courses, only: [:show, :update, :destroy, :new, :create, :edit]  
   devise_for :users
   get 'home/index'

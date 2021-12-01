@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <th>Instructor Name</th>
+        <th>Recommended for this specific section?</th>
+        <th>Comments</th>
+    </thead>
+    <tbody>
+        <% @recommendations.each do |recommendation| %>
+            <tr>
+                <td><%= recommendation.instructor_name %></td>
+                <td><%= (@section.id == recommendation.section) ? "Yes" : "No" %></td>
+                <td><%= recommendation.comments %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<br />
+<%# Back button to go the previous page %>
+<% if @prev_page == "section" %>
+    <%= link_to 'Back', section_path(@section) %>
+<% elsif @prev_page == "showGraders" %>
+    <%= link_to 'Back', section_showGraders_path(@section) %>
+<% end %>

@@ -28,6 +28,57 @@
   <%= @section.end_date %>
 </p>
 
+<% if current_user.user_type == 'Admin' %>
+    <p>
+        <strong>Graders Assigned: </strong><em><%= @section.graders.count %> / 2</em>
+    </p>
+    <hr />
+    <% if @section.graders.count < 2 %>
+        <% if @graders.count == 0 %>
+            <p>No grader available to assign</p>
+        <% else %>
+            <%= link_to 'Assign a Grader', section_showGraders_path(@section) %>
+        <% end %>
+        <hr />
+    <% end %>
+    <% if @section.graders.count > 0 %>    
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Name.#</th>
+                <th>Major</th>
+                <th>Availabilities</th>
+                <th>Recommendations</th>
+                <th></th>
+            </thead>  
+            <tbody>
+            <% @section.graders.each do |grader| %>
+                <tr>
+                    <td><%= grader.id %></td>
+                    <td><%= grader.name %></td>
+                    <td><%= grader.email %></td>
+                    <td><%= grader.name_dot_number %></td>
+                    <td><%= grader.major %></td>
+                    <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "section") %></td>
+                    <td>
+                        <% @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, grader.name_dot_number) %>
+                        <% if @recommendations.count == 0 %>
+                            No Recommendations
+                        <% else %>
+                            <%= link_to 'View', section_showGraders_recommendations_path(@section, :grader_id => grader.id, :prev_page => "section") %>
+                        <% end %>
+                    </td>
+                    <td><%= link_to 'Unassign Grader', section_unassignGrader_path(@section, :grader_id => grader.id), method: :unassignGrader, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+        <hr />
+    <% end %>
+<% end %>
+
 <table>
   <thead>
     <tr>

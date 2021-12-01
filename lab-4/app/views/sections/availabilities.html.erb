@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <th>Weekday</th>
+        <th>Start time</th>
+        <th>End Time</th>
+    </thead>  
+    <tbody>
+        <% @grader.availabilities.each do |availability| %>
+            <tr>
+                <td><input type="text" value="<%= @weekdays[availability.weekday] %>" readonly></td>
+                <td><input type="time" value="<%= availability.start_time.to_s(:time) %>" readonly></td>
+                <td><input type="time" value="<%= availability.end_time.to_s(:time) %>" readonly></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<br />
+<%# Back button to go the previous page %>
+<% if @prev_page == "section" %>
+    <%= link_to 'Back', section_path(@section) %>
+<% elsif @prev_page == "showGraders" %>
+    <%= link_to 'Back', section_showGraders_path(@section) %>
+<% end %>
