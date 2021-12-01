@@ -2,15 +2,15 @@
 <%= fields_for :recommendation do |form| %>   
  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   <%= form.label :'Instructor Name (Your Name)' %>
-    <%= form.text_field :instructor_name %>
+    <%= form.text_field :instructor_name, required: true %>
     <%= form.label :'Grader Name' %>
-    <%= form.text_field :grader_name %>
+    <%= form.text_field :grader_name, required: true %>
     <%= form.label :'Grader ID (Lastname.#)' %>
-    <%= form.text_field :grader_name_dot_number %>
+    <%= form.text_field :grader_name_dot_number, required: true %>
     <%= form.label :'Course title that the grader is being recommended for' %>
-    <%= form.collection_select(:id, Course.all, :id, :course_number_with_title, prompt: true) %> 
+    <%= form.collection_select :id, Course.all, :id, :course_number_with_title, prompt: true %> 
     <%= form.label :'Section Number for the course the grader is being recommended for (Enter only if you are requesting a grader for a specific section. Otherwise leave it blank)' %>
     <%= form.number_field :section %>
     <%= form.label :'Comments' %>
-    <%= form.text_field :comments %>
+    <%= form.text_field :comments, required: true %>
   <%end%>
