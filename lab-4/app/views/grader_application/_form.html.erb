@@ -5,6 +5,10 @@
     <%= form.text_field :name, required: true %>
     <%= form.label :email, 'OSU Email' %>
     <%= form.text_field :email, required: true %>
+
+    <%= form.label :name_dot_number, 'Last Name and OSU Dot Number' %>
+    <%= form.text_field :name_dot_number, required: true %>
+
     <%= form.label :major %>
     <%= form.text_field :major, required: true %> 
     
@@ -14,7 +18,7 @@
     <%= button_tag "Add", type: "button", onclick:"window.addNewTimeSlot()"%>
 
     <fieldset id="courses" name="courses" style="position:relative; padding:1em; margin-top:1em; margin-bottom:1em; border:2px black solid">
-        <span style="position:absolute; left:0.5em; top:-0.75em; background:white;font-weight:bold">Courses of Interest</span>
+        <span style="position:absolute; left:0.5em; top:-0.75em; background:white;font-weight:bold">Courses of Interest (Please only select courses you received an A in)</span>
     </fieldset>
     <%= button_tag "Add", type: "button", onclick:"window.addNewCourse()"%>
 <% end %>

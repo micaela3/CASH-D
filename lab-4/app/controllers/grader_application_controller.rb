@@ -21,6 +21,7 @@ class GraderApplicationController < ApplicationController
     @grader.name = params[:grader][:name]
     @grader.email = params[:grader][:email]
     @grader.major = params[:grader][:major]
+    @grader.name_dot_number = params[:grader][:name_dot_number]
     @grader.user = current_user
 
     @availabilities = params[:availability]
@@ -38,6 +39,7 @@ class GraderApplicationController < ApplicationController
       @currGrader.name = @grader.name
       @currGrader.email = @grader.email
       @currGrader.major = @grader.major
+      @currGrader.name_dot_number = @grader.name_dot_number
 
       @currGrader.save 
 
