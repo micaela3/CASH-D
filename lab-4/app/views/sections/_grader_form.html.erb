@@ -19,7 +19,7 @@
                 <td><%= grader.major %></td>
                 <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "showGraders") %></td>
                 <td>
-                    <% @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, grader.name_dot_number) %>
+                    <% @recommendations = Recommendation.where("course_number = (?) and grader_name_dot_number = (?)", @section.course.course_number, grader.name_dot_number) %>
                     <% if @recommendations.count == 0 %>
                         No Recommendations
                     <% else %>

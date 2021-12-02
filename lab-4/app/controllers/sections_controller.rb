@@ -100,7 +100,7 @@ class SectionsController < ApplicationController
     @prev_page = params[:prev_page]
     @grader = Grader.find(params[:grader_id])
     @section = Section.find(params[:section_id])
-    @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, @grader.name_dot_number)
+    @recommendations = Recommendation.where("course_number = (?) and grader_name_dot_number = (?)", @section.course.course_number, @grader.name_dot_number)
   end
 
   private

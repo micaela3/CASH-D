@@ -8,7 +8,7 @@
         <% @recommendations.each do |recommendation| %>
             <tr>
                 <td><%= recommendation.instructor_name %></td>
-                <td><%= (@section.id == recommendation.section) ? "Yes" : "No" %></td>
+                <td><%= (@section.class_number == recommendation.section) ? "Yes" : "No" %></td>
                 <td><%= recommendation.comments %></td>
             </tr>
         <% end %>

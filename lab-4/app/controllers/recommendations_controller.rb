@@ -11,14 +11,13 @@ class RecommendationsController < ApplicationController
     @recommendation.grader_name = params[:recommendation][:grader_name]
     @recommendation.user = current_user
     @recommendation.grader_name_dot_number = params[:recommendation][:grader_name_dot_number]
-    @recommendation.course_id = params[:recommendation][:id]
+    @recommendation.course_number = params[:recommendation][:course_number]
     if params[:recommendation][:section] == ""
         @recommendation.section = -1
     else
         @recommendation.section = params[:recommendation][:section]
     end
     @recommendation.comments = params[:recommendation][:comments]
-    
   if @recommendation.save
     redirect_to root_path, notice: "Form submission successful!"
   end
