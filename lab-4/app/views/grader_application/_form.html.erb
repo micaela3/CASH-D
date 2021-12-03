@@ -11,6 +11,10 @@
 
     <%= form.label :major %>
     <%= form.text_field :major, required: true %> 
+
+
+    <%= form.label :semester, 'Semester You Are Applying For'%>
+    <%= form.select :semester, [@terms[0], @terms[1]], required: true %>
     
     <fieldset id="availabilities" name="availabilities" class="options" style="position:relative; padding:1em; margin-top:1em; margin-bottom:1em; border:2px black solid">
         <span style="position:absolute; left:0.5em; top:-0.75em; background:white;font-weight:bold">Available Times</span>

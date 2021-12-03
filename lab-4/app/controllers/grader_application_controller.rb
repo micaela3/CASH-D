@@ -12,6 +12,33 @@ class GraderApplicationController < ApplicationController
     @graders = Grader.all
     @availabilities = Availability.all
     @courses_graders = CoursesGrader.all
+
+    @terms = []
+    # Get date, month, and next year for calculating terms
+    today = Date.today
+    month = today.month
+    next_year = today + 1.year
+    # Get current and next terms (commented out code for 2-our terms)
+    if month < 5
+        @terms = [
+          [today.strftime("Spring %Y"), today.strftime("1%y2")],
+          [today.strftime("Summer %Y"), today.strftime("1%y4")],
+#          [today.strftime("Autumn %Y"), today.strftime("1%y8")]
+        ]
+    elsif month < 8
+      @terms = [
+        [today.strftime("Summer %Y"), today.strftime("1%y4")],
+        [today.strftime("Autumn %Y"), today.strftime("1%y8")],
+#        [next_year.strftime("Spring %Y"), next_year.strftime("1%y2")]
+      ]
+    else
+      @terms = [
+        [today.strftime("Autumn %Y"), today.strftime("1%y8")],
+        [next_year.strftime("Spring %Y"), next_year.strftime("1%y2")],
+#        [next_year.strftime("Summer %Y"), next_year.strftime("1%y4")]
+      ]
+
+    end      
     
   end
 
@@ -22,7 +49,9 @@ class GraderApplicationController < ApplicationController
     @grader.email = params[:grader][:email]
     @grader.major = params[:grader][:major]
     @grader.name_dot_number = params[:grader][:name_dot_number]
+    @grader.semester = params[:grader][:semester]
     @grader.user = current_user
+    
 
     @availabilities = params[:availability]
     @course_interests = params[:courses]
@@ -36,6 +65,7 @@ class GraderApplicationController < ApplicationController
         @currGrader.email = @grader.email
         @currGrader.major = @grader.major
         @currGrader.name_dot_number = @grader.name_dot_number
+        @currGrader.semester = @grader.semester
 
         @currGrader.save 
 
