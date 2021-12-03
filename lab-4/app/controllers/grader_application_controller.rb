@@ -75,13 +75,27 @@ class GraderApplicationController < ApplicationController
         end
         
         current_user.has_grader = true
-
-        current_user.save
-        
-        
+        current_user.save            
     
     end 
+
     redirect_to root_path, notice: "Form submission successful!"   
+
+  end
+
+
+
+  def deleteForm
+    if current_user.has_grader
+      @currGrader = Grader.find_by user:current_user      
+      Availability.where(grader:@currGrader).delete_all
+      CoursesGrader.where(grader:@currGrader).delete_all 
+      @currGrader.destroy
+      current_user.has_grader = false
+      current_user.save
+
+      redirect_to root_path, notice: "Form deletion successful!"  
+    end
 
   end
 
