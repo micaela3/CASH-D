@@ -1,9 +1,9 @@
 <div id="course_template" class="option" style="display:none; flex-direction:row; gap:1em">
-<%= fields_for :course do |c| %>
-    <%= c.label :courses, 'Courses of Interest' %>   
-    <%= c.collection_select :id, @courses, :id, :course_number_with_title, required: true%>
-<% end %>
-<%= button_tag "Delete", type: "button", id: "course_delete", onclick:"window.deleteOption(this)"%>
+    <%= fields_for :course do |c| %>
+        <%= c.label :courses, 'Courses of Interest' %>   
+        <%= c.collection_select :id, @courses, :id, :course_number_with_title, required: true%>
+    <% end %>
+    <%= button_tag "Delete", type: "button", id: "course_delete", onclick:"window.deleteOption(this)"%>
 </div>
 
 

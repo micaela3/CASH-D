@@ -1,48 +1,36 @@
 <%= javascript_pack_tag 'graderapp' %>
 
-
 <h1>Grader Application</h1>
+
 <div class="white">
-<form action="?" method="POST">
 
-<%= render 'form', courses: @courses%>
-<br/><br/><br/>
-<input type="submit" value="Submit">
-</form>
-<%= render 'availability'%>
-<%= render 'courseselect'%>
+    <form action="?" method="POST">
+        <%= render 'form', courses: @courses%>
+        <br/><br/><br/>
+        <input type="submit" value="Submit">
+    </form>
 
+    <%= render 'availability'%>
+    <%= render 'courseselect'%>
 
+    <% if current_user.has_grader %>
+        <%= button_to "Delete Form", { action: "deleteForm" }, method: :deleteForm, data: { confirm: "Are you sure?" } %>
+    <% end %>
 
-
-<% if current_user.has_grader %>
-    <%= button_to "Delete Form", { action: "deleteForm" },
-                                method: :deleteForm, data: { confirm: "Are you sure?" } %>
-<% end %>
-
-
-
-
-
-<br/>
-<%= link_to 'Back to courses', home_index_path %>
+    <br/>
+    <%= link_to 'Back to courses', home_index_path %>
 </div>
-
-
 
 <script>
    window.addEventListener('load', (event) => {
-
         var availabilities = <%= @currAvails.to_json.html_safe %>;
-
         if (availabilities == undefined) {
             window.addNewTimeSlot();
         } else {
             for (var key in availabilities) {
                 window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
             }
-        }       
-        
+        }            
 
         var courseInterests = <%= @courseInts.to_json.html_safe %>;
 
@@ -53,11 +41,7 @@
                 window.addNewCourse(courseInterests[key].course_id);
             }
         }
-
-
     });
-
-
 </script>
 
 

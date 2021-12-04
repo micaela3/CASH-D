@@ -1,11 +1,11 @@
 <div id="availability_template" class="option" style="display:none; flex-direction:row; gap:1em">
-<%= fields_for :availability do |a| %>
-  <%= a.label :weekday %>
-   <%= a.select :weekday, [['Sunday',0], ['Monday',1], ['Tuesday',2], ['Wednesday',3], ['Thursday',4],['Friday',5], ['Saturday',6]], required: true%>
-    <%= a.label :start_time %>
-    <%=a.time_field :start_time, required: true %>
-    <%= a.label :end_time %>
-    <%=a.time_field :end_time, required: true %>
+  <%= fields_for :availability do |a| %>
+      <%= a.label :weekday %>
+      <%= a.select :weekday, [['Sunday',0], ['Monday',1], ['Tuesday',2], ['Wednesday',3], ['Thursday',4],['Friday',5], ['Saturday',6]], required: true%>
+      <%= a.label :start_time %>
+      <%=a.time_field :start_time, required: true %>
+      <%= a.label :end_time %>
+      <%=a.time_field :end_time, required: true %>
   <% end %>
   <%= button_tag "Delete", type: "button", onclick:"window.deleteOption(this)"%>
 </div>
