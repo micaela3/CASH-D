@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   post 'recommendations', to: 'recommendations#new'
   delete 'recommendations/delete', to: 'recommendations#delete'
   get 'recommendations/edit', to: 'recommendations#edit'
-  patch 'recommendations', to: 'recommendations#update'
+  patch 'recommendations/edit', to: 'recommendations#update'
   get 'recommendations/display', to: 'recommendations#display'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

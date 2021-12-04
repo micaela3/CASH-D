@@ -1,7 +1,15 @@
 <h1>Editing Recommendation</h1>
 
 <div class="white">
-<%= render 'form', recommendation: @recommendation %>
+
+<form action="/recommendations/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= render 'form', recommendation: @recommendation %>
+  <br />
+  <br />
+  <%= hidden_field_tag(:recommendation_id, @recommendation.id) %>
+  <input type="submit" value="Submit">
+</form>
 <br />
 <%= link_to 'Back', recommendations_display_path %>
 </div>

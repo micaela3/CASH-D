@@ -1,7 +1,9 @@
 
 <h1>Recommendations</h1>
 
+<%# display recommendations in a table %>
 <table>
+
   <thead>
     <tr>
       <th>Instructor Name</th>
@@ -15,7 +17,7 @@
   </thead>
 
   <tbody>
-    <%# Display information about each instructor for a meeting in a table %>
+    <%# Display information about each recommendation %>
     <% @recommendations.each do |recommendation| %>
       <tr>
         <td><%= recommendation.instructor_name %></td>
@@ -24,8 +26,10 @@
         <td><%= recommendation.course_number %></td>
         <td><%= recommendation.class_number %></td>
         <td><%= recommendation.comments %></td>
+
+        <%# edit an delete options to edit a recommendation or delete a recommendation %>
         <td><%= link_to 'Edit', recommendations_edit_path(:recommendation_id => recommendation.id) %></td>
-        <td><%= link_to 'Destroy', recommendations_delete_path(:recommendation_id => recommendation.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', recommendations_delete_path(:recommendation_id => recommendation.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -3,22 +3,29 @@
 <%= fields_for :recommendation do |form| %>   
   
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+    <%# text field for instructor name %>
     <%= form.label :'Instructor Name (Your Name)' %>
     <%= form.text_field :instructor_name, required: true %>
-    
+
+    <%# text field for grader name %>
     <%= form.label :'Grader Name' %>
     <%= form.text_field :grader_name, required: true %>
-    
+
+    <%# text field for grader's dot number %>
     <%= form.label :'Grader (Dot Number)' %>
     <%= form.text_field :grader_name_dot_number, required: true %>
     
     <%# Select course by course_number, rather than ID in case the admin rescrapes%>
+    <%# drop down for selecting a course %>
     <%= form.label :'Course title that the grader is being recommended for' %>
     <%= form.collection_select :course_number, Course.all, :course_number, :course_number_with_title, prompt: true %> 
-    
+
+    <%# number field to input class number if requesting a grader for a specific section %>
     <%= form.label :'Class Number for the course the grader is being recommended for (Enter only if you are requesting a grader for a specific section, Otherwise leave it blank), For example: If you requesting a grader for CSE 1110 Introduction to Computing Technology you can enter the class number that you are requesting the grader for like 24741 or 24743' %>    
     <%= form.number_field :class_number %>
-    
+
+    <%# text field to input comments %>
     <%= form.label :'Comments' %>
     <%= form.text_field :comments, size: "100", required: true %>
   <%end%>
