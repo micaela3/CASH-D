@@ -12,10 +12,10 @@ class RecommendationsController < ApplicationController
     @recommendation.user = current_user
     @recommendation.grader_name_dot_number = params[:recommendation][:grader_name_dot_number]
     @recommendation.course_number = params[:recommendation][:course_number]
-    if params[:recommendation][:section] == ""
-        @recommendation.section = -1
+    if params[:recommendation][:class_number] == ""
+        @recommendation.class_number = -1
     else
-        @recommendation.section = params[:recommendation][:section]
+        @recommendation.class_number = params[:recommendation][:class_number]
     end
     @recommendation.comments = params[:recommendation][:comments]
   if @recommendation.save
