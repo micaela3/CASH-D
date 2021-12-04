@@ -1,16 +1,8 @@
-<hr \>
-
-<%# button to rescrape the website for admin %>
-<% if current_user.user_type == 'Admin' %>
-<%# , method: :rescrape, data: { confirm: 'Are you sure?' }%>
-  <%= link_to 'Rescrape', home_scrapeoptions_path%>
-  <hr \>
-<% end %>
 
 <%# User can filter the courses by course level or search for course by title %>
-<h4>Filter by: </h4>
-<table>
+<table class="courseFilterBar">
   <tr>
+    <th>Filter by: </th>
     <th><a href="/">All courses</a></th>
     <th><a onclick="addQuery('course_number=1')">1xxx</a></th>
     <th><a onclick="addQuery('course_number=2')">2xxx</a></th>
@@ -21,27 +13,11 @@
     <th><a onclick="addQuery('course_number=7')">7xxx</a></th>
     <th><a onclick="addQuery('course_number=8')">8xxx</a></th>
     <th><input type="search" id="searchBar" placeholder="Search for the course by title"></th>
-    <th><button type="submit" onclick="addQuery('course_title=' + document.getElementById('searchBar').value)">Search</button></th>
+    <th><a type="submit" onclick="addQuery('course_title=' + document.getElementById('searchBar').value)">Search</a></th>
   </tr>
 </table>
 
-<hr />
-<% if current_user.user_type == 'TA' %>
-  <%= link_to 'Grader Application Form', grader_application_path, 'data-turbolinks' => false%>
-  <hr />
-<% end %>
-
-<% if current_user.user_type == 'Staff' %>
-  <%= link_to 'Instructor Recommendation Form', recommendations_path %>
-<%end%>
 <h1>Courses</h1>
-<hr />
-
-<%# Allow admin to add a new course to course list %>
-<% if current_user.user_type == 'Admin' %>
-  <%= link_to 'Add a new Course', new_course_path %>
-  <hr />
-<%end%>
 
 <%# Show course information for all CSE courses offered in spring 2022 %>
 <table>

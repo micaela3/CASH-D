@@ -1,12 +1,22 @@
-<% if !user_signed_in? %>
-    <%= link_to 'Sign Up', new_user_registration_path %> |
-    <%= link_to 'Sign In', new_user_session_path %> |
-    <%= link_to 'Home', home_index_path %><br/><br/>
-<%end%> 
-
 <% if user_signed_in? %>
-    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %> |
-    <%= link_to 'Edit Profile', edit_user_registration_path %> |
-    <%= link_to 'Home', home_index_path %><br/><br/>
+    <nav class="main-navbar">
+        <ul>
+            <li><%= link_to 'Home', home_index_path %></li>
+            <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+            <% if current_user.user_type == 'TA' %>
+                <li><%= link_to 'Grader Application Form', grader_application_path, 'data-turbolinks' => false %></li>
+            <% end %>
+            <% if current_user.user_type == 'Staff' %>
+                <li><%= link_to 'Instructor Recommendation Form', recommendations_path %></li>
+            <%end%>
+            <%# button to rescrape the website for admin %>
+            <% if current_user.user_type == 'Admin' %>
+                <%# , method: :rescrape, data: { confirm: 'Are you sure?' }%>
+                <li><%= link_to 'Rescrape', home_scrapeoptions_path%></li>
+                <%# Allow admin to add a new course to course list %>
+                <li><%= link_to 'Add a new Course', new_course_path %></li>
+            <%end%>
+            <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li> 
+    </nav>
 <%end%> 
 

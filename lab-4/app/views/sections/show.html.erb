@@ -1,46 +1,49 @@
 <%# display the section number %>
-<p>
-  <strong>Section number:</strong>
-  <%= @section.section_number %>
-</p>
-
-<%# display the class number %>
-<p>
-  <strong>Class number:</strong>
-  <%= @section.class_number %>
-</p>
-
-<%# display the section component %>
-<p>
-  <strong>Component:</strong>
-  <%= @section.component %>
-</p>
-
-<%# display the start date for the section %>
-<p>
-  <strong>Start date:</strong>
-  <%= @section.start_date %>
-</p>
-
-<%# display the end date for the section %>
-<p>
-  <strong>End date:</strong>
-  <%= @section.end_date %>
-</p>
-
-<% if current_user.user_type == 'Admin' %>
+<div class="showInformation">
     <p>
-        <strong>Graders Assigned: </strong><em><%= @section.graders.count %> / 2</em>
+        <strong>Section number:</strong>
+        <%= @section.section_number %>
     </p>
-    <hr />
-    <% if @section.graders.count < 2 %>
-        <% if @graders.count == 0 %>
-            <p>No grader available to assign</p>
-        <% else %>
-            <%= link_to 'Assign a Grader', section_showGraders_path(@section) %>
-        <% end %>
-        <hr />
+
+    <%# display the class number %>
+    <p>
+        <strong>Class number:</strong>
+        <%= @section.class_number %>
+    </p>
+
+    <%# display the section component %>
+    <p>
+        <strong>Component:</strong>
+        <%= @section.component %>
+    </p>
+
+    <%# display the start date for the section %>
+    <p>
+        <strong>Start date:</strong>
+        <%= @section.start_date %>
+    </p>
+
+    <%# display the end date for the section %>
+    <p>
+        <strong>End date:</strong>
+        <%= @section.end_date %>
+    </p>
+    <% if current_user.user_type != 'Admin' %>
+        </div>
     <% end %>
+
+    <% if current_user.user_type == 'Admin' %>
+        <p>
+            <strong>Graders Assigned: </strong><em><%= @section.graders.count %> / 2</em>
+        </p>
+        <% if @section.graders.count < 2 %>
+            <% if @graders.count == 0 %>
+                <p>No grader available to assign</p>
+            <% else %>
+                <%= link_to 'Assign a Grader', section_showGraders_path(@section) %>
+            <% end %>
+        <% end %>
+        </div>
     <% if @section.graders.count > 0 %>    
         <table>
             <thead>
@@ -63,7 +66,7 @@
                     <td><%= grader.major %></td>
                     <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "section") %></td>
                     <td>
-                        <% @recommendations = Recommendation.where("course_id = (?) and grader_name_dot_number = (?)", @section.course_id, grader.name_dot_number) %>
+                        <% @recommendations = Recommendation.where("course_number = (?) and grader_name_dot_number = (?)", @section.course.course_number, grader.name_dot_number) %>
                         <% if @recommendations.count == 0 %>
                             No Recommendations
                         <% else %>

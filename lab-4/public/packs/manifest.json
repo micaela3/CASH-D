@@ -1,13 +1,23 @@
 {
-  "application.js": "/packs/js/application-c6f96980e88a5cb04d30.js",
-  "application.js.map": "/packs/js/application-c6f96980e88a5cb04d30.js.map",
+  "alertChecker.js": "/packs/js/alertChecker-c432cd781487ce7e2747.js",
+  "alertChecker.js.map": "/packs/js/alertChecker-c432cd781487ce7e2747.js.map",
+  "application.js": "/packs/js/application-c1d1a1ce254fb20ac1e5.js",
+  "application.js.map": "/packs/js/application-c1d1a1ce254fb20ac1e5.js.map",
   "entrypoints": {
-    "application": {
+    "alertChecker": {
       "js": [
-        "/packs/js/application-c6f96980e88a5cb04d30.js"
+        "/packs/js/alertChecker-c432cd781487ce7e2747.js"
       ],
       "js.map": [
-        "/packs/js/application-c6f96980e88a5cb04d30.js.map"
+        "/packs/js/alertChecker-c432cd781487ce7e2747.js.map"
+      ]
+    },
+    "application": {
+      "js": [
+        "/packs/js/application-c1d1a1ce254fb20ac1e5.js"
+      ],
+      "js.map": [
+        "/packs/js/application-c1d1a1ce254fb20ac1e5.js.map"
       ]
     },
     "graderapp": {

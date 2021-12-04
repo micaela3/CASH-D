@@ -1,8 +1,191 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* CSS for the body */
+body{
+	 background-image: image-url('pexels-jot-2179483.jpg');
+	/* Makes the height to 100% so the webpage can use the whole space */
+	height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+    margin-top: 58px !important;
+}
+
+.white{
+    background: white;
+    padding: 20px;
+}
+
+/* CSS for the container that contains the game start button */
+.login, .signUp, .forgotPassword{
+    background: #fff;
+    
+	/* Sets the margin to auto so it can center on the page vertically and horizontally */
+	margin: auto;
+
+	/* Sets the position to absolute so that we can position the container in the middle of the page */
+	position: absolute;
+    
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px 1px #666;
+
+	/* Centers the div vertically from the top*/
+	top: 50%;
+
+	/* Centers the div horizontally from the left */
+	left: 50%;
+
+	/* Translates the div horizontally and vertically -50% to center the container */
+	transform: translate(-50%, -50%);
+
+	/* Makes the width of the container 30% of the whole page */
+	width: 20%;
+    height: 40%;
+}
+
+.login form, .signUp form, .forgotPassword form{
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.alert{
+    display: none;
+    padding: 16px 20px;
+    background: #bb0000;
+    text-align: center;
+    color: white;
+    border: white solid 1px;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 10px 1px #666;
+}
+
+.alert.block{
+    display: block;
+}
+
+.signUp, .forgotPassword{
+    height: 60%;
+}
+.signUp form{
+    font-size: 16px;
+    height: 95%;
+}
+.signUp form #error_explanation, .forgotPassword form #error_explanation{
+    width: 95%;
+}
+.signUp form .field_with_errors, .forgotPassword form .field_with_errors{
+    display: block;
+}
+
+.forgotPassword form{
+    height: 60%;
+    color: black;
+}
+.login form input[type="email"], .login form input[type="password"], .signUp form input[type="email"], .signUp form input[type="password"], .forgotPassword form input[type="email"], .forgotPassword form input[type="password"]{
+    width: 100%;
+    height: 30px;
+    border: solid 1px #ccc;
+}
+
+.login form input[type="email"]:focus-visible, .login form input[type="password"]:focus-visible, .signUp form input[type="email"]:focus-visible, .signUp form input[type="password"]:focus-visible, .forgotPassword form input[type="email"]:focus-visible, .forgotPassword form input[type="password"]:focus-visible{
+    background: #E0E0E0;
+    outline: solid 2px #767676;
+}
+
+.login form input[type="checkbox"]{
+    float: left;
+    width: 18px;
+    height: 19px;
+}
+.login form .checkBox{
+    padding: 10px 0;
+}
+.login form .checkBox label{
+    float: left;
+    padding-left: 10px;
+}
+
+
+/* CSS for the start game button */
+.login form input[type="submit"], .login a, .signUp form input[type="submit"], .signUp a, .forgotPassword form input[type="submit"], .forgotPassword a, .button, .button-no-width-change{
+	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
+	margin: 30px auto 20px auto;
+
+	/* Sets the color of the text to white */
+	color: white !important;
+
+	/* Sets the background color of the button to a dark gray color */
+	background-color: #333;
+
+	/* Sets the top and bottom padding to 10 px and the left and right padding to 20px for the button to look better */
+	padding: 10px 20px;
+
+	/* Sets the cursor to a pointer to make it seem like clicking on a link */
+	cursor: pointer;
+
+	/* Sets the display of the div to be like a block rather than text */
+	display: block;
+	
+	/* Center Aligns the text */
+	text-align: center;
+
+	/* Removes the underline from under the text */
+	text-decoration: none;
+
+	/* Sets the width to 50% of the parent container */
+	width: 50%;
+
+	/* Sets the font to have a bolder weight */
+	font-weight: 600;
+
+	/* Creates the extending width and background change transition */
+	transition: width .5s;
+
+	/* Makes it so the text in the button cannot be selected */
+	user-select: none;
+    border: none;
+}
+
+/* CSS for hovering on the game start button */
+.login form input[type="submit"]:hover, .login a:hover, .signUp form input[type="submit"]:hover, .signUp a:hover, .forgotPassword form input[type="submit"]:hover, .forgotPassword a:hover, .button:hover{
+	/* Changes the width to 90% of the container */
+	width: 90%;
+
+	/* Changes the background color of the button to a red color */
+	background-color: #bb0000;
+}
+
+.button-no-width-change:hover{
+    background-color: #bb0000;
+}
+
+.forgotPassword form input[type="submit"]{
+    width: 70%;
+}
+
+.login a, .signUp a, .forgotPassword a{
+    margin: 0px auto 2.5px auto;
+    font-weight: 100;
+}
+
+.width-30{
+    width: 30%;
+}
+
 #searchBar{
-	width: 25vw;
+	width: 500px;
+    margin: 0;
+    padding: 20px;
+    height: 100%;
+    border: solid 1px #ccc;
 	text-align: center;
 }
 th{
@@ -10,5 +193,78 @@ th{
 }
 
 table{
+    background: rgba(255, 255, 255, 0.75);
 	text-align: center;
+    border: none;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead tr{
+    background: #689699;
+}
+
+.courseFilterBar th{
+    padding: 0px;
+}
+
+.courseFilterBar a{
+    padding: 20px;
+    cursor: pointer;
+}
+
+h1{
+    background: rgba(39, 109, 138, 1);
+    padding: 20px;
+    color: WHITE;
+    margin-bottom: 0;
+}
+
+.left-button{
+    margin-left: 0px;
+}
+
+.main-navbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    height: 58px;
+    max-height: 58px;
+    border: none;
+}
+
+.main-navbar ul{
+    border: none;
+    background-color: #1B494C;
+    color: white;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 20px 0px;
+}
+
+.main-navbar li{
+    display: inline;
+}
+
+.main-navbar li:last-child{
+    float: right;
+}
+
+.main-navbar li a{
+    color: white !important;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.showInformation{
+    background: #fff;
+    margin-top: 100px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px 1px #666;
 }

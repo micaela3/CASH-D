@@ -1,6 +1,7 @@
 require 'date'
-
 class HomeController < ApplicationController
+  before_action :authenticate
+  
   def index
 
     # Code for filtering was obtained from:  https://www.justinweiss.com/articles/search-and-filter-rails-models-without-bloating-your-controller/
@@ -71,6 +72,15 @@ class HomeController < ApplicationController
   end
   
   private
+    #Authenticate if the user is signed in
+    def authenticate
+      #Do unless the user is signed in
+      unless user_signed_in?
+        # Redirect the user to the root page to sign/up or sign in and Flash a alert to the user when they try to access the page without signing in 
+        redirect_to new_user_session_path
+      end
+    end
+
     # Set the base endpoint for the API
     #?q=cse&campus=col&p=2&subject=cse&academic-career=ugrd&term=1222
     BASE_URL = "https://content.osu.edu/v2/classes/search"

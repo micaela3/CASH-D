@@ -1,3 +1,4 @@
+<div class="showInformation">
 <p>
   <strong>Instructor name:</strong>
   <%= @instructor.instructor_name %>
@@ -12,6 +13,6 @@
   <strong>Meetings:</strong>
   <%= @instructor.meeting_id %>
 </p>
-
+</div>
 <%= link_to 'Edit', edit_instructor_path(@instructor) %> |
 <%= link_to 'Back', @instructor.meeting %>
