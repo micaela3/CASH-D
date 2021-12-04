@@ -83,7 +83,7 @@ Possible Career Arguments:
 Possible Term Arguments
 - The term argument is a four digit number calculated by a formula. The first digit is always 1. The second two digits are the last two digits of the year. The third digit is the month, and is usually 8, 2, or 4 to signify the fall, spring, or summer semester, respectively.
 
- ** Tools and Ruby Gems Utilized **
+ **Tools and Ruby Gems Utilized**
 - Ruby v2.7.4
 - Devise (https://rubygems.org/gems/devise/versions/4.8.0)
 - Rest-Client (https://rubygems.org/gems/rest-client/versions/1.8.0)
