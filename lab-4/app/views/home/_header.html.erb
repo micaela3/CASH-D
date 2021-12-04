@@ -7,7 +7,11 @@
                 <li><%= link_to 'Grader Application Form', grader_application_path, 'data-turbolinks' => false %></li>
             <% end %>
             <% if current_user.user_type == 'Staff' %>
-                <li><%= link_to 'Instructor Recommendation Form', recommendations_path %></li>
+              <li><%= link_to 'Instructor Recommendation Form', recommendations_path %></li>
+              <% @recommendations = Recommendation.where(user_id: current_user.id) %>
+              <% if @recommendations.count != 0 %>
+                <li><%= link_to 'View Recommendations', recommendations_display_path %></li>
+              <%end%>
             <%end%>
             <%# button to rescrape the website for admin %>
             <% if current_user.user_type == 'Admin' %>

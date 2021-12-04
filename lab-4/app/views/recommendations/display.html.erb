@@ -1,0 +1,36 @@
+
+<h1>Recommendations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Instructor Name</th>
+      <th>Grader Name</th>
+      <th>Grader Name.#</th>
+      <th>Course Number</th>
+      <th>Class Number</th>
+      <th>Comments</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# Display information about each instructor for a meeting in a table %>
+    <% @recommendations.each do |recommendation| %>
+      <tr>
+        <td><%= recommendation.instructor_name %></td>
+        <td><%= recommendation.grader_name %></td>
+        <td><%= recommendation.grader_name_dot_number %></td>
+        <td><%= recommendation.course_number %></td>
+        <td><%= recommendation.class_number %></td>
+        <td><%= recommendation.comments %></td>
+        <td><%= link_to 'Edit', recommendations_edit_path(:recommendation_id => recommendation.id) %></td>
+        <td><%= link_to 'Destroy', recommendations_delete_path(:recommendation_id => recommendation.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', root_path %>
