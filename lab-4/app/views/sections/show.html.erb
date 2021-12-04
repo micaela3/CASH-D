@@ -33,6 +33,7 @@
     <% end %>
 
     <% if current_user.user_type == 'Admin' %>
+        <%# Show grader information and link to assign more graders %>
         <p>
             <strong>Graders Assigned: </strong><em><%= @section.graders.count %> / 2</em>
         </p>
@@ -44,7 +45,8 @@
             <% end %>
         <% end %>
         </div>
-    <% if @section.graders.count > 0 %>    
+    <% if @section.graders.count > 0 %>
+        <%# If we have graders, list them %>    
         <table>
             <thead>
                 <th>ID</th>
@@ -66,6 +68,7 @@
                     <td><%= grader.major %></td>
                     <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "section") %></td>
                     <td>
+                        <%# If grader has recommendations, let user view them%>
                         <% @recommendations = Recommendation.where("course_number = (?) and grader_name_dot_number = (?)", @section.course.course_number, grader.name_dot_number) %>
                         <% if @recommendations.count == 0 %>
                             No Recommendations
@@ -131,6 +134,7 @@
         <td><%= link_to 'Show', meeting %></td>
  
         <%if current_user.user_type == 'Admin' %>
+          <%# Admin options to edit or delete meeting time %>
           <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
           <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>

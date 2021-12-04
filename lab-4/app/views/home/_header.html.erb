@@ -6,6 +6,7 @@
             <% if current_user.user_type == 'TA' %>
                 <li><%= link_to 'Grader Application Form', grader_application_path, 'data-turbolinks' => false %></li>
             <% end %>
+            <%# Recommendation form button and view recommendations%>
             <% if current_user.user_type == 'Staff' %>
               <li><%= link_to 'Instructor Recommendation Form', recommendations_path %></li>
               <% @recommendations = Recommendation.where(user_id: current_user.id) %>

@@ -3,6 +3,7 @@
     </br>Please sign in or sign up to continue!!!!
 <%end%>
 <% if current_user.user_type == 'Admin'%>
+    <%# Rescrape options %>
     <%= form_with url: home_rescrape_path do |form| %>
         <%= form.label :campus, "Campus:" %>
         <%# Thanks to rb- on stackoverflow (https://stackoverflow.com/a/21884002) for this%>

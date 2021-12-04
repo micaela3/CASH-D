@@ -12,9 +12,11 @@
 
   <body>
     <%= render 'home/header' %>
+    <%# Show notices and alerts if they exist%>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
+    <%# Render the rest of the page using the appropriate view%>
     <%= yield %>
   </body>
 </html>

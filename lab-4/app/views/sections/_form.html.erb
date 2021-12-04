@@ -1,4 +1,5 @@
 <%= form_with(model: section, local: true) do |form| %>
+  <%# Form for specifying section information %>
   <% if section.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>

@@ -5,6 +5,7 @@
         <th>End Time</th>
     </thead>  
     <tbody>
+        <%# Show all available times grader has available %>
         <% @grader.availabilities.each do |availability| %>
             <tr>
                 <td><input type="text" value="<%= @weekdays[availability.weekday] %>" readonly></td>

@@ -53,6 +53,7 @@
       </tr>
     <% end %>
     <% if current_user.user_type == 'Admin' %>
+      <%# ALlow Admin to add new sections %>
       <tr>
         <td><%= link_to 'New Section', new_section_path(:prev_course_id => @course) %></td>
       </tr>  

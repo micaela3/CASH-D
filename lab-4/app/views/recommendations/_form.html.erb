@@ -3,7 +3,6 @@
 <%= fields_for :recommendation do |form| %>   
   
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-
     <%= form.label :'Instructor Name (Your Name)' %>
     <%= form.text_field :instructor_name, required: true %>
     
@@ -13,6 +12,7 @@
     <%= form.label :'Grader (Dot Number)' %>
     <%= form.text_field :grader_name_dot_number, required: true %>
     
+    <%# Select course by course_number, rather than ID in case the admin rescrapes%>
     <%= form.label :'Course title that the grader is being recommended for' %>
     <%= form.collection_select :course_number, Course.all, :course_number, :course_number_with_title, prompt: true %> 
     

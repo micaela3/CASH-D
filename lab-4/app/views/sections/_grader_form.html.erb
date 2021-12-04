@@ -10,6 +10,7 @@
             <th>Recommendations</th>
         </thead>  
         <tbody>
+        <%# Show graders available to be assigned to section%>
         <% @graders.each do |grader| %>
             <tr>
                 <td><%= radio_button_tag(:grader, grader.id, true) %></td>
@@ -19,6 +20,7 @@
                 <td><%= grader.major %></td>
                 <td><%= link_to 'View', section_showGraders_availabilities_path(@section, :grader_id => grader.id, :prev_page => "showGraders") %></td>
                 <td>
+                    <%# Show recommendations grader has, if any%>
                     <% @recommendations = Recommendation.where("course_number = (?) and grader_name_dot_number = (?)", @section.course.course_number, grader.name_dot_number) %>
                     <% if @recommendations.count == 0 %>
                         No Recommendations

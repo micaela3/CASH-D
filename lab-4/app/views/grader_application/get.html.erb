@@ -23,20 +23,26 @@
 
 <script>
    window.addEventListener('load', (event) => {
+        // Get current availabilties from ruby
         var availabilities = <%= @currAvails.to_json.html_safe %>;
         if (availabilities == undefined) {
+            // Add a blank availability if the user doesn't have any
             window.addNewTimeSlot();
         } else {
+            // Add each availability to the form
             for (var key in availabilities) {
                 window.addNewTimeSlot(availabilities[key].weekday, availabilities[key].start_time, availabilities[key].end_time )
             }
         }            
 
+        // Get current course interests from ruby
         var courseInterests = <%= @courseInts.to_json.html_safe %>;
 
         if (courseInterests == undefined) {
+            // If no course interests exist, add a blank one to edit
             window.addNewCourse();
         } else {
+            // Otherwise, add each course interest to the form
             for (var key in courseInterests) {
                 window.addNewCourse(courseInterests[key].course_id);
             }

@@ -5,6 +5,7 @@
         <th>Comments</th>
     </thead>
     <tbody>
+        <%# List all recommendations a grader has, and specify whether they are being recommended for this specific section %>
         <% @recommendations.each do |recommendation| %>
             <tr>
                 <td><%= recommendation.instructor_name %></td>
