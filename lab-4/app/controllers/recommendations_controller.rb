@@ -21,6 +21,7 @@ class RecommendationsController < ApplicationController
   if @recommendation.save
     redirect_to root_path, notice: "Form submission successful!"
   end
+  
   end
 
 end

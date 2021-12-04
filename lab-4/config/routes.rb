@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   post 'grader/application/delete', to:'grader_application#deleteForm'
   get 'recommendations', to:'recommendations#get'
   post 'recommendations', to: 'recommendations#new'
+  post 'recommendations', to: 'recommendations#deleteRecommendation'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
