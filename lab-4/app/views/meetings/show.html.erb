@@ -79,8 +79,8 @@
 </table>
 
 <% if current_user.user_type == 'Admin' %>
-  <%= link_to 'Edit', edit_meeting_path(@meeting) %>
+  <%= link_to 'Edit', edit_meeting_path(@meeting), class: "button-no-width-change width-30 left-button"  %>
 <%end%>
 
 <%# Back button to back to the previous page %>
-<%= link_to 'Back', @meeting.section %>
+<%= link_to 'Back', @meeting.section, class: "button-no-width-change width-30 left-button" %>

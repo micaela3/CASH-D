@@ -101,7 +101,8 @@ Possible Term Arguments
 2. Code for putting hidden fields below was obtained from https://stackoverflow.com/questions/17916316/is-there-a-way-to-pass-params-when-clicking-submit-button-in-simple-form-view-in
 
   hidden_field_tag(:prev_course_id, @course)
-  
+ 
+3. The image in the background was taken from https://www.pexels.com/photo/photo-of-blue-and-orange-abstract-painting-2179483/
   
 **Administrator Login Information**
   - Email: theadmin@admin.com

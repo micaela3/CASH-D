@@ -57,6 +57,7 @@ class SectionsController < ApplicationController
     end
   end
 
+  # Get /sections/showGraders
   def showGraders
     @section = Section.find(params[:section_id])
     unless current_user.user_type == 'Admin'
@@ -66,7 +67,8 @@ class SectionsController < ApplicationController
     @grader = Grader.all
     @graders = Grader.get_graders(@section)
   end
-
+  
+  # Post /sections/assignGrader
   def assignGrader
     @section = Section.find(params[:section_id])
     @grader = Grader.find(params[:grader])
@@ -77,7 +79,8 @@ class SectionsController < ApplicationController
         format.html { redirect_to @section, notice: "Succesfully assigned grader." }
     end
   end
-    
+  
+  # Post /sections/unassignGrader
   def unassignGrader
    @section = Section.find(params[:section_id])
    @grader = Grader.find(params[:grader_id])
@@ -88,7 +91,8 @@ class SectionsController < ApplicationController
        format.html { redirect_to @section, notice: "Successfully unassigned grader." }
     end
   end
-
+  
+  # get /sections/showGraders/availabilities
   def availabilities
     @prev_page = params[:prev_page]
     @weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -96,6 +100,7 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:section_id])
   end
 
+  # get /sections/showGraders/availabilities
   def recommendations
     @prev_page = params[:prev_page]
     @grader = Grader.find(params[:grader_id])

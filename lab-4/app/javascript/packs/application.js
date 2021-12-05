@@ -18,9 +18,3 @@ import addQuery from './home'
 import alertChecker from './alertChecker'
 window.addQuery = addQuery;
 window.onload = alertChecker;
-
-window.addEventListener('popstate', alertChecker);
-const pushUrl = (href) => {
-  history.pushState({}, '', href);
-  window.dispatchEvent(new Event('popstate'));
-};

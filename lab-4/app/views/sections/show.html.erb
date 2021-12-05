@@ -150,8 +150,8 @@
 
 <%# Allow Admin to make changes to different senctions %>
 <% if current_user.user_type == 'Admin' %>
-  <%= link_to 'Edit', edit_section_path(@section) %> |
+  <%= link_to 'Edit', edit_section_path(@section), class: "button-no-width-change width-30 left-button"  %>
 <%end%> 
 
 <%# Back button to go the previous page %>
-<%= link_to 'Back', @section.course %>
+<%= link_to 'Back', @section.course, class: "button-no-width-change width-30 left-button" %>

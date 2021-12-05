@@ -18,7 +18,7 @@
 <br />
 <%# Back button to go the previous page %>
 <% if @prev_page == "section" %>
-    <%= link_to 'Back', section_path(@section) %>
+    <%= link_to 'Back', section_path(@section), class: "button-no-width-change width-30 left-button" %>
 <% elsif @prev_page == "showGraders" %>
-    <%= link_to 'Back', section_showGraders_path(@section) %>
+    <%= link_to 'Back', section_showGraders_path(@section), class: "button-no-width-change width-30 left-button" %>
 <% end %>

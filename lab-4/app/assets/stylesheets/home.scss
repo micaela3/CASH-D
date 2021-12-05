@@ -55,7 +55,7 @@ body{
     font-weight: 100;
 }
 
-.alert{
+.alert, .notice{
     display: none;
     padding: 16px 20px;
     background: #2eafd2;
@@ -67,7 +67,7 @@ body{
     box-shadow: 2px 2px 10px 1px #666;
 }
 
-.alert.block{
+.alert.block, .notice.block{
     display: block;
 }
 
@@ -268,3 +268,4 @@ h1{
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px 1px #666;
 }
+
