@@ -4,44 +4,88 @@ class Grader < ApplicationRecord
   validates_associated :section
   has_many :availabilities, dependent: :delete_all
   has_many :courses_graders, dependent: :delete_all
-  #has_and_belongs_to_many :courses, class_name: 'course_interests', dependent: :delete_all
     
   def self.get_graders(section)
     meetings = section.meetings.where.not(start_time: nil).where.not(end_time: nil)
-    graders = self.joins(:courses_graders).where(courses_graders: {course_id: section.course_id}, assigned: nil)
     
-    if meetings.count > 0
-       days = [0,0,0,0,0,0,0]
-       days_index = []
-       start_times = []
-       end_times = []
-       query = ""
-       query2 = ""
-       meetings.each do |meeting|
-           days[0] = meeting.sunday if days[0] == 0
-           days[1] = meeting.monday if days[1] == 0
-           days[2] = meeting.tuesday if days[2] == 0
-           days[3] = meeting.wednesday if days[3] == 0
-           days[4] = meeting.thursday if days[4] == 0
-           days[5] = meeting.friday if days[5] == 0
-           days[6] = meeting.saturday if days[6] == 0
-       end
-       days.each_with_index { |val, index| days_index << index if val }
-       puts days_index
-       query2 = "availabilities.weekday IN (" + days_index.map(&:to_s).join(",") + ")"
-       meetings.each do |meeting|
-           query += (" or (availabilities.weekday = 0 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.sunday && !query.include?("availabilities.weekday = 0 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 1 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.monday && !query.include?("availabilities.weekday = 1 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 2 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.tuesday && !query.include?("availabilities.weekday = 2 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 3 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.wednesday && !query.include?("availabilities.weekday = 3 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 4 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.thursday && !query.include?("availabilities.weekday = 4 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 5 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.friday && !query.include?("availabilities.weekday = 5 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-           query += (" or (availabilities.weekday = 6 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "'))") if (meeting.saturday && !query.include?("availabilities.weekday = 6 and availabilities.start_time <= ('" + meeting.start_time.to_s(:db) + "') and availabilities.end_time >= ('" + meeting.end_time.to_s(:db) + "')"))
-       end
-       query.slice!(0..3)
-       puts query
-       graders = graders.joins(:availabilities).where(query2).where(query).uniq
+      # Get date, month, and next year for calculating terms
+      date = section.start_date
+      month = date.month
+      year = date.strftime("%y")
+
+      semester = 0
+      if month < 5
+        semester = '1' + year + "2"
+      elsif month < 8
+        semester = '1' + year + "4"
+      else
+        semester = '1' + year + "8"
+      end
+      semester = semester.to_i
+
+     
+     graders = []
+     initial_graders = self.joins(:courses_graders).where(courses_graders: {course_id: section.course_id}, assigned: nil, semester: semester)
+     if meetings.count > 0
+        days =["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+        match_found = true
+
+        initial_graders.each do |grader|
+            meetings.each do |meeting|
+               
+                    if match_found
+                        if meeting.sunday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 0, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.monday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 1, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.tuesday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 2, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.wednesday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 3, meeting.start_time, meeting.end_time)
+                            puts availabilities.size
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.thursday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 4, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.friday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 5, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end
+                        end
+                        if meeting.saturday
+                            availabilities = grader.availabilities.where("weekday = (?) and start_time <= (?) and end_time >= (?)", 6, meeting.start_time, meeting.end_time)
+                            if availabilities.empty?
+                                match_found = false
+                            end 
+                        end
+                    end
+        end
+        graders << grader if match_found
+        match_found = true
+      end
+    else
+        graders = initial_graders
     end
+
     return graders
  end
 
