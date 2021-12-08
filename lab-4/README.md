@@ -62,6 +62,8 @@ The code for the application is located at https://github.com/cse-3901-sharkey/C
 
 git clone https://github.com/cse-3901-sharkey/CASH-D.git
 
+It's possible that you may need to run the following command to install any gems utilized in the project that aren't already downloaded on your machine: <$ bundle install>
+
 **How to Run/Navigate**
 
 To run the application, type the command <bin/rails server> onto the command line. Some text will appear on the screen. The server has been completely configured when the last line is "Use Ctrl+C to stop". At that point, just above that line will be another line that looks something like tcp://[::1]:3000. The final four digits are the port number for the server. To access the server, go to "http://localhost:<port number>". Once the application loads, either create an or log in based on what type of account it will be and then navigate the page accordingly.
