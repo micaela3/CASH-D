@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_145903) do
+ActiveRecord::Schema.define(version: 2021_12_10_212259) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "grader_id", null: false
@@ -110,7 +110,9 @@ ActiveRecord::Schema.define(version: 2021_12_04_145903) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "user_type"
     t.boolean "has_grader", default: false
+    t.string "name_dot_number"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name_dot_number"], name: "index_users_on_name_dot_number"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

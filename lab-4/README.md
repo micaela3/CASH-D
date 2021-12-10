@@ -105,6 +105,8 @@ Possible Term Arguments
   hidden_field_tag(:prev_course_id, @course)
  
 3. The image in the background was taken from https://www.pexels.com/photo/photo-of-blue-and-orange-abstract-painting-2179483/
+
+4. Code for assigning proper user_types was taken from FutureTech Corp's github https://github.com/cse-3901-sharkey/FutureTechCorp/blob/0e36df77201610c1bb973a4d2bab11b3e1d653bc/lab-4/app/models/user.rb
   
 **Administrator Login Information**
   - Email: theadmin@admin.com
