@@ -110,7 +110,7 @@ select{
     border: solid 1px #ccc;
 }
 
-.recommendations form input:focus-visible, .login form input[type="email"]:focus-visible, .login form input[type="password"]:focus-visible, .signUp form input[type="email"]:focus-visible, .signUp form input[type="password"]:focus-visible, .forgotPassword form input[type="email"]:focus-visible, .forgotPassword form input[type="password"]:focus-visible{
+.recommendations form .comment-box:focus-visible, .recommendations form input:focus-visible, .login form input[type="email"]:focus-visible, .login form input[type="password"]:focus-visible, .signUp form input[type="email"]:focus-visible, .signUp form input[type="password"]:focus-visible, .forgotPassword form input[type="email"]:focus-visible, .forgotPassword form input[type="password"]:focus-visible{
     background: #E0E0E0;
     outline: solid 2px #767676;
 }
@@ -130,7 +130,7 @@ select{
 
 
 /* CSS for the submit button */
-.recommendations form input[type="submit"], .login a, .signUp form input[type="submit"], .signUp a, .forgotPassword form input[type="submit"], .forgotPassword a, .button, .button-no-width-change{
+.recommendations form input[type="submit"], .login form input[type="submit"], .login a, .signUp form input[type="submit"], .signUp a, .forgotPassword form input[type="submit"], .forgotPassword a, .button, .button-no-width-change{
 	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
 	margin: 30px auto 20px auto;
 
