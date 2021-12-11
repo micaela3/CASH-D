@@ -14,13 +14,15 @@ body{
     margin-top: 58px !important;
 }
 
+
 .white{
     background: white;
     padding: 20px;
 }
 
-/* CSS for the container that contains the game start button */
-.login, .signUp, .forgotPassword{
+
+/* CSS for the form element */
+.recommendations, .login, .signUp, .forgotPassword{
     background: #fff;
     
 	/* Sets the margin to auto so it can center on the page vertically and horizontally */
@@ -47,7 +49,7 @@ body{
     height: 40%;
 }
 
-.login form, .signUp form, .forgotPassword form{
+.recommendation form, .login form, .signUp form, .forgotPassword form{
     width: 100%;
     height: 80%;
     text-align: center;
@@ -71,6 +73,19 @@ body{
     display: block;
 }
 
+.recommendations {
+    height: 70%;
+    margin-top: 60px;
+}
+
+.recommendations .comment-box{
+    height: 140px;
+    width: 100%;
+}
+select{
+    width: 100%;
+}
+
 .signUp, .forgotPassword{
     height: 60%;
 }
@@ -89,13 +104,13 @@ body{
     height: 60%;
     color: black;
 }
-.login form input[type="email"], .login form input[type="password"], .signUp form input[type="email"], .signUp form input[type="password"], .forgotPassword form input[type="email"], .forgotPassword form input[type="password"]{
+.recommendations form input, .login form input[type="email"], .login form input[type="password"], .signUp form input[type="email"], .signUp form input[type="password"], .forgotPassword form input[type="email"], .forgotPassword form input[type="password"]{
     width: 100%;
     height: 30px;
     border: solid 1px #ccc;
 }
 
-.login form input[type="email"]:focus-visible, .login form input[type="password"]:focus-visible, .signUp form input[type="email"]:focus-visible, .signUp form input[type="password"]:focus-visible, .forgotPassword form input[type="email"]:focus-visible, .forgotPassword form input[type="password"]:focus-visible{
+.recommendations form input:focus-visible, .login form input[type="email"]:focus-visible, .login form input[type="password"]:focus-visible, .signUp form input[type="email"]:focus-visible, .signUp form input[type="password"]:focus-visible, .forgotPassword form input[type="email"]:focus-visible, .forgotPassword form input[type="password"]:focus-visible{
     background: #E0E0E0;
     outline: solid 2px #767676;
 }
@@ -114,8 +129,8 @@ body{
 }
 
 
-/* CSS for the start game button */
-.login form input[type="submit"], .login a, .signUp form input[type="submit"], .signUp a, .forgotPassword form input[type="submit"], .forgotPassword a, .button, .button-no-width-change{
+/* CSS for the submit button */
+.recommendations form input[type="submit"], .login a, .signUp form input[type="submit"], .signUp a, .forgotPassword form input[type="submit"], .forgotPassword a, .button, .button-no-width-change{
 	/* Sets a 0px top margin, auto left and right margin to center and a 20px bottom margin to separate from other things at the bottom */
 	margin: 30px auto 20px auto;
 
@@ -154,12 +169,12 @@ body{
     border: none;
 }
 
-/* CSS for hovering on the game start button */
-.login form input[type="submit"]:hover, .login a:hover, .signUp form input[type="submit"]:hover, .signUp a:hover, .forgotPassword form input[type="submit"]:hover, .forgotPassword a:hover, .button:hover{
+/* CSS for hovering on submit button */
+.recommendations form input[type="submit"]:hover, .login form input[type="submit"]:hover, .login a:hover, .signUp form input[type="submit"]:hover, .signUp a:hover, .forgotPassword form input[type="submit"]:hover, .forgotPassword a:hover, .button:hover{
 	/* Changes the width to 90% of the container */
 	width: 90%;
 
-	/* Changes the background color of the button to a red color */
+	/* Changes the background color of the button to a blue color */
 	background-color: #2eafd2;
 }
 

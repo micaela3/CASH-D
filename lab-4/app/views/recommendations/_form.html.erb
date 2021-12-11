@@ -27,5 +27,5 @@
 
     <%# text field to input comments %>
     <%= form.label :'Comments' %>
-    <%= form.text_field :comments, size: "100", required: true %>
+    <%= form.text_area :comments, required: true, class: "comment-box" %>
   <%end%>
